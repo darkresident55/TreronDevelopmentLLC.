@@ -7,7 +7,7 @@
     "theme_color": "#000",
     "description": "Treron Development API",
     "icons": [{
-      "src": "TemplateData/icons/unity-logo-dark.png",
+      "src": "Treron-Logo.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any maskable"
