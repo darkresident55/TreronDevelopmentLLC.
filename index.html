@@ -1,108 +1,59 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treron Development</title>
-    <!-- Favicon link for Pixel Cube image -->
-    <link rel="icon" href="Treron Logo.png" type="image/png">    
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | TD Website Preview</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-    <link rel="manifest" href="manifest.webmanifest">
-  </head>
-  <body>
-    <div id="unity-container">
-      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
-        </div>
-      </div>
-      <div id="unity-warning"> </div>
-    </div>
-    <script>
-      window.addEventListener("load", function () {
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.register("ServiceWorker.js");
+    <title>Website Outage Notice.</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
         }
-      });
-
-      var container = document.querySelector("#unity-container");
-      var canvas = document.querySelector("#unity-canvas");
-      var loadingBar = document.querySelector("#unity-loading-bar");
-      var progressBarFull = document.querySelector("#unity-progress-bar-full");
-      var warningBanner = document.querySelector("#unity-warning");
-
-      // Shows a temporary message banner/ribbon for a few seconds, or
-      // a permanent error message on top of the canvas if type=='error'.
-      // If type=='warning', a yellow highlight color is used.
-      // Modify or remove this function to customize the visually presented
-      // way that non-critical warnings and error messages are presented to the
-      // user.
-      function unityShowBanner(msg, type) {
-        function updateBannerVisibility() {
-          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        h1, h2 {
+            color: #fff; /* White text for headings */
         }
-        var div = document.createElement('div');
-        div.innerHTML = msg;
-        warningBanner.appendChild(div);
-        if (type == 'error') div.style = 'background: red; padding: 10px;';
-        else {
-          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
-          setTimeout(function() {
-            warningBanner.removeChild(div);
-            updateBannerVisibility();
-          }, 5000);
+        p, ul {
+            margin: 0 0 1em 0;
+            padding: 0;
         }
-        updateBannerVisibility();
-      }
+        ul {
+            list-style-type: disc;
+            margin-left: 2em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+            color: #fff; /* White text for table */
+        }
+        th, td {
+            border: 1px solid #555; /* Darker border color */
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #333; /* Dark gray background for table headers */
+        }
+        td {
+            background-color: #111; /* Slightly lighter black for table cells */
+        }
+    </style>
+</head>
+<body>
+    <h1>The Website is Currently Under Construction.</h1>
 
-      var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Treron Development Website Build.loader.js";
-      var config = {
-        dataUrl: buildUrl + "/Treron Development Website Build.data.unityweb",
-        frameworkUrl: buildUrl + "/Treron Development Website Build.framework.js.unityweb",
-        codeUrl: buildUrl + "/Treron Development Website Build.wasm.unityweb",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "TD Website Preview",
-        productVersion: "0.1.0",
-        showBanner: unityShowBanner,
-      };
+    <p><strong>Effective Date:</strong> February 6th, 2025</p>
 
-      // By default Unity keeps WebGL canvas render target size matched with
-      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-      // Set this to false if you want to decouple this synchronization from
-      // happening inside the engine, and you would instead like to size up
-      // the canvas DOM size and WebGL render target sizes yourself.
-      // config.matchWebGLToCanvasSize = false;
+    <p>We are to Inform you that the Website is Currently Being worked on to Better Work the Website and Bring a Better Experiance. i'd Suggest Waiting untill The Website is Ready to Use if you plan to make a Treron Account at Treron Development.</p>
+    <p>Please Refer to This Link Below to Read the Privacy Policy.</p>
 
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
-      }
-
-      loadingBar.style.display = "block";
-
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          progressBarFull.style.width = 100 * progress + "%";
-        }).then((unityInstance) => {
-          loadingBar.style.display = "none";
-        }).catch((message) => {
-          alert(message);
-        });
-      };
-      document.body.appendChild(script);
-    </script>
-  </body>
+    <h2 id="information-collection">https://trerondevelopment.xyz/Privacy-and-Safety-Finished</h2>
+    <p><strong>This Link is in the update:</strong> Privacy Policy Update September 2024.</p>
+  
+    <p>Copyright© 2025 | Treron Development LLC™</p>
+</body>
 </html>
