@@ -25,6 +25,8 @@
             position: absolute;
             top: 0;
             left: 0;
+            width: 100%;
+            justify-content: space-between;
         }
         .logo {
             width: 50px;
@@ -34,6 +36,22 @@
         .logo-text {
             font-size: 1.5em;
             font-weight: bold;
+        }
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+        }
+        .nav-buttons a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+            padding: 10px;
+            background-color: #555;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-buttons a:hover {
+            background-color: #777;
         }
         .container {
             display: flex;
@@ -82,8 +100,14 @@
 </head>
 <body>
     <div class="header">
-        <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="logo">
-        <span class="logo-text">Treron LLC</span>
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="logo">
+            <span class="logo-text">Treron LLC</span>
+        </div>
+        <div class="nav-buttons">
+            <a href="#" onclick="alert('Home clicked!')">Home</a>
+            <a href="#" onclick="alert('Log in clicked!')">Log in</a>
+        </div>
     </div>
     <div class="container">
         <h1>Website Under Construction</h1>
