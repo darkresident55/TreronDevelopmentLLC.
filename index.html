@@ -26,7 +26,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            justify-content: space-between;
+            justify-content: flex-start;
         }
         .logo {
             width: 50px;
@@ -40,6 +40,7 @@
         .nav-buttons {
             display: flex;
             align-items: center;
+            margin-left: 20px;
         }
         .nav-buttons a {
             color: #fff;
@@ -105,8 +106,8 @@
             <span class="logo-text">Treron LLC</span>
         </div>
         <div class="nav-buttons">
-            <a href="#" onclick="alert('Home clicked!')">Home</a>
-            <a href="#" onclick="alert('Log in clicked!')">Log in</a>
+            <a href="#" class="home-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Home</a>
+            <a href="#" class="login-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Log in</a>
         </div>
     </div>
     <div class="container">
