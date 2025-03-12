@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Outage Notice</title>
+    <link rel="icon" href="TreronIcons/treron-logo.png" type="image/png">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,6 +14,8 @@
             background-color: #000;
             color: #fff;
             text-align: center;
+            position: relative;
+            min-height: 100vh;
         }
         h1, h2 {
             color: #fff;
@@ -26,7 +29,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            min-height: 85vh;
+        }
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
         }
         .button-container {
             margin-top: 15px;
@@ -51,7 +58,9 @@
             transform: scale(0.95);
         }
         footer {
-            margin-top: 20px;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
             font-size: 0.9em;
             opacity: 0.8;
         }
@@ -59,6 +68,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="TreronIcons/treron-logo.png" alt="Treron Logo" class="logo">
         <h1>Website Under Construction</h1>
         <p><strong>Effective Date:</strong> February 6th, 2025</p>
         <p>We are currently working on improving our website to provide a better experience. If you plan to create a Treron account, we recommend waiting until the site is fully operational.</p>
@@ -66,9 +76,9 @@
         <div class="button-container">
             <a href="https://trerondevelopment.xyz/Privacy-and-Safety-Finished" target="_blank" class="privacy-button">Privacy and Safety</a>
         </div>
-        <footer>
-            Copyright &copy; 2023-2025 | Treron Development LLC™
-        </footer>
     </div>
+    <footer>
+        Copyright &copy; 2023-2025 | Treron Development LLC™
+    </footer>
 </body>
 </html>
