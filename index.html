@@ -10,19 +10,30 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #000;
             color: #fff;
             text-align: center;
             position: relative;
             min-height: 100vh;
+            overflow-x: hidden;
         }
-        h1, h2 {
-            color: #fff;
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
-        p {
-            max-width: 600px;
-            margin: 0 auto 1em auto;
+        .logo {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .logo-text {
+            font-size: 1.5em;
+            font-weight: bold;
         }
         .container {
             display: flex;
@@ -30,10 +41,7 @@
             align-items: center;
             justify-content: center;
             min-height: 85vh;
-        }
-        .logo {
-            width: 100px;
-            margin-bottom: 20px;
+            padding-top: 60px;
         }
         .button-container {
             margin-top: 15px;
@@ -67,8 +75,11 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="header">
         <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="logo">
+        <span class="logo-text">Treron Development LLC</span>
+    </div>
+    <div class="container">
         <h1>Website Under Construction</h1>
         <p><strong>Effective Date:</strong> February 6th, 2025</p>
         <p>We are currently working on improving our website to provide a better experience. If you plan to create a Treron account, we recommend waiting until the site is fully operational.</p>
