@@ -26,7 +26,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            justify-content: space-between;
+            justify-content: flex-start;
         }
         .logo-container {
             display: flex;
@@ -43,17 +43,10 @@
             display: inline-block;
             vertical-align: middle;
         }
-        .nav-buttons-left {
+        .nav-buttons {
             display: flex;
             align-items: center;
-        }
-        .nav-buttons-right {
-            display: flex;
-            align-items: center;
-        }
-        /* Space in the middle */
-        .spacer {
-            flex-grow: 1;
+            margin-left: auto;
         }
         .nav-buttons a {
             color: #fff;
@@ -61,9 +54,8 @@
             margin-left: 15px;
             padding: 12px 20px;
             background-color: #555;
-            border-radius: 20px;  /* Rounded buttons */
+            border-radius: 5px;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            display: inline-block;
         }
         .nav-buttons a:hover {
             background-color: #777;
@@ -123,11 +115,8 @@
             <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="logo">
             <span class="logo-text">Treron LLC</span>
         </div>
-        <div class="spacer"></div> <!-- Spacer to push buttons apart -->
-        <div class="nav-buttons-left">
+        <div class="nav-buttons">
             <a href="#" class="home-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Home</a>
-        </div>
-        <div class="nav-buttons-right">
             <a href="#" class="login-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Log in</a>
         </div>
     </div>
