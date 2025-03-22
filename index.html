@@ -11,6 +11,11 @@
             --foreground: 0, 0%, 100%;
             --muted-foreground: 0, 0%, 70%;
             --border: 0, 0%, 33%;
+            --card: 0, 0%, 10%;
+            --card-foreground: 0, 0%, 100%;
+            --primary: 214, 100%, 60%;
+            --primary-foreground: 0, 0%, 100%;
+            --input: 0, 0%, 20%;
         }
 
         .dark {
@@ -18,6 +23,11 @@
             --foreground: 0, 0%, 100%;
             --muted-foreground: 0, 0%, 70%;
             --border: 0, 0%, 33%;
+            --card: 0, 0%, 10%;
+            --card-foreground: 0, 0%, 100%;
+            --primary: 214, 100%, 60%;
+            --primary-foreground: 0, 0%, 100%;
+            --input: 0, 0%, 20%;
         }
 
         .light {
@@ -25,6 +35,11 @@
             --foreground: 0, 0%, 0%;
             --muted-foreground: 0, 0%, 45%;
             --border: 0, 0%, 85%;
+            --card: 0, 0%, 95%;
+            --card-foreground: 0, 0%, 0%;
+            --primary: 214, 100%, 50%;
+            --primary-foreground: 0, 0%, 100%;
+            --input: 0, 0%, 90%;
         }
 
         body {
@@ -374,9 +389,401 @@
                 transparent 90%);
             box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
         }
+
+        /* Login Modal Styles */
+        .login-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .login-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .login-modal {
+            background-color: hsl(var(--card));
+            color: hsl(var(--card-foreground));
+            border-radius: 16px;
+            padding: 24px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+        }
+
+        .login-modal-overlay.active .login-modal {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .login-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .login-modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .login-modal-close {
+            background: none;
+            border: none;
+            color: hsl(var(--muted-foreground));
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .login-modal-close:hover {
+            background-color: hsla(var(--foreground), 0.1);
+            color: hsl(var(--foreground));
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid hsla(var(--border), 0.5);
+            background-color: hsl(var(--input));
+            color: hsl(var(--foreground));
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: hsl(var(--primary));
+            box-shadow: 0 0 0 2px hsla(var(--primary), 0.2);
+        }
+
+        .login-button {
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .login-button:hover {
+            background-color: hsl(var(--primary), 0.9);
+            transform: translateY(-2px);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .login-footer {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .login-footer a {
+            color: hsl(var(--primary));
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Notifications Popup Styles */
+        .notifications-popup {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            width: 90%;
+            max-width: 350px;
+            background-color: hsl(var(--card));
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.3s ease;
+        }
+
+        .notifications-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .notifications-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid hsla(var(--border), 0.5);
+        }
+
+        .notifications-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notifications-close {
+            background: none;
+            border: none;
+            color: hsl(var(--muted-foreground));
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .notifications-close:hover {
+            background-color: hsla(var(--foreground), 0.1);
+            color: hsl(var(--foreground));
+        }
+
+        .notifications-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .notification-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid hsla(var(--border), 0.2);
+            text-align: left;
+            transition: background-color 0.2s ease;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item:hover {
+            background-color: hsla(var(--foreground), 0.05);
+        }
+
+        .notification-content {
+            display: flex;
+            gap: 12px;
+        }
+
+        .notification-icon {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: hsla(var(--primary), 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: hsl(var(--primary));
+        }
+
+        .notification-text {
+            flex-grow: 1;
+        }
+
+        .notification-title {
+            font-weight: 500;
+            margin: 0 0 4px 0;
+        }
+
+        .notification-message {
+            color: hsl(var(--muted-foreground));
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .notification-time {
+            font-size: 0.8rem;
+            color: hsl(var(--muted-foreground));
+            margin-top: 4px;
+        }
+
+        .notifications-footer {
+            padding: 12px 16px;
+            text-align: center;
+            border-top: 1px solid hsla(var(--border), 0.5);
+        }
+
+        .view-all-button {
+            background: none;
+            border: none;
+            color: hsl(var(--primary));
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .view-all-button:hover {
+            text-decoration: underline;
+        }
+
+        .empty-notifications {
+            padding: 24px 16px;
+            text-align: center;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .empty-notifications-icon {
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body class="dark">
+    <!-- Login Modal -->
+    <div class="login-modal-overlay" id="login-modal">
+        <div class="login-modal">
+            <div class="login-modal-header">
+                <h2 class="login-modal-title">Log in to Treron</h2>
+                <button class="login-modal-close" id="login-modal-close">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <button type="button" class="login-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Log in</button>
+            </form>
+            <div class="login-footer">
+                <p>Don't have an account? <a href="#">Sign up</a></p>
+                <p><a href="#">Forgot password?</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Popup -->
+    <div class="notifications-popup" id="notifications-popup">
+        <div class="notifications-header">
+            <h3 class="notifications-title">
+                <svg class="icon-svg" style="color: #f97316;" viewBox="0 0 24 24">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                Notifications
+            </h3>
+            <button class="notifications-close" id="notifications-close">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <ul class="notifications-list">
+            <li class="notification-item">
+                <div class="notification-content">
+                    <div class="notification-icon">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                        </svg>
+                    </div>
+                    <div class="notification-text">
+                        <h4 class="notification-title">System Update</h4>
+                        <p class="notification-message">Treron has been updated to version 2.0.4</p>
+                        <div class="notification-time">2 hours ago</div>
+                    </div>
+                </div>
+            </li>
+            <li class="notification-item">
+                <div class="notification-content">
+                    <div class="notification-icon">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <div class="notification-text">
+                        <h4 class="notification-title">Welcome to Treron</h4>
+                        <p class="notification-message">Thank you for joining our platform!</p>
+                        <div class="notification-time">1 day ago</div>
+                    </div>
+                </div>
+            </li>
+            <li class="notification-item">
+                <div class="notification-content">
+                    <div class="notification-icon">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <div class="notification-text">
+                        <h4 class="notification-title">Important Notice</h4>
+                        <p class="notification-message">Please update your security settings</p>
+                        <div class="notification-time">3 days ago</div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="notifications-footer">
+            <button class="view-all-button">View all notifications</button>
+        </div>
+    </div>
+
     <div class="header">
         <div class="logo-container">
             <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="logo">
@@ -413,6 +820,8 @@
             <a href="https://trerondevelopment.xyz/Privacy-and-Safety-Finished" target="_blank" class="privacy-button" 
                onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Privacy and Safety</a>
         </div>
+      onmouseup="playSound('ClickOut.wav')">Privacy and Safety</a>
+        </div>
     </div>
 
     <div class="menu-bar-container">
@@ -443,7 +852,7 @@
                 <li class="menu-item" data-highlight="highlight-notifications">
                     <div class="menu-link-wrapper">
                         <div class="menu-item-glow" style="background: radial-gradient(circle, rgba(249,115,22,0.15) 0%, rgba(234,88,12,0.06) 50%, rgba(194,65,12,0) 100%);"></div>
-                        <a href="#" class="menu-link-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
+                        <a href="#" class="menu-link-front" id="notifications-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
                             <svg class="menu-icon icon-svg" style="--icon-color: #f97316;" viewBox="0 0 24 24">
                                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                                 <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
@@ -481,7 +890,7 @@
                 <li class="menu-item" data-highlight="highlight-profile">
                     <div class="menu-link-wrapper">
                         <div class="menu-item-glow" style="background: radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.06) 50%, rgba(185,28,28,0) 100%);"></div>
-                        <a href="#" class="menu-link-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
+                        <a href="#" class="menu-link-front" id="login-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
                             <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
@@ -517,6 +926,12 @@
             const themeToggle = document.getElementById('theme-toggle-checkbox');
             const body = document.body;
             const menuBarHighlight = document.querySelector('.menu-bar-highlight');
+            const loginModal = document.getElementById('login-modal');
+            const loginButton = document.getElementById('login-button');
+            const loginModalClose = document.getElementById('login-modal-close');
+            const notificationsPopup = document.getElementById('notifications-popup');
+            const notificationsButton = document.getElementById('notifications-button');
+            const notificationsClose = document.getElementById('notifications-close');
 
             // Initialize theme based on checkbox state
             if (themeToggle.checked) {
@@ -586,6 +1001,47 @@
             menuBar.addEventListener('mouseleave', () => {
                 // Hide the highlight when mouse leaves
                 menuBarHighlight.style.opacity = '0';
+            });
+            
+            // Login Modal Functionality
+            loginButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.classList.add('active');
+                playSound('ClickIn.wav');
+            });
+            
+            loginModalClose.addEventListener('click', () => {
+                loginModal.classList.remove('active');
+                playSound('ClickOut.wav');
+            });
+            
+            // Close modal when clicking outside
+            loginModal.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    loginModal.classList.remove('active');
+                }
+            });
+            
+            // Notifications Popup Functionality
+            notificationsButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                notificationsPopup.classList.add('active');
+                playSound('ClickIn.wav');
+            });
+            
+            notificationsClose.addEventListener('click', () => {
+                notificationsPopup.classList.remove('active');
+                playSound('ClickOut.wav');
+            });
+            
+            // Close notifications when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!notificationsPopup.contains(e.target) && 
+                    e.target !== notificationsButton && 
+                    !notificationsButton.contains(e.target) &&
+                    notificationsPopup.classList.contains('active')) {
+                    notificationsPopup.classList.remove('active');
+                }
             });
             
             // Update copyright year dynamically
