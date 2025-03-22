@@ -178,12 +178,11 @@
             border-radius: 16px;
             opacity: 0;
             transform: scale(0.8);
-            transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: opacity 0.3s ease;
         }
 
         .menu-link-wrapper:hover .menu-item-glow {
             opacity: 1;
-            transform: scale(2);
         }
 
         .menu-link-front, .menu-link-back {
@@ -344,9 +343,81 @@
             stroke-linecap: round;
             stroke-linejoin: round;
         }
+
+        /* Cursor-following glow effect */
+        .cursor-glow {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(255, 255, 255, 0.25) 0%, 
+                rgba(255, 255, 255, 0.15) 25%, 
+                rgba(255, 255, 255, 0.05) 50%, 
+                transparent 75%);
+            pointer-events: none;
+            opacity: 0;
+            z-index: 5;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.2s ease;
+        }
+
+        .menu-bar-cursor-glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(59, 130, 246, 0.3) 0%, 
+                rgba(139, 92, 246, 0.2) 30%, 
+                rgba(239, 68, 68, 0.1) 60%, 
+                transparent 80%);
+            pointer-events: none;
+            opacity: 0;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.2s ease;
+        }
+
+        /* Custom cursor glow colors for each menu item */
+        .cursor-glow-home {
+            background: radial-gradient(circle, 
+                rgba(59, 130, 246, 0.4) 0%, 
+                rgba(37, 99, 235, 0.2) 40%, 
+                rgba(29, 78, 216, 0.05) 70%, 
+                transparent 90%);
+        }
+
+        .cursor-glow-notifications {
+            background: radial-gradient(circle, 
+                rgba(249, 115, 22, 0.4) 0%, 
+                rgba(234, 88, 12, 0.2) 40%, 
+                rgba(194, 65, 12, 0.05) 70%, 
+                transparent 90%);
+        }
+
+        .cursor-glow-settings {
+            background: radial-gradient(circle, 
+                rgba(34, 197, 94, 0.4) 0%, 
+                rgba(22, 163, 74, 0.2) 40%, 
+                rgba(21, 128, 61, 0.05) 70%, 
+                transparent 90%);
+        }
+
+        .cursor-glow-profile {
+            background: radial-gradient(circle, 
+                rgba(239, 68, 68, 0.4) 0%, 
+                rgba(220, 38, 38, 0.2) 40%, 
+                rgba(185, 28, 28, 0.05) 70%, 
+                transparent 90%);
+        }
     </style>
 </head>
 <body class="dark">
+    <!-- Cursor glow elements -->
+    <div class="cursor-glow"></div>
+    <div class="menu-bar-cursor-glow"></div>
+
     <div class="header">
         <div class="logo-container">
             <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="logo">
@@ -376,7 +447,7 @@
             <nav class="menu-bar">
                 <div class="menu-bar-glow"></div>
                 <ul class="menu-list">
-                    <li class="menu-item">
+                    <li class="menu-item" data-glow-class="cursor-glow-home">
                         <div class="menu-link-wrapper">
                             <div class="menu-item-glow" style="background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%);"></div>
                             <a href="#" class="menu-link-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
@@ -395,7 +466,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" data-glow-class="cursor-glow-notifications">
                         <div class="menu-link-wrapper">
                             <div class="menu-item-glow" style="background: radial-gradient(circle, rgba(249,115,22,0.15) 0%, rgba(234,88,12,0.06) 50%, rgba(194,65,12,0) 100%);"></div>
                             <a href="#" class="menu-link-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
@@ -414,7 +485,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" data-glow-class="cursor-glow-settings">
                         <div class="menu-link-wrapper">
                             <div class="menu-item-glow" style="background: radial-gradient(circle, rgba(34,197,94,0.15) 0%, rgba(22,163,74,0.06) 50%, rgba(21,128,61,0) 100%);"></div>
                             <a href="#" class="menu-link-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
@@ -433,7 +504,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" data-glow-class="cursor-glow-profile">
                         <div class="menu-link-wrapper">
                             <div class="menu-item-glow" style="background: radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.06) 50%, rgba(185,28,28,0) 100%);"></div>
                             <a href="#" class="menu-link-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
@@ -481,6 +552,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             const themeToggle = document.getElementById('theme-toggle-checkbox');
             const body = document.body;
+            const cursorGlow = document.querySelector('.cursor-glow');
+            const menuBarCursorGlow = document.querySelector('.menu-bar-cursor-glow');
 
             // Initialize theme based on checkbox state
             if (themeToggle.checked) {
@@ -505,35 +578,62 @@
                 playSound('ClickIn.wav');
             });
 
-            // Menu item hover effects
+            // Menu item hover effects with cursor following
             const menuItems = document.querySelectorAll('.menu-item');
+            
             menuItems.forEach(item => {
                 const wrapper = item.querySelector('.menu-link-wrapper');
+                const glowClass = item.getAttribute('data-glow-class');
                 
-                wrapper.addEventListener('mouseenter', () => {
-                    const glow = item.querySelector('.menu-item-glow');
-                    glow.style.opacity = '1';
-                    glow.style.transform = 'scale(2)';
+                wrapper.addEventListener('mousemove', (e) => {
+                    // Get position relative to the menu item
+                    const rect = wrapper.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    // Position the glow element at the cursor
+                    cursorGlow.style.left = `${e.clientX}px`;
+                    cursorGlow.style.top = `${e.clientY}px`;
+                    
+                    // Add the specific glow class for this menu item
+                    cursorGlow.className = 'cursor-glow ' + glowClass;
+                    
+                    // Show the glow
+                    cursorGlow.style.opacity = '1';
                 });
                 
                 wrapper.addEventListener('mouseleave', () => {
-                    const glow = item.querySelector('.menu-item-glow');
-                    glow.style.opacity = '0';
-                    glow.style.transform = 'scale(0.8)';
+                    // Hide the glow when mouse leaves
+                    cursorGlow.style.opacity = '0';
                 });
             });
-
-            // Menu bar hover effect
-            const menuBar = document.querySelector('.menu-bar');
-            const menuBarGlow = document.querySelector('.menu-bar-glow');
             
-            menuBar.addEventListener('mouseenter', () => {
-                menuBarGlow.style.opacity = '1';
+            // Menu bar cursor following effect
+            const menuBar = document.querySelector('.menu-bar');
+            
+            menuBar.addEventListener('mousemove', (e) => {
+                // Get position relative to the menu bar
+                const rect = menuBar.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Position the glow element at the cursor
+                menuBarCursorGlow.style.left = `${e.clientX}px`;
+                menuBarCursorGlow.style.top = `${e.clientY}px`;
+                
+                // Show the glow
+                menuBarCursorGlow.style.opacity = '1';
             });
             
             menuBar.addEventListener('mouseleave', () => {
-                menuBarGlow.style.opacity = '0';
+                // Hide the glow when mouse leaves
+                menuBarCursorGlow.style.opacity = '0';
             });
+            
+            // Update copyright year dynamically
+            const footerYear = document.querySelector('footer');
+            const currentYear = new Date().getFullYear();
+            footerYear.innerHTML = `Copyright &copy; 2023-${currentYear} | Treron Development LLC™`;
         });
     </script>
 </body>
