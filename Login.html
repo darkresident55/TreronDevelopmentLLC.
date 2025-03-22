@@ -24,6 +24,7 @@
             width: 100%;
             padding: 10px;
             background: #111;
+            cursor: pointer;
         }
         .logo-container {
             display: flex;
@@ -66,15 +67,19 @@
             cursor: pointer;
             width: 100%;
             border-radius: 5px;
+            margin-top: 10px;
         }
         #errorMessage {
             color: #FF4C4C;
             margin-top: 10px;
         }
+        .go-back {
+            background: #555;
+        }
     </style>
 </head>
 <body>
-    <div class="header">
+    <div class="header" onclick="window.location.href='https://trerondevelopment.xyz/'">
         <div class="logo-container">
             <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="logo">
             <span class="logo-text">Treron LLC</span>
@@ -88,6 +93,7 @@
             <button id="loginBtn">Log In</button>
             <p id="errorMessage"></p>
         </form>
+        <button class="go-back" onclick="window.history.back()">Go Back</button>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
