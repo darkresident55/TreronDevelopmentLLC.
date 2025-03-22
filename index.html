@@ -915,12 +915,18 @@
     <script>
         // Sound effects
         function playSound(soundFile) {
-            let audio = new Audio(soundFile);
-            audio.play();
+            try {
+                let audio = new Audio(soundFile);
+                audio.play().catch(e => console.log("Sound play error:", e));
+            } catch (e) {
+                console.log("Sound error:", e);
+            }
         }
 
         // Theme toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded");
+            
             const themeToggle = document.getElementById('theme-toggle-checkbox');
             const body = document.body;
             const menuBarHighlight = document.querySelector('.menu-bar-highlight');
@@ -930,6 +936,9 @@
             const notificationsPopup = document.getElementById('notifications-popup');
             const notificationsButton = document.getElementById('notifications-button');
             const notificationsClose = document.getElementById('notifications-close');
+
+            console.log("Login button:", loginButton);
+            console.log("Notifications button:", notificationsButton);
 
             // Initialize theme based on checkbox state
             if (themeToggle.checked) {
@@ -1002,42 +1011,54 @@
             });
             
             // Login Modal Functionality
-            loginButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                loginModal.classList.add('active');
-                playSound('ClickIn.wav');
-            });
+            if (loginButton) {
+                loginButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log("Login button clicked");
+                    loginModal.classList.add('active');
+                    playSound('ClickIn.wav');
+                });
+            }
             
-            loginModalClose.addEventListener('click', () => {
-                loginModal.classList.remove('active');
-                playSound('ClickOut.wav');
-            });
+            if (loginModalClose) {
+                loginModalClose.addEventListener('click', function() {
+                    loginModal.classList.remove('active');
+                    playSound('ClickOut.wav');
+                });
+            }
             
             // Close modal when clicking outside
-            loginModal.addEventListener('click', (e) => {
+            loginModal.addEventListener('click', function(e) {
                 if (e.target === loginModal) {
                     loginModal.classList.remove('active');
                 }
             });
             
             // Notifications Popup Functionality
-            notificationsButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                notificationsPopup.classList.add('active');
-                playSound('ClickIn.wav');
-            });
+            if (notificationsButton) {
+                notificationsButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log("Notifications button clicked");
+                    notificationsPopup.classList.add('active');
+                    playSound('ClickIn.wav');
+                });
+            }
             
-            notificationsClose.addEventListener('click', () => {
-                notificationsPopup.classList.remove('active');
-                playSound('ClickOut.wav');
-            });
+            if (notificationsClose) {
+                notificationsClose.addEventListener('click', function() {
+                    notificationsPopup.classList.remove('active');
+                    playSound('ClickOut.wav');
+                });
+            }
             
             // Close notifications when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!notificationsPopup.contains(e.target) && 
+            document.addEventListener('click', function(e) {
+                if (notificationsPopup.classList.contains('active') && 
+                    !notificationsPopup.contains(e.target) && 
                     e.target !== notificationsButton && 
-                    !notificationsButton.contains(e.target) &&
-                    notificationsPopup.classList.contains('active')) {
+                    !notificationsButton.contains(e.target)) {
                     notificationsPopup.classList.remove('active');
                 }
             });
