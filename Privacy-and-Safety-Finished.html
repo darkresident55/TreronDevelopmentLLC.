@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Notice - Treron LLC</title>
+    <title>Privacy Notice - Treron Development LLC</title>
     <link rel="icon" href="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" type="image/png">
     <style>
         :root {
@@ -467,13 +467,107 @@
                 flex-grow: 1;
             }
         }
+
+    .back-button-container {
+        display: flex;
+        justify-content: center;
+        margin: 50px 0 30px;
+    }
+
+    .back-button {
+        padding: 5px;
+        background: linear-gradient(to bottom, hsla(var(--background), 0.8), hsla(var(--background), 0.4));
+        backdrop-filter: blur(10px);
+        border: 1px solid hsla(var(--border), 0.4);
+        border-radius: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .back-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .menu-link-wrapper {
+        display: block;
+        border-radius: 12px;
+        overflow: visible;
+        position: relative;
+        perspective: 600px;
+    }
+
+    .menu-item-glow {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        border-radius: 16px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .menu-link-wrapper:hover .menu-item-glow {
+        opacity: 1;
+    }
+
+    .menu-link-front, .menu-link-back {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        position: relative;
+        z-index: 10;
+        background-color: transparent;
+        color: hsl(var(--muted-foreground));
+        transition: color 0.3s ease;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .menu-link-front {
+        transform-style: preserve-3d;
+        transform-origin: center bottom;
+        transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .menu-link-back {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+        transform-origin: center top;
+        transform: rotateX(90deg);
+        opacity: 0;
+        transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .menu-link-wrapper:hover .menu-link-front {
+        transform: rotateX(-90deg);
+        opacity: 0;
+    }
+
+    .menu-link-wrapper:hover .menu-link-back {
+        transform: rotateX(0);
+        opacity: 1;
+    }
+
+    .menu-icon {
+        transition: color 0.3s ease;
+        width: 20px;
+        height: 20px;
+    }
+
+    .menu-link-wrapper:hover .menu-icon {
+        color: #3b82f6;
+    }
     </style>
 </head>
 <body class="dark">
     <div class="header">
         <div class="logo-container">
             <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="logo">
-            <span class="logo-text">Treron LLC</span>
+            <span class="logo-text">Treron Development LLC</span>
         </div>
         <div class="theme-toggle">
             <svg class="theme-icon sun-icon icon-svg" viewBox="0 0 24 24">
@@ -651,9 +745,6 @@
                 <section id="california-privacy" class="section fade-in">
                     <h2 class="section-title">11. CALIFORNIA PRIVACY RIGHTS</h2>
                     <p><strong>In Short:</strong> California residents have specific rights regarding their personal information.</p>
-                    <p>If you are a California resident, you have specific rights regarding your personal information under California privacy laws, including the California Consumer Privacy Act (CCPA) and the California Privacy Rights Act (CPRA).  including the California Consumer Privacy Act (CCPA) and the California Privacy Rights Act (CPRA). These rights may include:
-
-```html file="privacy-policy.html" isFixed
                     <p>If you are a California resident, you have specific rights regarding your personal information under California privacy laws, including the California Consumer Privacy Act (CCPA) and the California Privacy Rights Act (CPRA). These rights may include:</p>
                     <ul>
                         <li>The right to know what personal information we collect, use, disclose, and sell</li>
@@ -810,6 +901,26 @@
         </div>
     </div>
 
+    <div class="back-button-container">
+        <div class="menu-link-wrapper back-button">
+            <div class="menu-item-glow" style="background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%);"></div>
+            <a href="https://trerondevelopment.xyz/" class="menu-link-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
+                <svg class="menu-icon icon-svg" style="--icon-color: #3b82f6;" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Go back to Main Screen</span>
+            </a>
+            <a href="https://trerondevelopment.xyz/" class="menu-link-back" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
+                <svg class="menu-icon icon-svg" style="--icon-color: #3b82f6;" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Go back to Main Screen</span>
+            </a>
+        </div>
+    </div>
+
     <div class="back-to-top" id="back-to-top">
         <svg class="icon-svg" viewBox="0 0 24 24">
             <polyline points="18 15 12 9 6 15"></polyline>
@@ -924,7 +1035,7 @@
                     const sectionHeight = section.clientHeight;
                     
                     if (window.pageYOffset >= sectionTop - 150 && 
-                        window.pageYOffset &lt; sectionTop + sectionHeight - 150) {
+                        window.pageYOffset < sectionTop + sectionHeight - 150) {
                         currentSection = '#' + section.getAttribute('id');
                     }
                 });
@@ -940,7 +1051,7 @@
                     const sectionTop = section.getBoundingClientRect().top;
                     const windowHeight = window.innerHeight;
                     
-                    if (sectionTop &lt; windowHeight - 100) {
+                    if (sectionTop < windowHeight - 100) {
                         section.style.opacity = '1';
                         section.style.transform = 'translateY(0)';
                     }
@@ -950,6 +1061,16 @@
             // Initial call to set active TOC link and animate visible sections
             updateActiveTocLinkOnScroll();
             animateSectionsOnScroll();
+
+    // Sound effects
+    function playSound(soundFile) {
+        try {
+            let audio = new Audio(soundFile);
+            audio.play().catch(e => console.log("Sound play error:", e));
+        } catch (e) {
+            console.log("Sound error:", e);
+        }
+    }
         });
     </script>
 </body>
