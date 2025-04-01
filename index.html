@@ -684,12 +684,93 @@
         margin-bottom: 12px;
         opacity: 0.5;
     }
+
+    /* Additional Styles for Login Modal */
+    .login-modal-logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .login-modal-logo {
+        width: 60px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .login-modal-company {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: hsl(var(--muted-foreground));
+    }
+
+    .login-error {
+        color: #ef4444;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .login-message {
+        color: hsl(var(--primary));
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    /* Updated Login Modal Styles */
+    .login-modal-logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .login-modal-logo {
+        width: 80px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .login-modal-company {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: hsl(var(--foreground));
+    }
+
+    .login-error {
+        color: #e53e3e;
+        background-color: rgba(229, 62, 62, 0.1);
+        border-radius: 6px;
+        padding: 10px;
+        margin-bottom: 15px;
+        text-align: center;
+        display: none;
+    }
+
+    .login-message {
+        color: #38a169;
+        background-color: rgba(56, 161, 105, 0.1);
+        border-radius: 6px;
+        padding: 10px;
+        margin-bottom: 15px;
+        text-align: center;
+        display: none;
+    }
+
+    .login-modal {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
 </style>
 </head>
 <body class="dark">
 <!-- Login Modal -->
 <div class="login-modal-overlay" id="login-modal">
     <div class="login-modal">
+        <div class="login-modal-logo-container">
+            <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="login-modal-logo">
+            <span class="login-modal-company">Treron Development LLC</span>
+        </div>
         <div class="login-modal-header">
             <h2 class="login-modal-title">Log in to Treron</h2>
             <button class="login-modal-close" id="login-modal-close">
@@ -699,7 +780,8 @@
                 </svg>
             </button>
         </div>
-        <form class="login-form">
+        <div id="login-error" class="login-error"></div>
+        <form class="login-form" id="login-form">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" placeholder="Enter your email" required>
@@ -708,11 +790,79 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="Enter your password" required>
             </div>
-            <button type="button" class="login-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Log in</button>
+            <button type="submit" class="login-button" id="login-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Log in</button>
         </form>
         <div class="login-footer">
-            <p>Don't have an account? <a href="#">Sign up</a></p>
-            <p><a href="#">Forgot password?</a></p>
+            <p>Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+            <p><a href="#" id="forgot-password">Forgot password?</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Add signup modal -->
+<div class="login-modal-overlay" id="signup-modal">
+    <div class="login-modal">
+        <div class="login-modal-logo-container">
+            <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="login-modal-logo">
+            <span class="login-modal-company">Treron Development LLC</span>
+        </div>
+        <div class="login-modal-header">
+            <h2 class="login-modal-title">Create an Account</h2>
+            <button class="login-modal-close" id="signup-modal-close">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div id="signup-error" class="login-error"></div>
+        <form class="login-form" id="signup-form">
+            <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" placeholder="Enter your password (min 6 characters)" required minlength="6">
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm your password" required minlength="6">
+            </div>
+            <button type="submit" class="login-button" id="signup-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Sign up</button>
+        </form>
+        <div class="login-footer">
+            <p>Already have an account? <a href="#" id="show-login">Log in</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Add password reset modal -->
+<div class="login-modal-overlay" id="reset-modal">
+    <div class="login-modal">
+        <div class="login-modal-logo-container">
+            <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="login-modal-logo">
+            <span class="login-modal-company">Treron Development LLC</span>
+        </div>
+        <div class="login-modal-header">
+            <h2 class="login-modal-title">Reset Password</h2>
+            <button class="login-modal-close" id="reset-modal-close">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div id="reset-message" class="login-message"></div>
+        <form class="login-form" id="reset-form">
+            <div class="form-group">
+                <label for="reset-email">Email</label>
+                <input type="email" id="reset-email" placeholder="Enter your email" required>
+            </div>
+            <button type="submit" class="login-button" id="reset-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Send Reset Link</button>
+        </form>
+        <div class="login-footer">
+            <p><a href="#" id="back-to-login">Back to login</a></p>
         </div>
     </div>
 </div>
@@ -1095,6 +1245,376 @@
             footerYear.innerHTML = `Copyright &copy; 2023-${currentYear} | Treron Development LLC™`;
         });
     </script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script>
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAC01DxmHUGxXUzZvwodxyyIXa9X-JCIJI",
+        authDomain: "recharge-api-data-get.firebaseapp.com",
+        projectId: "recharge-api-data-get",
+        storageBucket: "recharge-api-data-get.appspot.com",
+        messagingSenderId: "1001831986604",
+        appId: "1:1001831986604:web:d9d3c3b5f7b9a9e0a9b9a9"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Add Firebase authentication functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get DOM elements
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const resetForm = document.getElementById('reset-form');
+        const loginError = document.getElementById('login-error');
+        const signupError = document.getElementById('signup-error');
+        const resetMessage = document.getElementById('reset-message');
+        const showSignupLink = document.getElementById('show-signup');
+        const showLoginLink = document.getElementById('show-login');
+        const forgotPasswordLink = document.getElementById('forgot-password');
+        const backToLoginLink = document.getElementById('back-to-login');
+        const loginModal = document.getElementById('login-modal');
+        const signupModal = document.getElementById('signup-modal');
+        const resetModal = document.getElementById('reset-modal');
+        const signupModalClose = document.getElementById('signup-modal-close');
+        const resetModalClose = document.getElementById('reset-modal-close');
+        
+        // User state listener
+        auth.onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in
+                console.log('User is signed in:', user.email);
+                
+                // Update login button to show logged in state
+                const loginButtonFront = document.getElementById('login-button-front');
+                const loginButtonBack = document.getElementById('login-button-back');
+                
+                if (loginButtonFront) {
+                    loginButtonFront.innerHTML = `
+                        <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>Account</span>
+                    `;
+                }
+                
+                if (loginButtonBack) {
+                    loginButtonBack.innerHTML = `
+                        <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>Account</span>
+                    `;
+                }
+                
+                // Update login modal to show logged in state
+                if (loginForm) {
+                    loginForm.style.display = 'none';
+                    
+                    // Create logged in content if it doesn't exist
+                    let loggedInContent = document.getElementById('logged-in-content');
+                    if (!loggedInContent) {
+                        loggedInContent = document.createElement('div');
+                        loggedInContent.id = 'logged-in-content';
+                        loggedInContent.innerHTML = `
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <p>You are logged in as:</p>
+                                <p style="font-weight: bold; font-size: 1.1rem; margin: 10px 0;">${user.email}</p>
+                            </div>
+                            <button type="button" id="logout-button" class="login-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Log out</button>
+                        `;
+                        loginForm.parentNode.insertBefore(loggedInContent, loginForm);
+                        
+                        // Add logout functionality
+                        document.getElementById('logout-button').addEventListener('click', function() {
+                            auth.signOut().then(function() {
+                                console.log('User signed out');
+                                playSound('ClickOut.wav');
+                                loginModal.classList.remove('active');
+                            }).catch(function(error) {
+                                console.error('Sign out error:', error);
+                            });
+                        });
+                    }
+                }
+            } else {
+                // User is signed out
+                console.log('User is signed out');
+                
+                // Update login button to show logged out state
+                const loginButtonFront = document.getElementById('login-button-front');
+                const loginButtonBack = document.getElementById('login-button-back');
+                
+                if (loginButtonFront) {
+                    loginButtonFront.innerHTML = `
+                        <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>Log in</span>
+                    `;
+                }
+                
+                if (loginButtonBack) {
+                    loginButtonBack.innerHTML = `
+                        <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>Log in</span>
+                    `;
+                }
+                
+                // Update login modal to show login form
+                if (loginForm) {
+                    loginForm.style.display = 'flex';
+                    
+                    // Remove logged in content if it exists
+                    const loggedInContent = document.getElementById('logged-in-content');
+                    if (loggedInContent) {
+                        loggedInContent.remove();
+                    }
+                }
+            }
+        });
+        
+        // Login form submission
+        if (loginForm) {
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Show loading state
+                const loginButton = document.getElementById('login-button');
+                loginButton.textContent = 'Logging in...';
+                loginButton.disabled = true;
+                
+                // Clear previous errors
+                loginError.style.display = 'none';
+                loginError.textContent = '';
+                
+                // Sign in with Firebase
+                auth.signInWithEmailAndPassword(email, password)
+                    .then(function(userCredential) {
+                        // Signed in
+                        console.log('Login successful');
+                        playSound('ClickOut.wav');
+                        
+                        // Reset form
+                        loginForm.reset();
+                    })
+                    .catch(function(error) {
+                        // Handle errors
+                        console.error('Login error:', error);
+                        loginError.textContent = getAuthErrorMessage(error);
+                        loginError.style.display = 'block';
+                        playSound('ClickOut.wav');
+                    })
+                    .finally(function() {
+                        // Reset button state
+                        loginButton.textContent = 'Log in';
+                        loginButton.disabled = false;
+                    });
+            });
+        }
+        
+        // Signup form submission
+        if (signupForm) {
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                // Show loading state
+                const signupButton = document.getElementById('signup-button');
+                signupButton.textContent = 'Creating account...';
+                signupButton.disabled = true;
+                
+                // Clear previous errors
+                signupError.style.display = 'none';
+                signupError.textContent = '';
+                
+                // Check if passwords match
+                if (password !== confirmPassword) {
+                    signupError.textContent = 'Passwords do not match';
+                    signupError.style.display = 'block';
+                    signupButton.textContent = 'Sign up';
+                    signupButton.disabled = false;
+                    playSound('ClickOut.wav');
+                    return;
+                }
+                
+                // Create user with Firebase
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then(function(userCredential) {
+                        // Signed up
+                        console.log('Signup successful');
+                        playSound('ClickOut.wav');
+                        
+                        // Reset form
+                        signupForm.reset();
+                        
+                        // Switch to login modal
+                        signupModal.classList.remove('active');
+                        loginModal.classList.add('active');
+                    })
+                    .catch(function(error) {
+                        // Handle errors
+                        console.error('Signup error:', error);
+                        signupError.textContent = getAuthErrorMessage(error);
+                        signupError.style.display = 'block';
+                        playSound('ClickOut.wav');
+                    })
+                    .finally(function() {
+                        // Reset button state
+                        signupButton.textContent = 'Sign up';
+                        signupButton.disabled = false;
+                    });
+            });
+        }
+        
+        // Password reset form submission
+        if (resetForm) {
+            resetForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('reset-email').value;
+                
+                // Show loading state
+                const resetButton = document.getElementById('reset-button');
+                resetButton.textContent = 'Sending...';
+                resetButton.disabled = true;
+                
+                // Clear previous messages
+                resetMessage.style.display = 'none';
+                resetMessage.textContent = '';
+                
+                // Send password reset email
+                auth.sendPasswordResetEmail(email)
+                    .then(function() {
+                        // Email sent
+                        console.log('Password reset email sent');
+                        resetMessage.textContent = 'Password reset email sent. Check your inbox.';
+                        resetMessage.style.display = 'block';
+                        playSound('ClickOut.wav');
+                        
+                        // Reset form
+                        resetForm.reset();
+                    })
+                    .catch(function(error) {
+                        // Handle errors
+                        console.error('Password reset error:', error);
+                        resetMessage.textContent = getAuthErrorMessage(error);
+                        resetMessage.style.display = 'block';
+                        resetMessage.style.color = '#e53e3e';
+                        playSound('ClickOut.wav');
+                    })
+                    .finally(function() {
+                        // Reset button state
+                        resetButton.textContent = 'Send Reset Link';
+                        resetButton.disabled = false;
+                    });
+            });
+        }
+        
+        // Show signup modal
+        if (showSignupLink) {
+            showSignupLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginModal.classList.remove('active');
+                signupModal.classList.add('active');
+                playSound('ClickIn.wav');
+            });
+        }
+        
+        // Show login modal
+        if (showLoginLink) {
+            showLoginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                signupModal.classList.remove('active');
+                loginModal.classList.add('active');
+                playSound('ClickIn.wav');
+            });
+        }
+        
+        // Show password reset modal
+        if (forgotPasswordLink) {
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginModal.classList.remove('active');
+                resetModal.classList.add('active');
+                playSound('ClickIn.wav');
+            });
+        }
+        
+        // Back to login from password reset
+        if (backToLoginLink) {
+            backToLoginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                resetModal.classList.remove('active');
+                loginModal.classList.add('active');
+                playSound('ClickIn.wav');
+            });
+        }
+        
+        // Close signup modal
+        if (signupModalClose) {
+            signupModalClose.addEventListener('click', function() {
+                signupModal.classList.remove('active');
+                playSound('ClickOut.wav');
+            });
+        }
+        
+        // Close reset modal
+        if (resetModalClose) {
+            resetModalClose.addEventListener('click', function() {
+                resetModal.classList.remove('active');
+                playSound('ClickOut.wav');
+            });
+        }
+        
+        // Close modals when clicking outside
+        signupModal.addEventListener('click', function(e) {
+            if (e.target === signupModal) {
+                signupModal.classList.remove('active');
+            }
+        });
+        
+        resetModal.addEventListener('click', function(e) {
+            if (e.target === resetModal) {
+                resetModal.classList.remove('active');
+            }
+        });
+        
+        // Helper function to get user-friendly error messages
+        function getAuthErrorMessage(error) {
+            switch (error.code) {
+                case 'auth/email-already-in-use':
+                    return 'This email is already in use by another account.';
+                case 'auth/invalid-email':
+                    return 'Please enter a valid email address.';
+                case 'auth/weak-password':
+                    return 'Password is too weak. Please use at least 6 characters.';
+                case 'auth/user-not-found':
+                    return 'No account found with this email address.';
+                case 'auth/wrong-password':
+                    return 'Incorrect password. Please try again.';
+                case 'auth/too-many-requests':
+                    return 'Too many unsuccessful login attempts. Please try again later.';
+                default:
+                    return error.message || 'An error occurred. Please try again.';
+            }
+        }
+    });
+</script>
 </body>
 </html>
 
