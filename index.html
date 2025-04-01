@@ -549,13 +549,19 @@
         opacity: 0;
         visibility: hidden;
         transform-origin: bottom center;
-        transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.3s ease;
+        transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.3s ease, max-width 0.5s ease, max-height 0.5s ease;
+        max-height: 400px;
     }
 
     .notifications-popup.active {
         opacity: 1;
         visibility: visible;
         transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .notifications-popup.expanded {
+        max-width: 600px;
+        max-height: 80vh;
     }
 
     .notifications-header {
@@ -599,6 +605,11 @@
         padding: 0;
         margin: 0;
         list-style: none;
+        transition: max-height 0.5s ease;
+    }
+
+    .notifications-popup.expanded .notifications-list {
+        max-height: calc(80vh - 120px);
     }
 
     .notification-item {
@@ -646,6 +657,7 @@
         color: hsl(var(--muted-foreground));
         font-size: 0.9rem;
         margin: 0;
+        white-space: pre-line;
     }
 
     .notification-time {
@@ -760,6 +772,12 @@
     .login-modal {
         max-height: 90vh;
         overflow-y: auto;
+    }
+
+    /* Keyframes for loading animation */
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 </style>
 </head>
@@ -1247,6 +1265,7 @@
     </script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
 <script>
     // Firebase configuration
     const firebaseConfig = {
@@ -1261,6 +1280,7 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+    const storage = firebase.storage();
 
     // Add Firebase authentication functionality
     document.addEventListener('DOMContentLoaded', function() {
@@ -1613,6 +1633,227 @@
                     return error.message || 'An error occurred. Please try again.';
             }
         }
+    });
+
+    // Add notification functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get DOM elements for notifications
+        const notificationsPopup = document.getElementById('notifications-popup');
+        const notificationsList = document.querySelector('.notifications-list');
+        const viewAllButton = document.querySelector('.view-all-button');
+        
+        // Function to fetch notifications from Firebase Storage
+        function fetchNotifications(limit = 3) {
+            // Reference to the notifications folder in Firebase Storage
+            const notificationsRef = storage.ref('Current Notification history');
+            
+            // Clear existing notifications
+            notificationsList.innerHTML = '';
+            
+            // Show loading indicator
+            notificationsList.innerHTML = `
+                <li class="notification-item" style="text-align: center;">
+                    <div style="padding: 20px;">
+                        <svg class="icon-svg" style="width: 24px; height: 24px; animation: spin 1s linear infinite;" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor" stroke-dasharray="30 30" fill="none" />
+                        </svg>
+                        <p>Loading notifications...</p>
+                    </div>
+                </li>
+            `;
+            
+            // List all items in the folder
+            notificationsRef.listAll()
+                .then((result) => {
+                    // If no notifications found
+                    if (result.items.length === 0) {
+                        notificationsList.innerHTML = `
+                            <li class="notification-item">
+                                <div class="empty-notifications">
+                                    <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
+                                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                    </svg>
+                                    <p>No notifications found</p>
+                                </div>
+                            </li>
+                        `;
+                        return;
+                    }
+                    
+                    // Sort items by name in reverse order (assuming newer notifications have higher numbers)
+                    const sortedItems = [...result.items].sort((a, b) => {
+                        return b.name.localeCompare(a.name, undefined, { numeric: true });
+                    });
+                    
+                    // Limit the number of notifications if not viewing all
+                    const itemsToProcess = limit ? sortedItems.slice(0, limit) : sortedItems;
+                    
+                    // Clear loading indicator
+                    notificationsList.innerHTML = '';
+                    
+                    // Process each notification file
+                    let processedCount = 0;
+                    
+                    itemsToProcess.forEach((item) => {
+                        // Get download URL for each file
+                        item.getDownloadURL()
+                            .then((url) => {
+                                // Fetch the notification content
+                                fetch(url)
+                                    .then(response => response.text())
+                                    .then(content => {
+                                        // Parse notification content
+                                        const lines = content.split('\n');
+                                        let title = 'Notification';
+                                        let description = '';
+                                        
+                                        // Extract title and description
+                                        if (lines.length > 0) {
+                                            const titleLine = lines[0].trim();
+                                            if (titleLine.startsWith('Title:')) {
+                                                title = titleLine.substring(6).trim();
+                                            }
+                                            
+                                            // Find description start
+                                            const descIndex = lines.findIndex(line => line.trim().startsWith('Description:'));
+                                            if (descIndex !== -1) {
+                                                // Get description (everything after "Description:")
+                                                description = lines[descIndex].substring(12).trim();
+                                                
+                                                // Add remaining lines to description
+                                                for (let i = descIndex + 1; i < lines.length; i++) {
+                                                    description += '\n' + lines[i];
+                                                }
+                                            } else {
+                                                // If no Description: tag, use everything after title
+                                                description = lines.slice(1).join('\n');
+                                            }
+                                        }
+                                        
+                                        // Create notification element
+                                        const notificationItem = document.createElement('li');
+                                        notificationItem.className = 'notification-item';
+                                        
+                                        // Format the description text (replace newlines with <br>)
+                                        const formattedDescription = description.replace(/\n/g, '<br>');
+                                        
+                                        // Generate a random time for demo purposes (in a real app, you'd store timestamps)
+                                        const randomHours = Math.floor(Math.random() * 48);
+                                        const timeText = randomHours === 0 ? 'Just now' : 
+                                                        randomHours === 1 ? '1 hour ago' : 
+                                                        randomHours < 24 ? `${randomHours} hours ago` : 
+                                                        randomHours === 24 ? '1 day ago' : 
+                                                        `${Math.floor(randomHours / 24)} days ago`;
+                                        
+                                        notificationItem.innerHTML = `
+                                            <div class="notification-content">
+                                                <div class="notification-icon">
+                                                    <svg class="icon-svg" viewBox="0 0 24 24">
+                                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                                    </svg>
+                                                </div>
+                                                <div class="notification-text">
+                                                    <h4 class="notification-title">${title}</h4>
+                                                    <p class="notification-message">${formattedDescription}</p>
+                                                    <div class="notification-time">${timeText}</div>
+                                                </div>
+                                            </div>
+                                        `;
+                                        
+                                        notificationsList.appendChild(notificationItem);
+                                        processedCount++;
+                                        
+                                        // Update view all button text with count
+                                        if (processedCount === itemsToProcess.length) {
+                                            viewAllButton.textContent = limit && sortedItems.length > limit ? 
+                                                `View all notifications (${sortedItems.length})` : 
+                                                'Refresh notifications';
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error("Error fetching notification content:", error);
+                                    });
+                            })
+                            .catch(error => {
+                                console.error("Error getting download URL:", error);
+                            });
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error listing notifications:", error);
+                    notificationsList.innerHTML = `
+                        <li class="notification-item">
+                            <div class="empty-notifications">
+                                <p>Error loading notifications</p>
+                                <p style="font-size: 0.8rem; color: hsl(var(--muted-foreground));">${error.message}</p>
+                            </div>
+                        </li>
+                    `;
+                });
+        }
+        
+        // Initialize notifications when popup is opened
+        const notificationsButtonFront = document.getElementById('notifications-button-front');
+        const notificationsButtonBack = document.getElementById('notifications-button-back');
+        const notificationsClose = document.getElementById('notifications-close');
+        
+        // Function to open notifications popup
+        function openNotificationsPopup() {
+            notificationsPopup.classList.add('active');
+            fetchNotifications(3); // Show limited notifications initially
+            playSound('ClickIn.wav');
+        }
+        
+        // Attach event listeners for notification buttons
+        if (notificationsButtonFront) {
+            notificationsButtonFront.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                openNotificationsPopup();
+            });
+        }
+        
+        if (notificationsButtonBack) {
+            notificationsButtonBack.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                openNotificationsPopup();
+            });
+        }
+        
+        // View all notifications button
+        if (viewAllButton) {
+            viewAllButton.addEventListener('click', function() {
+                // Expand the notifications popup
+                notificationsPopup.classList.add('expanded');
+                // Fetch all notifications
+                fetchNotifications(null); // null means no limit
+                playSound('ClickIn.wav');
+            });
+        }
+        
+        // Close notifications popup
+        if (notificationsClose) {
+            notificationsClose.addEventListener('click', function() {
+                notificationsPopup.classList.remove('active');
+                notificationsPopup.classList.remove('expanded');
+                playSound('ClickOut.wav');
+            });
+        }
+        
+        // Close notifications when clicking outside
+        document.addEventListener('click', function(e) {
+            if (notificationsPopup.classList.contains('active') && 
+                !notificationsPopup.contains(e.target) && 
+                e.target !== notificationsButtonFront && 
+                !notificationsButtonFront.contains(e.target) &&
+                e.target !== notificationsButtonBack && 
+                !notificationsButtonBack.contains(e.target)) {
+                notificationsPopup.classList.remove('active');
+                notificationsPopup.classList.remove('expanded');
+            }
+        });
     });
 </script>
 </body>
