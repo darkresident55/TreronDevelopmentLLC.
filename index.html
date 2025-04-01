@@ -1651,7 +1651,7 @@
             notificationsList.innerHTML = '';
             
             // Show loading indicator
-            notificationsList.innerHTML = 
+            notificationsList.innerHTML = `
                 <li class="notification-item" style="text-align: center;">
                     <div style="padding: 20px;">
                         <svg class="icon-svg" style="width: 24px; height: 24px; animation: spin 1s linear infinite;" viewBox="0 0 24 24">
@@ -1660,14 +1660,14 @@
                         <p>Loading notifications...</p>
                     </div>
                 </li>
-            ;
+            `;
             
             // List all items in the folder
             notificationsRef.listAll()
                 .then((result) => {
                     // If no notifications found
                     if (result.items.length === 0) {
-                        notificationsList.innerHTML = 
+                        notificationsList.innerHTML = `
                             <li class="notification-item">
                                 <div class="empty-notifications">
                                     <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
@@ -1677,7 +1677,7 @@
                                     <p>No notifications found</p>
                                 </div>
                             </li>
-                        ;
+                        `;
                         return;
                     }
                     
@@ -1742,11 +1742,11 @@
                                         const randomHours = Math.floor(Math.random() * 48);
                                         const timeText = randomHours === 0 ? 'Just now' : 
                                                         randomHours === 1 ? '1 hour ago' : 
-                                                        randomHours < 24 ? ${randomHours} hours ago : 
+                                                        randomHours < 24 ? `${randomHours} hours ago` : 
                                                         randomHours === 24 ? '1 day ago' : 
-                                                        ${Math.floor(randomHours / 24)} days ago;
+                                                        `${Math.floor(randomHours / 24)} days ago`;
                                         
-                                        notificationItem.innerHTML = 
+                                        notificationItem.innerHTML = `
                                             <div class="notification-content">
                                                 <div class="notification-icon">
                                                     <svg class="icon-svg" viewBox="0 0 24 24">
@@ -1759,7 +1759,7 @@
                                                     <div class="notification-time">${timeText}</div>
                                                 </div>
                                             </div>
-                                        ;
+                                        `;
                                         
                                         notificationsList.appendChild(notificationItem);
                                         processedCount++;
@@ -1767,7 +1767,7 @@
                                         // Update view all button text with count
                                         if (processedCount === itemsToProcess.length) {
                                             viewAllButton.textContent = limit && sortedItems.length > limit ? 
-                                                View all notifications (${sortedItems.length}) : 
+                                                `View all notifications (${sortedItems.length})` : 
                                                 'Refresh notifications';
                                         }
                                     })
@@ -1782,14 +1782,14 @@
                 })
                 .catch((error) => {
                     console.error("Error listing notifications:", error);
-                    notificationsList.innerHTML = 
+                    notificationsList.innerHTML = `
                         <li class="notification-item">
                             <div class="empty-notifications">
                                 <p>Error loading notifications</p>
                                 <p style="font-size: 0.8rem; color: hsl(var(--muted-foreground));">${error.message}</p>
                             </div>
                         </li>
-                    ;
+                    `;
                 });
         }
         
