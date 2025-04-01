@@ -1635,21 +1635,16 @@
         }
     });
 
-    // Add notification functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get DOM elements for notifications
-        const notificationsPopup = document.getElementById('notifications-popup');
-        const notificationsList = document.querySelector('.notifications-list');
-        const viewAllButton = document.querySelector('.view-all-button');
+           function fetchNotifications(limit = 3) {
+            // Initialize Firebase Storage
+            const storage = firebase.storage();
         
-        // Function to fetch notifications from Firebase Storage
-        function fetchNotifications(limit = 3) {
-            // Reference to the notifications folder in Firebase Storage
-            const notificationsRef = storage.ref('Current Notification history');
-            
+            // Use refFromURL to reference the correct storage path
+            const notificationsRef = storage.refFromURL("gs://recharge-api-data-get.appspot.com/Current Notification history");
+        
             // Clear existing notifications
             notificationsList.innerHTML = '';
-            
+        
             // Show loading indicator
             notificationsList.innerHTML = `
                 <li class="notification-item" style="text-align: center;">
@@ -1661,11 +1656,10 @@
                     </div>
                 </li>
             `;
-            
+        
             // List all items in the folder
             notificationsRef.listAll()
                 .then((result) => {
-                    // If no notifications found
                     if (result.items.length === 0) {
                         notificationsList.innerHTML = `
                             <li class="notification-item">
@@ -1680,107 +1674,77 @@
                         `;
                         return;
                     }
-                    
-                    // Sort items by name in reverse order (assuming newer notifications have higher numbers)
+        
+                    // Sort items by name (assuming newer notifications have higher numbers)
                     const sortedItems = [...result.items].sort((a, b) => {
                         return b.name.localeCompare(a.name, undefined, { numeric: true });
                     });
-                    
-                    // Limit the number of notifications if not viewing all
+        
                     const itemsToProcess = limit ? sortedItems.slice(0, limit) : sortedItems;
-                    
-                    // Clear loading indicator
                     notificationsList.innerHTML = '';
-                    
-                    // Process each notification file
+        
                     let processedCount = 0;
-                    
                     itemsToProcess.forEach((item) => {
-                        // Get download URL for each file
                         item.getDownloadURL()
-                            .then((url) => {
-                                // Fetch the notification content
-                                fetch(url)
-                                    .then(response => response.text())
-                                    .then(content => {
-                                        // Parse notification content
-                                        const lines = content.split('\n');
-                                        let title = 'Notification';
-                                        let description = '';
-                                        
-                                        // Extract title and description
-                                        if (lines.length > 0) {
-                                            const titleLine = lines[0].trim();
-                                            if (titleLine.startsWith('Title:')) {
-                                                title = titleLine.substring(6).trim();
-                                            }
-                                            
-                                            // Find description start
-                                            const descIndex = lines.findIndex(line => line.trim().startsWith('Description:'));
-                                            if (descIndex !== -1) {
-                                                // Get description (everything after "Description:")
-                                                description = lines[descIndex].substring(12).trim();
-                                                
-                                                // Add remaining lines to description
-                                                for (let i = descIndex + 1; i < lines.length; i++) {
-                                                    description += '\n' + lines[i];
-                                                }
-                                            } else {
-                                                // If no Description: tag, use everything after title
-                                                description = lines.slice(1).join('\n');
-                                            }
-                                        }
-                                        
-                                        // Create notification element
-                                        const notificationItem = document.createElement('li');
-                                        notificationItem.className = 'notification-item';
-                                        
-                                        // Format the description text (replace newlines with <br>)
-                                        const formattedDescription = description.replace(/\n/g, '<br>');
-                                        
-                                        // Generate a random time for demo purposes (in a real app, you'd store timestamps)
-                                        const randomHours = Math.floor(Math.random() * 48);
-                                        const timeText = randomHours === 0 ? 'Just now' : 
-                                                        randomHours === 1 ? '1 hour ago' : 
-                                                        randomHours < 24 ? `${randomHours} hours ago` : 
-                                                        randomHours === 24 ? '1 day ago' : 
-                                                        `${Math.floor(randomHours / 24)} days ago`;
-                                        
-                                        notificationItem.innerHTML = `
-                                            <div class="notification-content">
-                                                <div class="notification-icon">
-                                                    <svg class="icon-svg" viewBox="0 0 24 24">
-                                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                                                    </svg>
-                                                </div>
-                                                <div class="notification-text">
-                                                    <h4 class="notification-title">${title}</h4>
-                                                    <p class="notification-message">${formattedDescription}</p>
-                                                    <div class="notification-time">${timeText}</div>
-                                                </div>
-                                            </div>
-                                        `;
-                                        
-                                        notificationsList.appendChild(notificationItem);
-                                        processedCount++;
-                                        
-                                        // Update view all button text with count
-                                        if (processedCount === itemsToProcess.length) {
-                                            viewAllButton.textContent = limit && sortedItems.length > limit ? 
-                                                `View all notifications (${sortedItems.length})` : 
-                                                'Refresh notifications';
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error("Error fetching notification content:", error);
-                                    });
+                            .then((url) => fetch(url))
+                            .then(response => response.text())
+                            .then(content => {
+                                const lines = content.split('\n');
+                                let title = 'Notification';
+                                let description = '';
+        
+                                if (lines.length > 0) {
+                                    const titleLine = lines[0].trim();
+                                    if (titleLine.startsWith('Title:')) {
+                                        title = titleLine.substring(6).trim();
+                                    }
+                                    const descIndex = lines.findIndex(line => line.trim().startsWith('Description:'));
+                                    if (descIndex !== -1) {
+                                        description = lines.slice(descIndex + 1).join('\n').trim();
+                                    } else {
+                                        description = lines.slice(1).join('\n').trim();
+                                    }
+                                }
+        
+                                const notificationItem = document.createElement('li');
+                                notificationItem.className = 'notification-item';
+                                const formattedDescription = description.replace(/\n/g, '<br>');
+        
+                                const randomHours = Math.floor(Math.random() * 48);
+                                const timeText = randomHours === 0 ? 'Just now' :
+                                                randomHours === 1 ? '1 hour ago' :
+                                                randomHours < 24 ? `${randomHours} hours ago` :
+                                                randomHours === 24 ? '1 day ago' :
+                                                `${Math.floor(randomHours / 24)} days ago`;
+        
+                                notificationItem.innerHTML = `
+                                    <div class="notification-content">
+                                        <div class="notification-icon">
+                                            <svg class="icon-svg" viewBox="0 0 24 24">
+                                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="notification-text">
+                                            <h4 class="notification-title">${title}</h4>
+                                            <p class="notification-message">${formattedDescription}</p>
+                                            <div class="notification-time">${timeText}</div>
+                                        </div>
+                                    </div>
+                                `;
+        
+                                notificationsList.appendChild(notificationItem);
+                                processedCount++;
+        
+                                if (processedCount === itemsToProcess.length) {
+                                    viewAllButton.textContent = limit && sortedItems.length > limit ? 
+                                        `View all notifications (${sortedItems.length})` : 
+                                        'Refresh notifications';
+                                }
                             })
-                            .catch(error => {
-                                console.error("Error getting download URL:", error);
-                            });
+                            .catch(error => console.error("Error fetching notification content:", error));
                     });
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.error("Error listing notifications:", error);
                     notificationsList.innerHTML = `
                         <li class="notification-item">
