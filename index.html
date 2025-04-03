@@ -47,7 +47,7 @@
         line-height: 1.6;
         margin: 0;
         padding: 0;
-        background-color: transparent;
+        background-color: hsl(var(--background));
         color: hsl(var(--foreground));
         text-align: center;
         position: relative;
@@ -95,13 +95,6 @@
         min-height: 85vh;
         padding-top: 60px;
         padding-bottom: 80px; /* Make room for the menu bar at bottom */
-        background-color: rgba(0, 0, 0, 0.2);
-        backdrop-filter: none;
-        border-radius: 16px;
-        padding: 20px;
-        margin: 20px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .button-container {
@@ -158,7 +151,6 @@
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         position: relative;
         overflow: hidden;
-        animation: floatMenu 4s ease-in-out infinite;
     }
 
     .menu-list {
@@ -787,176 +779,9 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
-
-/* Add this CSS to the existing <style> section */
-@keyframes backgroundScroll {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 0%; }
-}
-
-.background-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
-
-/* Update the forest-background to have a cleaner gradient */
-.forest-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 100%;
-    background-image: linear-gradient(
-        to bottom,
-        #0f0326 0%,
-        #1a0940 30%,
-        #2a0f66 60%,
-        #3b1a8c 100%
-    );
-    animation: backgroundScroll 60s linear infinite;
-}
-
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 60%;
-    background-image: 
-        radial-gradient(1px 1px at 25px 5px, white, rgba(255, 255, 255, 0)),
-        radial-gradient(1px 1px at 50px 25px, white, rgba(255, 255, 255, 0)),
-        radial-gradient(1px 1px at 125px 20px, white, rgba(255, 255, 255, 0)),
-        radial-gradient(1.5px 1.5px at 50px 75px, white, rgba(255, 255, 255, 0)),
-        radial-gradient(2px 2px at 15px 125px, white, rgba(255, 255, 255, 0)),
-        radial-gradient(2.5px 2.5px at 110px 80px, white, rgba(255, 255, 255, 0));
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    animation: backgroundScroll 120s linear infinite, twinkle 4s ease-in-out infinite;
-    opacity: 0.6;
-}
-
-/* Replace the forest with a fence and grass */
-.fence {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    background-color: #4a3b6b;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.fence-posts {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    background-image: 
-        repeating-linear-gradient(
-            to right,
-            transparent 0px,
-            transparent 60px,
-            #6a5a8a 60px,
-            #6a5a8a 70px,
-            transparent 70px,
-            transparent 130px
-        );
-    animation: fenceScroll 30s linear infinite;
-}
-
-@keyframes fenceScroll {
-    0% { background-position: 0 0; }
-    100% { background-position: 130px 0; }
-}
-
-.grass-field {
-    position: absolute;
-    top: 50%;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to bottom, #1a2e1a 0%, #0d1a0d 100%);
-    box-shadow: inset 0 10px 10px -10px rgba(0, 0, 0, 0.8);
-}
-
-.grass-texture {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background-image: 
-        repeating-linear-gradient(
-            80deg,
-            transparent 0px,
-            transparent 2px,
-            rgba(50, 100, 50, 0.2) 2px,
-            rgba(50, 100, 50, 0.2) 3px
-        ),
-        repeating-linear-gradient(
-            -80deg,
-            transparent 0px,
-            transparent 3px,
-            rgba(50, 100, 50, 0.2) 3px,
-            rgba(50, 100, 50, 0.2) 4px
-        );
-    opacity: 0.3;
-    animation: grassMove 20s linear infinite;
-}
-
-@keyframes grassMove {
-    0% { background-position: 0 0; }
-    100% { background-position: 100px 0; }
-}
-
-.moon {
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #ffffff, #e1e1ff 30%, #b0b0ff 50%, #6a6aff 70%, #3b1a8c 100%);
-    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.4);
-    animation: pulseMoon 8s ease-in-out infinite;
-}
-
-/* Remove these elements as they're being replaced */
-.forest, .grass-blades, .mountains {
-    display: none;
-}
-
-/* Add a subtle pulse animation to the moon */
-@keyframes pulseMoon {
-    0% { box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.4); }
-    50% { box-shadow: 0 0 30px 8px rgba(255, 255, 255, 0.6); }
-    100% { box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.4); }
-}
-
-/* Make the stars twinkle */
-@keyframes twinkle {
-    0% { opacity: 0.4; }
-    50% { opacity: 0.8; }
-    100% { opacity: 0.4; }
-}
 </style>
 </head>
 <body class="dark">
-<div class="background-container">
-    <div class="forest-background"></div>
-    <div class="stars"></div>
-    <div class="moon"></div>
-    <div class="fence"></div>
-    <div class="fence-posts"></div>
-    <div class="grass-field"></div>
-    <div class="grass-texture"></div>
-</div>
 <!-- Login Modal -->
 <div class="login-modal-overlay" id="login-modal">
     <div class="login-modal">
@@ -1096,7 +921,7 @@
             <div class="notification-content">
                 <div class="notification-icon">
                     <svg class="icon-svg" viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 </div>
@@ -1235,14 +1060,14 @@
                         <div class="menu-item-glow" style="background: radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.06) 50%, rgba(185,28,28,0) 100%);"></div>
                         <a href="#" class="menu-link-front" id="login-button-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
                             <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
                             <span>Log in</span>
                         </a>
                         <a href="#" class="menu-link-back" id="login-button-back" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
                             <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
                             <span>Log in</span>
@@ -1489,7 +1314,7 @@
                 if (loginButtonFront) {
                     loginButtonFront.innerHTML = `
                         <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         <span>Account</span>
@@ -1499,7 +1324,7 @@
                 if (loginButtonBack) {
                     loginButtonBack.innerHTML = `
                         <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         <span>Account</span>
@@ -1547,7 +1372,7 @@
                 if (loginButtonFront) {
                     loginButtonFront.innerHTML = `
                         <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         <span>Log in</span>
@@ -1557,7 +1382,7 @@
                 if (loginButtonBack) {
                     loginButtonBack.innerHTML = `
                         <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         <span>Log in</span>
