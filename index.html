@@ -864,7 +864,7 @@
         </div>
         <div class="login-modal-header">
             <h2 class="login-modal-title">Reset Password</h2>
-            <button class="login-modal-close" id="reset-modal-close">
+            <button class="reset-modal-close" id="reset-modal-close">
                 <svg class="icon-svg" viewBox="0 0 24 24">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -1643,155 +1643,211 @@
         const viewAllButton = document.querySelector('.view-all-button');
         
         // Function to fetch notifications from Firebase Storage
-        function fetchNotifications(limit = 3) {
-            // Reference to the notifications folder in Firebase Storage
-            const notificationsRef = storage.ref('Current-Notification-history');
-            
-            // Clear existing notifications
-            notificationsList.innerHTML = '';
-            
-            // Show loading indicator
+        
+// Function to fetch notifications from Firebase Storage
+function fetchNotifications(limit = 3) {
+    console.log("Fetching notifications...");
+    
+    // Try both path formats to see which one works
+    const paths = [
+        'Current-Notification-history',
+        'Current Notification history'
+    ];
+    
+    // Show loading indicator
+    notificationsList.innerHTML = `
+        <li class="notification-item" style="text-align: center;">
+            <div style="padding: 20px;">
+                <svg class="icon-svg" style="width: 24px; height: 24px; animation: spin 1s linear infinite;" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor" stroke-dasharray="30 30" fill="none" />
+                </svg>
+                <p>Loading notifications...</p>
+            </div>
+        </li>
+    `;
+    
+    // Try each path
+    tryNextPath(0);
+    
+    function tryNextPath(index) {
+        if (index >= paths.length) {
+            // All paths failed
             notificationsList.innerHTML = `
-                <li class="notification-item" style="text-align: center;">
-                    <div style="padding: 20px;">
-                        <svg class="icon-svg" style="width: 24px; height: 24px; animation: spin 1s linear infinite;" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor" stroke-dasharray="30 30" fill="none" />
-                        </svg>
-                        <p>Loading notifications...</p>
+                <li class="notification-item">
+                    <div class="empty-notifications">
+                        <p>Error loading notifications</p>
+                        <p style="font-size: 0.8rem; color: hsl(var(--muted-foreground));">Could not find notifications folder</p>
                     </div>
                 </li>
             `;
-            
-            // List all items in the folder
-            notificationsRef.listAll()
-                .then((result) => {
-                    // If no notifications found
-                    if (result.items.length === 0) {
-                        notificationsList.innerHTML = `
-                            <li class="notification-item">
-                                <div class="empty-notifications">
-                                    <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
-                                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                                    </svg>
-                                    <p>No notifications found</p>
-                                </div>
-                            </li>
-                        `;
-                        return;
-                    }
-                    
-                    // Sort items by name in reverse order (assuming newer notifications have higher numbers)
-                    const sortedItems = [...result.items].sort((a, b) => {
-                        return b.name.localeCompare(a.name, undefined, { numeric: true });
-                    });
-                    
-                    // Limit the number of notifications if not viewing all
-                    const itemsToProcess = limit ? sortedItems.slice(0, limit) : sortedItems;
-                    
-                    // Clear loading indicator
-                    notificationsList.innerHTML = '';
-                    
-                    // Process each notification file
-                    let processedCount = 0;
-                    
-                    itemsToProcess.forEach((item) => {
-                        // Get download URL for each file
-                        item.getDownloadURL()
-                            .then((url) => {
-                                // Fetch the notification content
-                                fetch(url)
-                                    .then(response => response.text())
-                                    .then(content => {
-                                        // Parse notification content
-                                        const lines = content.split('\n');
-                                        let title = 'Notification';
-                                        let description = '';
-                                        
-                                        // Extract title and description
-                                        if (lines.length > 0) {
-                                            const titleLine = lines[0].trim();
-                                            if (titleLine.startsWith('Title:')) {
-                                                title = titleLine.substring(6).trim();
-                                            }
-                                            
-                                            // Find description start
-                                            const descIndex = lines.findIndex(line => line.trim().startsWith('Description:'));
-                                            if (descIndex !== -1) {
-                                                // Get description (everything after "Description:")
-                                                description = lines[descIndex].substring(12).trim();
-                                                
-                                                // Add remaining lines to description
-                                                for (let i = descIndex + 1; i < lines.length; i++) {
-                                                    description += '\n' + lines[i];
-                                                }
-                                            } else {
-                                                // If no Description: tag, use everything after title
-                                                description = lines.slice(1).join('\n');
-                                            }
-                                        }
-                                        
-                                        // Create notification element
-                                        const notificationItem = document.createElement('li');
-                                        notificationItem.className = 'notification-item';
-                                        
-                                        // Format the description text (replace newlines with <br>)
-                                        const formattedDescription = description.replace(/\n/g, '<br>');
-                                        
-                                        // Generate a random time for demo purposes (in a real app, you'd store timestamps)
-                                        const randomHours = Math.floor(Math.random() * 48);
-                                        const timeText = randomHours === 0 ? 'Just now' : 
-                                                        randomHours === 1 ? '1 hour ago' : 
-                                                        randomHours < 24 ? `${randomHours} hours ago` : 
-                                                        randomHours === 24 ? '1 day ago' : 
-                                                        `${Math.floor(randomHours / 24)} days ago`;
-                                        
-                                        notificationItem.innerHTML = `
-                                            <div class="notification-content">
-                                                <div class="notification-icon">
-                                                    <svg class="icon-svg" viewBox="0 0 24 24">
-                                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                                                    </svg>
-                                                </div>
-                                                <div class="notification-text">
-                                                    <h4 class="notification-title">${title}</h4>
-                                                    <p class="notification-message">${formattedDescription}</p>
-                                                    <div class="notification-time">${timeText}</div>
-                                                </div>
-                                            </div>
-                                        `;
-                                        
-                                        notificationsList.appendChild(notificationItem);
-                                        processedCount++;
-                                        
-                                        // Update view all button text with count
-                                        if (processedCount === itemsToProcess.length) {
-                                            viewAllButton.textContent = limit && sortedItems.length > limit ? 
-                                                `View all notifications (${sortedItems.length})` : 
-                                                'Refresh notifications';
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error("Error fetching notification content:", error);
-                                    });
-                            })
-                            .catch(error => {
-                                console.error("Error getting download URL:", error);
-                            });
-                    });
-                })
-                .catch((error) => {
-                    console.error("Error listing notifications:", error);
+            return;
+        }
+        
+        const path = paths[index];
+        console.log(`Trying path: ${path}`);
+        
+        // Reference to the notifications folder in Firebase Storage
+        const notificationsRef = firebase.storage().ref(path);
+        
+        // List all items in the folder
+        notificationsRef.listAll()
+            .then((result) => {
+                console.log(`Success with path: ${path}`, result);
+                
+                // If no notifications found
+                if (result.items.length === 0) {
                     notificationsList.innerHTML = `
                         <li class="notification-item">
                             <div class="empty-notifications">
-                                <p>Error loading notifications</p>
-                                <p style="font-size: 0.8rem; color: hsl(var(--muted-foreground));">${error.message}</p>
+                                <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
+                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                </svg>
+                                <p>No notifications found</p>
                             </div>
                         </li>
                     `;
+                    return;
+                }
+                
+                // Sort items by name in reverse order (assuming newer notifications have higher numbers)
+                const sortedItems = [...result.items].sort((a, b) => {
+                    return b.name.localeCompare(a.name, undefined, { numeric: true });
                 });
-        }
+                
+                // Limit the number of notifications if not viewing all
+                const itemsToProcess = limit ? sortedItems.slice(0, limit) : sortedItems;
+                
+                // Clear loading indicator
+                notificationsList.innerHTML = '';
+                
+                // Process each notification file
+                let processedCount = 0;
+                
+                itemsToProcess.forEach((item) => {
+                    console.log(`Processing item: ${item.name}`);
+                    
+                    // Get download URL for each file
+                    item.getDownloadURL()
+                        .then((url) => {
+                            console.log(`Got URL for ${item.name}: ${url}`);
+                            
+                            // Fetch the notification content
+                            fetch(url)
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                    }
+                                    return response.text();
+                                })
+                                .then(content => {
+                                    console.log(`Got content for ${item.name}`, content.substring(0, 50) + "...");
+                                    
+                                    // Parse notification content
+                                    const lines = content.split('\n');
+                                    let title = 'Notification';
+                                    let description = '';
+                                    
+                                    // Extract title and description
+                                    if (lines.length > 0) {
+                                        const titleLine = lines[0].trim();
+                                        if (titleLine.startsWith('Title:')) {
+                                            title = titleLine.substring(6).trim();
+                                        }
+                                        
+                                        // Find description start
+                                        const descIndex = lines.findIndex(line => line.trim().startsWith('Description:'));
+                                        if (descIndex !== -1) {
+                                            // Get description (everything after "Description:")
+                                            description = lines[descIndex].substring(12).trim();
+                                            
+                                            // Add remaining lines to description
+                                            for (let i = descIndex + 1; i < lines.length; i++) {
+                                                description += '\n' + lines[i];
+                                            }
+                                        } else {
+                                            // If no Description: tag, use everything after title
+                                            description = lines.slice(1).join('\n');
+                                        }
+                                    }
+                                    
+                                    // Create notification element
+                                    const notificationItem = document.createElement('li');
+                                    notificationItem.className = 'notification-item';
+                                    
+                                    // Format the description text (replace newlines with <br>)
+                                    const formattedDescription = description.replace(/\n/g, '<br>');
+                                    
+                                    // Generate a random time for demo purposes (in a real app, you'd store timestamps)
+                                    const randomHours = Math.floor(Math.random() * 48);
+                                    const timeText = randomHours === 0 ? 'Just now' : 
+                                                    randomHours === 1 ? '1 hour ago' : 
+                                                    randomHours < 24 ? `${randomHours} hours ago` : 
+                                                    randomHours === 24 ? '1 day ago' : 
+                                                    `${Math.floor(randomHours / 24)} days ago`;
+                                    
+                                    notificationItem.innerHTML = `
+                                        <div class="notification-content">
+                                            <div class="notification-icon">
+                                                <svg class="icon-svg" viewBox="0 0 24 24">
+                                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="notification-text">
+                                                <h4 class="notification-title">${title}</h4>
+                                                <p class="notification-message">${formattedDescription}</p>
+                                                <div class="notification-time">${timeText}</div>
+                                            </div>
+                                        </div>
+                                    `;
+                                    
+                                    notificationsList.appendChild(notificationItem);
+                                    processedCount++;
+                                    
+                                    // Update view all button text with count
+                                    if (viewAllButton && processedCount === itemsToProcess.length) {
+                                        viewAllButton.textContent = limit && sortedItems.length > limit ? 
+                                            `View all notifications (${sortedItems.length})` : 
+                                            'Refresh notifications';
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error(`Error fetching notification content for ${item.name}:`, error);
+                                    
+                                    // Create error notification item
+                                    const errorItem = document.createElement('li');
+                                    errorItem.className = 'notification-item';
+                                    errorItem.innerHTML = `
+                                        <div class="notification-content">
+                                            <div class="notification-icon" style="background-color: rgba(239, 68, 68, 0.2); color: #ef4444;">
+                                                <svg class="icon-svg" viewBox="0 0 24 24">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                                </svg>
+                                            </div>
+                                            <div class="notification-text">
+                                                <h4 class="notification-title">Error loading notification</h4>
+                                                <p class="notification-message">Could not load ${item.name}</p>
+                                            </div>
+                                        </div>
+                                    `;
+                                    notificationsList.appendChild(errorItem);
+                                    processedCount++;
+                                });
+                        })
+                        .catch(error => {
+                            console.error(`Error getting download URL for ${item.name}:`, error);
+                        });
+                });
+            })
+            .catch((error) => {
+                console.error(`Error listing notifications with path ${path}:`, error);
+                // Try the next path
+                tryNextPath(index + 1);
+            });
+    }
+}
         
         // Initialize notifications when popup is opened
         const notificationsButtonFront = document.getElementById('notifications-button-front');
