@@ -47,7 +47,7 @@
         line-height: 1.6;
         margin: 0;
         padding: 0;
-        background-color: transparent;
+        background-color: transparent !important;
         color: hsl(var(--foreground));
         text-align: center;
         position: relative;
@@ -95,13 +95,14 @@
         min-height: 85vh;
         padding-top: 60px;
         padding-bottom: 80px;
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.3);
         backdrop-filter: blur(5px);
         border-radius: 16px;
         padding: 20px;
         margin: 20px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1;
     }
 
     .button-container {
@@ -820,6 +821,7 @@
     height: 100%;
     z-index: -1;
     overflow: hidden;
+    background-color: #0f0326; /* Fallback color */
 }
 
 .night-sky {
@@ -836,6 +838,7 @@
         #3b1a8c 100%
     );
     animation: backgroundScroll 60s linear infinite;
+    opacity: 1;
 }
 
 .stars {
@@ -854,7 +857,7 @@
     background-repeat: repeat;
     background-size: 200px 200px;
     animation: backgroundScroll 120s linear infinite, twinkle 4s ease-in-out infinite;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 .moon {
@@ -871,7 +874,7 @@
 </style>
 </head>
 <body class="dark">
-<!-- Add this HTML right after the <body> tag opening -->
+<!-- Background container -->
 <div class="background-container">
     <div class="night-sky"></div>
     <div class="stars"></div>
