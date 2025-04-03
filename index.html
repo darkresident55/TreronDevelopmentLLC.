@@ -95,8 +95,8 @@
         min-height: 85vh;
         padding-top: 60px;
         padding-bottom: 80px; /* Make room for the menu bar at bottom */
-        background-color: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(5px);
+        background-color: rgba(0, 0, 0, 0.2);
+        backdrop-filter: none;
         border-radius: 16px;
         padding: 20px;
         margin: 20px;
@@ -158,6 +158,7 @@
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         position: relative;
         overflow: hidden;
+        animation: floatMenu 4s ease-in-out infinite;
     }
 
     .menu-list {
@@ -803,6 +804,7 @@
     overflow: hidden;
 }
 
+/* Update the forest-background to have a cleaner gradient */
 .forest-background {
     position: absolute;
     top: 0;
@@ -812,11 +814,9 @@
     background-image: linear-gradient(
         to bottom,
         #0f0326 0%,
-        #1a0940 20%,
-        #2a0f66 40%,
-        #3b1a8c 60%,
-        #2a0f66 80%,
-        #1a0940 100%
+        #1a0940 30%,
+        #2a0f66 60%,
+        #3b1a8c 100%
     );
     animation: backgroundScroll 60s linear infinite;
 }
@@ -836,7 +836,7 @@
         radial-gradient(2.5px 2.5px at 110px 80px, white, rgba(255, 255, 255, 0));
     background-repeat: repeat;
     background-size: 200px 200px;
-    animation: backgroundScroll 120s linear infinite;
+    animation: backgroundScroll 120s linear infinite, twinkle 4s ease-in-out infinite;
     opacity: 0.6;
 }
 
@@ -845,132 +845,63 @@
     bottom: 0;
     left: 0;
     width: 200%;
-    height: 40%;
+    height: 15%;
     background-image: 
-        linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%),
+        linear-gradient(to top, rgba(26, 9, 64, 0.3) 0%, rgba(26, 9, 64, 0) 100%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" preserveAspectRatio="none"><path d="M0,200 C150,100 350,150 500,100 C650,50 850,150 1000,100 L1000,200 L0,200 Z" fill="%23193c17"/><path d="M0,200 C100,150 300,120 500,150 C700,180 900,120 1000,150 L1000,200 L0,200 Z" fill="%23224c1f"/><path d="M0,200 C200,180 400,160 600,180 C800,200 900,180 1000,190 L1000,200 L0,200 Z" fill="%23285c24"/></svg>');
+    background-size: 200% 100%, 200% 100%;
+    animation: backgroundScroll 60s linear infinite;
+}
+
+/* Add grass blades at the bottom */
+.grass-blades {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-image: 
         repeating-linear-gradient(
-            to right,
-            transparent 0%,
-            transparent 1%,
-            #0a0a0a 1%,
-            #0a0a0a 1.5%,
-            transparent 1.5%,
-            transparent 2.5%,
-            #0a0a0a 2.5%,
-            #0a0a0a 3%,
-            transparent 3%,
-            transparent 4%,
-            #0a0a0a 4%,
-            #0a0a0a 4.5%,
-            transparent 4.5%,
-            transparent 6%,
-            #0a0a0a 6%,
-            #0a0a0a 6.5%,
-            transparent 6.5%,
-            transparent 7.5%,
-            #0a0a0a 7.5%,
-            #0a0a0a 8%,
-            transparent 8%,
-            transparent 9.5%,
-            #0a0a0a 9.5%,
-            #0a0a0a 10%,
-            transparent 10%,
-            transparent 12%,
-            #0a0a0a 12%,
-            #0a0a0a 12.5%,
-            transparent 12.5%,
-            transparent 14%,
-            #0a0a0a 14%,
-            #0a0a0a 14.5%,
-            transparent 14.5%,
-            transparent 16%,
-            #0a0a0a 16%,
-            #0a0a0a 16.5%,
-            transparent 16.5%,
-            transparent 18%,
-            #0a0a0a 18%,
-            #0a0a0a 18.5%,
-            transparent 18.5%,
-            transparent 20%,
-            #0a0a0a 20%,
-            #0a0a0a 20.5%,
-            transparent 20.5%,
-            transparent 22%,
-            #0a0a0a 22%,
-            #0a0a0a 22.5%,
-            transparent 22.5%,
-            transparent 24%,
-            #0a0a0a 24%,
-            #0a0a0a 24.5%,
-            transparent 24.5%,
-            transparent 26%,
-            #0a0a0a 26%,
-            #0a0a0a 26.5%,
-            transparent 26.5%,
-            transparent 28%,
-            #0a0a0a 28%,
-            #0a0a0a 28.5%,
-            transparent 28.5%,
-            transparent 30%,
-            #0a0a0a 30%,
-            #0a0a0a 30.5%,
-            transparent 30.5%,
-            transparent 32%,
-            #0a0a0a 32%,
-            #0a0a0a 32.5%,
-            transparent 32.5%,
-            transparent 34%,
-            #0a0a0a 34%,
-            #0a0a0a 34.5%,
-            transparent 34.5%,
-            transparent 36%,
-            #0a0a0a 36%,
-            #0a0a0a 36.5%,
-            transparent 36.5%,
-            transparent 38%,
-            #0a0a0a 38%,
-            #0a0a0a 38.5%,
-            transparent 38.5%,
-            transparent 40%,
-            #0a0a0a 40%,
-            #0a0a0a 40.5%,
-            transparent 40.5%,
-            transparent 42%,
-            #0a0a0a 42%,
-            #0a0a0a 42.5%,
-            transparent 42.5%,
-            transparent 44%,
-            #0a0a0a 44%,
-            #0a0a0a 44.5%,
-            transparent 44.5%,
-            transparent 46%,
-            #0a0a0a 46%,
-            #0a0a0a 46.5%,
-            transparent 46.5%,
-            transparent 48%,
-            #0a0a0a 48%,
-            #0a0a0a 48.5%,
-            transparent 48.5%,
-            transparent 50%
+            90deg,
+            transparent 0px,
+            transparent 2px,
+            #285c24 2px,
+            #285c24 3px,
+            transparent 3px,
+            transparent 6px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 4px,
+            #224c1f 4px,
+            #224c1f 5px,
+            transparent 5px,
+            transparent 9px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 7px,
+            #193c17 7px,
+            #193c17 9px,
+            transparent 9px,
+            transparent 15px
         );
-    background-size: 200% 100%;
-    animation: backgroundScroll 40s linear infinite;
+    background-position: 0 bottom, 3px bottom, 7px bottom;
+    background-size: 18px 30px, 18px 40px, 30px 50px;
+    background-repeat: repeat-x;
+    animation: grassWave 10s ease-in-out infinite;
+}
+
+@keyframes grassWave {
+    0% { background-position: 0 bottom, 3px bottom, 7px bottom; }
+    50% { background-position: 10px bottom, -5px bottom, 15px bottom; }
+    100% { background-position: 0 bottom, 3px bottom, 7px bottom; }
 }
 
 .mountains {
-    position: absolute;
-    bottom: 40%;
-    left: 0;
-    width: 200%;
-    height: 20%;
-    background-image: 
-        linear-gradient(to top, rgba(26, 9, 64, 0.8) 0%, rgba(26, 9, 64, 0) 100%),
-        linear-gradient(135deg, #2a0f66 25%, transparent 25%) 0 50px,
-        linear-gradient(225deg, #2a0f66 25%, transparent 25%) 0 50px,
-        linear-gradient(315deg, #2a0f66 25%, transparent 25%),
-        linear-gradient(45deg, #2a0f66 25%, transparent 25%);
-    background-size: 100px 100px;
-    animation: backgroundScroll 80s linear infinite;
+    display: none;
 }
 
 .moon {
@@ -982,12 +913,13 @@
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, #ffffff, #e1e1ff 30%, #b0b0ff 50%, #6a6aff 70%, #3b1a8c 100%);
     box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.4);
+    animation: pulseMoon 8s ease-in-out infinite;
 }
 
 /* Adjust container background to be transparent */
 .container {
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: none;
     border-radius: 16px;
     padding: 20px;
     margin: 20px;
@@ -999,14 +931,35 @@
 body {
     background-color: transparent;
 }
+
+/* Add a gentle floating animation for the menu */
+@keyframes floatMenu {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Add a subtle pulse animation to the moon */
+@keyframes pulseMoon {
+    0% { box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.4); }
+    50% { box-shadow: 0 0 30px 8px rgba(255, 255, 255, 0.6); }
+    100% { box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.4); }
+}
+
+/* Make the stars twinkle */
+@keyframes twinkle {
+    0% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.4; }
+}
 </style>
 </head>
 <body class="dark">
 <div class="background-container">
     <div class="forest-background"></div>
     <div class="stars"></div>
-    <div class="mountains"></div>
     <div class="forest"></div>
+    <div class="grass-blades"></div>
     <div class="moon"></div>
 </div>
 <!-- Login Modal -->
@@ -1287,14 +1240,14 @@ body {
                         <div class="menu-item-glow" style="background: radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.06) 50%, rgba(185,28,28,0) 100%);"></div>
                         <a href="#" class="menu-link-front" id="login-button-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
                             <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
                             <span>Log in</span>
                         </a>
                         <a href="#" class="menu-link-back" id="login-button-back" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
                             <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
                             <span>Log in</span>
@@ -1541,7 +1494,7 @@ body {
                 if (loginButtonFront) {
                     loginButtonFront.innerHTML = `
                         <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         <span>Account</span>
@@ -1551,7 +1504,7 @@ body {
                 if (loginButtonBack) {
                     loginButtonBack.innerHTML = `
                         <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         <span>Account</span>
@@ -1599,7 +1552,7 @@ body {
                 if (loginButtonFront) {
                     loginButtonFront.innerHTML = `
                         <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         <span>Log in</span>
@@ -1609,7 +1562,7 @@ body {
                 if (loginButtonBack) {
                     loginButtonBack.innerHTML = `
                         <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         <span>Log in</span>
