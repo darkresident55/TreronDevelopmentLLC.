@@ -903,49 +903,12 @@
         </button>
     </div>
     <ul class="notifications-list">
-        <li class="notification-item">
-            <div class="notification-content">
-                <div class="notification-icon">
-                    <svg class="icon-svg" viewBox="0 0 24 24">
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                    </svg>
-                </div>
-                <div class="notification-text">
-                    <h4 class="notification-title">System Update</h4>
-                    <p class="notification-message">Treron has been updated to version 2.0.4</p>
-                    <div class="notification-time">2 hours ago</div>
-                </div>
-            </div>
-        </li>
-        <li class="notification-item">
-            <div class="notification-content">
-                <div class="notification-icon">
-                    <svg class="icon-svg" viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                </div>
-                <div class="notification-text">
-                    <h4 class="notification-title">Welcome to Treron</h4>
-                    <p class="notification-message">Thank you for joining our platform!</p>
-                    <div class="notification-time">1 day ago</div>
-                </div>
-            </div>
-        </li>
-        <li class="notification-item">
-            <div class="notification-content">
-                <div class="notification-icon">
-                    <svg class="icon-svg" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="8" x2="12" y2="12"></line>
-                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                    </svg>
-                </div>
-                <div class="notification-text">
-                    <h4 class="notification-title">Important Notice</h4>
-                    <p class="notification-message">Please update your security settings</p>
-                    <div class="notification-time">3 days ago</div>
-                </div>
+        <li class="notification-item" style="text-align: center;">
+            <div style="padding: 20px;">
+                <svg class="icon-svg" style="width: 24px; height: 24px; animation: spin 1s linear infinite;" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor" stroke-dasharray="30 30" fill="none" />
+                </svg>
+                <p>Loading notifications...</p>
             </div>
         </li>
     </ul>
@@ -1000,7 +963,7 @@
         <ul class="menu-list">
             <li class="menu-item" data-highlight="highlight-home">
                 <div class="menu-link-wrapper">
-                    <div class="menu-item-glow" style="background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba  style="background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%);"></div>
+                    <div class="menu-item-glow" style="background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%);"></div>
                         <a href="#" class="menu-link-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
                             <svg class="menu-icon icon-svg" style="--icon-color: #3b82f6;" viewBox="0 0 24 24">
                                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -1042,7 +1005,7 @@
                         <a href="#" class="menu-link-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
                             <svg class="menu-icon icon-svg" style="--icon-color: #22c55e;" viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="3"></circle>
-                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                             </svg>
                             <span>Settings</span>
                         </a>
@@ -1224,6 +1187,7 @@
                     e.stopPropagation();
                     console.log("Notifications front button clicked");
                     notificationsPopup.classList.add('active');
+                    fetchNotifications(3); // Load notifications when popup is opened
                     playSound('ClickIn.wav');
                 });
             }
@@ -1234,6 +1198,7 @@
                     e.stopPropagation();
                     console.log("Notifications back button clicked");
                     notificationsPopup.classList.add('active');
+                    fetchNotifications(3); // Load notifications when popup is opened
                     playSound('ClickIn.wav');
                 });
             }
@@ -1241,6 +1206,7 @@
             if (notificationsClose) {
                 notificationsClose.addEventListener('click', function() {
                     notificationsPopup.classList.remove('active');
+                    notificationsPopup.classList.remove('expanded');
                     playSound('ClickOut.wav');
                 });
             }
@@ -1254,6 +1220,7 @@
                     e.target !== notificationsButtonBack && 
                     !notificationsButtonBack.contains(e.target)) {
                     notificationsPopup.classList.remove('active');
+                    notificationsPopup.classList.remove('expanded');
                 }
             });
             
@@ -1261,577 +1228,49 @@
             const footerYear = document.querySelector('footer');
             const currentYear = new Date().getFullYear();
             footerYear.innerHTML = `Copyright &copy; 2023-${currentYear} | Treron Development LLC™`;
-        });
-    </script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
-<script>
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyAC01DxmHUGxXUzZvwodxyyIXa9X-JCIJI",
-        authDomain: "recharge-api-data-get.firebaseapp.com",
-        projectId: "recharge-api-data-get",
-        storageBucket: "recharge-api-data-get.appspot.com",
-        messagingSenderId: "1001831986604",
-        appId: "1:1001831986604:web:d9d3c3b5f7b9a9e0a9b9a9"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const storage = firebase.storage();
-
-    // Add Firebase authentication functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get DOM elements
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
-        const resetForm = document.getElementById('reset-form');
-        const loginError = document.getElementById('login-error');
-        const signupError = document.getElementById('signup-error');
-        const resetMessage = document.getElementById('reset-message');
-        const showSignupLink = document.getElementById('show-signup');
-        const showLoginLink = document.getElementById('show-login');
-        const forgotPasswordLink = document.getElementById('forgot-password');
-        const backToLoginLink = document.getElementById('back-to-login');
-        const loginModal = document.getElementById('login-modal');
-        const signupModal = document.getElementById('signup-modal');
-        const resetModal = document.getElementById('reset-modal');
-        const signupModalClose = document.getElementById('signup-modal-close');
-        const resetModalClose = document.getElementById('reset-modal-close');
-        
-        // User state listener
-        auth.onAuthStateChanged(function(user) {
-            if (user) {
-                // User is signed in
-                console.log('User is signed in:', user.email);
-                
-                // Update login button to show logged in state
-                const loginButtonFront = document.getElementById('login-button-front');
-                const loginButtonBack = document.getElementById('login-button-back');
-                
-                if (loginButtonFront) {
-                    loginButtonFront.innerHTML = `
-                        <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        <span>Account</span>
-                    `;
-                }
-                
-                if (loginButtonBack) {
-                    loginButtonBack.innerHTML = `
-                        <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        <span>Account</span>
-                    `;
-                }
-                
-                // Update login modal to show logged in state
-                if (loginForm) {
-                    loginForm.style.display = 'none';
-                    
-                    // Create logged in content if it doesn't exist
-                    let loggedInContent = document.getElementById('logged-in-content');
-                    if (!loggedInContent) {
-                        loggedInContent = document.createElement('div');
-                        loggedInContent.id = 'logged-in-content';
-                        loggedInContent.innerHTML = `
-                            <div style="text-align: center; margin-bottom: 20px;">
-                                <p>You are logged in as:</p>
-                                <p style="font-weight: bold; font-size: 1.1rem; margin: 10px 0;">${user.email}</p>
-                            </div>
-                            <button type="button" id="logout-button" class="login-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Log out</button>
-                        `;
-                        loginForm.parentNode.insertBefore(loggedInContent, loginForm);
-                        
-                        // Add logout functionality
-                        document.getElementById('logout-button').addEventListener('click', function() {
-                            auth.signOut().then(function() {
-                                console.log('User signed out');
-                                playSound('ClickOut.wav');
-                                loginModal.classList.remove('active');
-                            }).catch(function(error) {
-                                console.error('Sign out error:', error);
-                            });
-                        });
-                    }
-                }
-            } else {
-                // User is signed out
-                console.log('User is signed out');
-                
-                // Update login button to show logged out state
-                const loginButtonFront = document.getElementById('login-button-front');
-                const loginButtonBack = document.getElementById('login-button-back');
-                
-                if (loginButtonFront) {
-                    loginButtonFront.innerHTML = `
-                        <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        <span>Log in</span>
-                    `;
-                }
-                
-                if (loginButtonBack) {
-                    loginButtonBack.innerHTML = `
-                        <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        <span>Log in</span>
-                    `;
-                }
-                
-                // Update login modal to show login form
-                if (loginForm) {
-                    loginForm.style.display = 'flex';
-                    
-                    // Remove logged in content if it exists
-                    const loggedInContent = document.getElementById('logged-in-content');
-                    if (loggedInContent) {
-                        loggedInContent.remove();
-                    }
-                }
-            }
-        });
-        
-        // Login form submission
-        if (loginForm) {
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                
-                // Show loading state
-                const loginButton = document.getElementById('login-button');
-                loginButton.textContent = 'Logging in...';
-                loginButton.disabled = true;
-                
-                // Clear previous errors
-                loginError.style.display = 'none';
-                loginError.textContent = '';
-                
-                // Sign in with Firebase
-                auth.signInWithEmailAndPassword(email, password)
-                    .then(function(userCredential) {
-                        // Signed in
-                        console.log('Login successful');
-                        playSound('ClickOut.wav');
-                        
-                        // Reset form
-                        loginForm.reset();
-                    })
-                    .catch(function(error) {
-                        // Handle errors
-                        console.error('Login error:', error);
-                        loginError.textContent = getAuthErrorMessage(error);
-                        loginError.style.display = 'block';
-                        playSound('ClickOut.wav');
-                    })
-                    .finally(function() {
-                        // Reset button state
-                        loginButton.textContent = 'Log in';
-                        loginButton.disabled = false;
-                    });
-            });
-        }
-        
-        // Signup form submission
-        if (signupForm) {
-            signupForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const email = document.getElementById('signup-email').value;
-                const password = document.getElementById('signup-password').value;
-                const confirmPassword = document.getElementById('confirm-password').value;
-                
-                // Show loading state
-                const signupButton = document.getElementById('signup-button');
-                signupButton.textContent = 'Creating account...';
-                signupButton.disabled = true;
-                
-                // Clear previous errors
-                signupError.style.display = 'none';
-                signupError.textContent = '';
-                
-                // Check if passwords match
-                if (password !== confirmPassword) {
-                    signupError.textContent = 'Passwords do not match';
-                    signupError.style.display = 'block';
-                    signupButton.textContent = 'Sign up';
-                    signupButton.disabled = false;
-                    playSound('ClickOut.wav');
-                    return;
-                }
-                
-                // Create user with Firebase
-                auth.createUserWithEmailAndPassword(email, password)
-                    .then(function(userCredential) {
-                        // Signed up
-                        console.log('Signup successful');
-                        playSound('ClickOut.wav');
-                        
-                        // Reset form
-                        signupForm.reset();
-                        
-                        // Switch to login modal
-                        signupModal.classList.remove('active');
-                        loginModal.classList.add('active');
-                    })
-                    .catch(function(error) {
-                        // Handle errors
-                        console.error('Signup error:', error);
-                        signupError.textContent = getAuthErrorMessage(error);
-                        signupError.style.display = 'block';
-                        playSound('ClickOut.wav');
-                    })
-                    .finally(function() {
-                        // Reset button state
-                        signupButton.textContent = 'Sign up';
-                        signupButton.disabled = false;
-                    });
-            });
-        }
-        
-        // Password reset form submission
-        if (resetForm) {
-            resetForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const email = document.getElementById('reset-email').value;
-                
-                // Show loading state
-                const resetButton = document.getElementById('reset-button');
-                resetButton.textContent = 'Sending...';
-                resetButton.disabled = true;
-                
-                // Clear previous messages
-                resetMessage.style.display = 'none';
-                resetMessage.textContent = '';
-                
-                // Send password reset email
-                auth.sendPasswordResetEmail(email)
-                    .then(function() {
-                        // Email sent
-                        console.log('Password reset email sent');
-                        resetMessage.textContent = 'Password reset email sent. Check your inbox.';
-                        resetMessage.style.display = 'block';
-                        playSound('ClickOut.wav');
-                        
-                        // Reset form
-                        resetForm.reset();
-                    })
-                    .catch(function(error) {
-                        // Handle errors
-                        console.error('Password reset error:', error);
-                        resetMessage.textContent = getAuthErrorMessage(error);
-                        resetMessage.style.display = 'block';
-                        resetMessage.style.color = '#e53e3e';
-                        playSound('ClickOut.wav');
-                    })
-                    .finally(function() {
-                        // Reset button state
-                        resetButton.textContent = 'Send Reset Link';
-                        resetButton.disabled = false;
-                    });
-            });
-        }
-        
-        // Show signup modal
-        if (showSignupLink) {
-            showSignupLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                loginModal.classList.remove('active');
-                signupModal.classList.add('active');
-                playSound('ClickIn.wav');
-            });
-        }
-        
-        // Show login modal
-        if (showLoginLink) {
-            showLoginLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                signupModal.classList.remove('active');
-                loginModal.classList.add('active');
-                playSound('ClickIn.wav');
-            });
-        }
-        
-        // Show password reset modal
-        if (forgotPasswordLink) {
-            forgotPasswordLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                loginModal.classList.remove('active');
-                resetModal.classList.add('active');
-                playSound('ClickIn.wav');
-            });
-        }
-        
-        // Back to login from password reset
-        if (backToLoginLink) {
-            backToLoginLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                resetModal.classList.remove('active');
-                loginModal.classList.add('active');
-                playSound('ClickIn.wav');
-            });
-        }
-        
-        // Close signup modal
-        if (signupModalClose) {
-            signupModalClose.addEventListener('click', function() {
-                signupModal.classList.remove('active');
-                playSound('ClickOut.wav');
-            });
-        }
-        
-        // Close reset modal
-        if (resetModalClose) {
-            resetModalClose.addEventListener('click', function() {
-                resetModal.classList.remove('active');
-                playSound('ClickOut.wav');
-            });
-        }
-        
-        // Close modals when clicking outside
-        signupModal.addEventListener('click', function(e) {
-            if (e.target === signupModal) {
-                signupModal.classList.remove('active');
-            }
-        });
-        
-        resetModal.addEventListener('click', function(e) {
-            if (e.target === resetModal) {
-                resetModal.classList.remove('active');
-            }
-        });
-        
-        // Helper function to get user-friendly error messages
-        function getAuthErrorMessage(error) {
-            switch (error.code) {
-                case 'auth/email-already-in-use':
-                    return 'This email is already in use by another account.';
-                case 'auth/invalid-email':
-                    return 'Please enter a valid email address.';
-                case 'auth/weak-password':
-                    return 'Password is too weak. Please use at least 6 characters.';
-                case 'auth/user-not-found':
-                    return 'No account found with this email address.';
-                case 'auth/wrong-password':
-                    return 'Incorrect password. Please try again.';
-                case 'auth/too-many-requests':
-                    return 'Too many unsuccessful login attempts. Please try again later.';
-                default:
-                    return error.message || 'An error occurred. Please try again.';
-            }
-        }
-    });
-
-    // Add notification functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get DOM elements for notifications
-        const notificationsPopup = document.getElementById('notifications-popup');
-        const notificationsList = document.querySelector('.notifications-list');
-        const viewAllButton = document.querySelector('.view-all-button');
-        
-        // Function to fetch notifications from Firebase Storage without using listAll
-        function fetchNotifications(limit = 3) {
-            console.log("Fetching notifications...");
             
-            // Show loading indicator
-            notificationsList.innerHTML = `
-                <li class="notification-item" style="text-align: center;">
-                    <div style="padding: 20px;">
-                        <svg class="icon-svg" style="width: 24px; height: 24px; animation: spin 1s linear infinite;" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor" stroke-dasharray="30 30" fill="none" />
-                        </svg>
-                        <p>Loading notifications...</p>
-                    </div>
-                </li>
-            `;
+            // View all notifications button
+            const viewAllButton = document.querySelector('.view-all-button');
+            if (viewAllButton) {
+                viewAllButton.addEventListener('click', function() {
+                    // Expand the notifications popup
+                    notificationsPopup.classList.add('expanded');
+                    // Fetch all notifications
+                    fetchNotifications(null); // null means no limit
+                    playSound('ClickIn.wav');
+                });
+            }
             
-            // Since we can't list files, we'll use a known pattern or hardcoded file names
-            // For example, if your notifications are named notification1.txt, notification2.txt, etc.
-            // Find the fetchNotifications function and replace the notificationFiles array with:
-
-            // Since we can't list files, we'll use the specific file names you have
-            const notificationFiles = [
-                "Welcome!.txt"
-                // Add any other notification files you have here
-            ];
-            
-            // Limit the files based on the limit parameter
-            const filesToFetch = limit ? notificationFiles.slice(0, limit) : notificationFiles;
-            
-            // Clear loading indicator if we have no files to fetch
-            if (filesToFetch.length === 0) {
+            // Function to fetch notifications from local files
+            function fetchNotifications(limit = 3) {
+                console.log("Fetching notifications...");
+                
+                const notificationsList = document.querySelector('.notifications-list');
+                
+                // Show loading indicator
                 notificationsList.innerHTML = `
-                    <li class="notification-item">
-                        <div class="empty-notifications">
-                            <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
-                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    <li class="notification-item" style="text-align: center;">
+                        <div style="padding: 20px;">
+                            <svg class="icon-svg" style="width: 24px; height: 24px; animation: spin 1s linear infinite;" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor" stroke-dasharray="30 30" fill="none" />
                             </svg>
-                            <p>No notifications found</p>
+                            <p>Loading notifications...</p>
                         </div>
                     </li>
                 `;
-                return;
-            }
-            
-            // Clear the notifications list
-            notificationsList.innerHTML = '';
-            
-            // Counter for processed files
-            let processedCount = 0;
-            
-            // Try both path formats
-            const basePaths = [
-                'Current-Notification-history/',
-                'Current Notification history/'
-            ];
-            
-            // Function to try fetching a file with different base paths
-            function tryFetchFile(fileIndex, basePathIndex) {
-                if (basePathIndex >= basePaths.length) {
-                    // All base paths failed for this file, move to next file
-                    processedCount++;
-                    if (processedCount === filesToFetch.length) {
-                        // All files processed
-                        updateViewAllButton();
-                    }
-                    return;
-                }
                 
-                if (fileIndex >= filesToFetch.length) {
-                    // All files processed
-                    updateViewAllButton();
-                    return;
-                }
+                // Define notification files to load
+                const notificationFiles = [
+                    'notifications/welcome.txt',
+                    'notifications/update.txt',
+                    'notifications/important.txt'
+                ];
                 
-                const fileName = filesToFetch[fileIndex];
-                const basePath = basePaths[basePathIndex];
-                const fullPath = basePath + fileName;
+                // Limit the files based on the limit parameter
+                const filesToFetch = limit ? notificationFiles.slice(0, limit) : notificationFiles;
                 
-                console.log(`Trying to fetch: ${fullPath}`);
-                
-                // Get file reference
-                const fileRef = firebase.storage().ref(fullPath);
-                
-                // Get download URL
-                // Also, update the tryFetchFile function to better handle your specific format:
-
-                // Get download URL
-                fileRef.getDownloadURL()
-                    .then((url) => {
-                        console.log(`Got URL for ${fullPath}: ${url}`);
-                        
-                        // Fetch the notification content
-                        fetch(url)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error(`HTTP error! status: ${response.status}`);
-                                }
-                                return response.text();
-                            })
-                            .then(content => {
-                                console.log(`Got content for ${fullPath}`, content.substring(0, 50) + "...");
-                                
-                                // Parse notification content based on the specified format
-                                const lines = content.split('\n');
-                                let title = 'Notification';
-                                let description = '';
-                                
-                                // Extract title (format: "Title: Your Title")
-                                if (lines.length > 0) {
-                                    const titleLine = lines[0].trim();
-                                    if (titleLine.startsWith('Title:')) {
-                                        title = titleLine.substring(6).trim();
-                                    }
-                                }
-                                
-                                // Extract description (format: "Description: Your description")
-                                // Description can span multiple lines after the "Description:" line
-                                const descIndex = lines.findIndex(line => line.trim().startsWith('Description:'));
-                                if (descIndex !== -1) {
-                                    // Start with the text after "Description:"
-                                    description = lines[descIndex].substring(12).trim();
-                                    
-                                    // Add all subsequent lines to the description
-                                    for (let i = descIndex + 1; i < lines.length; i++) {
-                                        if (description) {
-                                            description += '\n' + lines[i];
-                                        } else {
-                                            description = lines[i];
-                                        }
-                                    }
-                                }
-                                
-                                // Create notification element
-                                const notificationItem = document.createElement('li');
-                                notificationItem.className = 'notification-item';
-                                
-                                // Format the description text (replace newlines with <br>)
-                                const formattedDescription = description.replace(/\n/g, '<br>');
-                                
-                                // Generate a random time for demo purposes
-                                const randomHours = Math.floor(Math.random() * 48);
-                                const timeText = randomHours === 0 ? 'Just now' : 
-                                                randomHours === 1 ? '1 hour ago' : 
-                                                randomHours < 24 ? `${randomHours} hours ago` : 
-                                                randomHours === 24 ? '1 day ago' : 
-                                                `${Math.floor(randomHours / 24)} days ago`;
-                                
-                                notificationItem.innerHTML = `
-                                    <div class="notification-content">
-                                        <div class="notification-icon">
-                                            <svg class="icon-svg" viewBox="0 0 24 24">
-                                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                                            </svg>
-                                        </div>
-                                        <div class="notification-text">
-                                            <h4 class="notification-title">${title}</h4>
-                                            <p class="notification-message">${formattedDescription}</p>
-                                            <div class="notification-time">${timeText}</div>
-                                        </div>
-                                    </div>
-                                `;
-                                
-                                notificationsList.appendChild(notificationItem);
-                                
-                                // Move to next file
-                                processedCount++;
-                                tryFetchFile(fileIndex + 1, 0);
-                            })
-                    })
-                    .catch((error) => {
-                        console.error(`Error getting download URL for ${fullPath}:`, error);
-                        // Try next base path for this file
-                        tryFetchFile(fileIndex, basePathIndex + 1);
-                    });
-            }
-            
-            // Start fetching files
-            tryFetchFile(0, 0);
-            
-            // Update the view all button
-            function updateViewAllButton() {
-                if (viewAllButton) {
-                    viewAllButton.textContent = limit && notificationFiles.length > limit ? 
-                        `View all notifications (${notificationFiles.length})` : 
-                        'Refresh notifications';
-                }
-                
-                // If no notifications were loaded, show empty state
-                if (notificationsList.children.length === 0) {
+                // Clear loading indicator if we have no files to fetch
+                if (filesToFetch.length === 0) {
                     notificationsList.innerHTML = `
                         <li class="notification-item">
                             <div class="empty-notifications">
@@ -1843,73 +1282,461 @@
                             </div>
                         </li>
                     `;
+                    return;
+                }
+                
+                // Clear the notifications list
+                notificationsList.innerHTML = '';
+                
+                // Counter for processed files
+                let processedCount = 0;
+                
+                // Process each notification file
+                filesToFetch.forEach((filePath, index) => {
+                    fetch(filePath)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.text();
+                        })
+                        .then(content => {
+                            console.log(`Got content for ${filePath}`, content.substring(0, 50) + "...");
+                            
+                            // Parse notification content based on the specified format
+                            const lines = content.split('\n');
+                            let title = 'Notification';
+                            let description = '';
+                            
+                            // Extract title (format: "Title: Your Title")
+                            if (lines.length > 0) {
+                                const titleLine = lines[0].trim();
+                                if (titleLine.startsWith('Title:')) {
+                                    title = titleLine.substring(6).trim();
+                                }
+                            }
+                            
+                            // Extract description (format: "Description: Your description")
+                            // Description can span multiple lines after the "Description:" line
+                            const descIndex = lines.findIndex(line => line.trim().startsWith('Description:'));
+                            if (descIndex !== -1) {
+                                // Get all lines after "Description:"
+                                const descriptionLines = lines.slice(descIndex + 1);
+                                description = descriptionLines.join('\n').trim();
+                            }
+                            
+                            // Create notification element
+                            const notificationItem = document.createElement('li');
+                            notificationItem.className = 'notification-item';
+                            
+                            // Format the description text (replace newlines with <br>)
+                            const formattedDescription = description.replace(/\n/g, '<br>');
+                            
+                            // Generate a random time for demo purposes
+                            const randomHours = Math.floor(Math.random() * 48);
+                            const timeText = randomHours === 0 ? 'Just now' : 
+                                            randomHours === 1 ? '1 hour ago' : 
+                                            randomHours < 24 ? `${randomHours} hours ago` : 
+                                            randomHours === 24 ? '1 day ago' : 
+                                            `${Math.floor(randomHours / 24)} days ago`;
+                            
+                            notificationItem.innerHTML = `
+                                <div class="notification-content">
+                                    <div class="notification-icon">
+                                        <svg class="icon-svg" viewBox="0 0 24 24">
+                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="notification-text">
+                                        <h4 class="notification-title">${title}</h4>
+                                        <p class="notification-message">${formattedDescription}</p>
+                                        <div class="notification-time">${timeText}</div>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            notificationsList.appendChild(notificationItem);
+                            
+                            // Update processed count
+                            processedCount++;
+                            
+                            // Update view all button when all files are processed
+                            if (processedCount === filesToFetch.length) {
+                                updateViewAllButton();
+                            }
+                        })
+                        .catch(error => {
+                            console.error(`Error fetching notification: ${error}`);
+                            processedCount++;
+                            
+                            // Update view all button when all files are processed
+                            if (processedCount === filesToFetch.length) {
+                                updateViewAllButton();
+                            }
+                        });
+                });
+                
+                // Update the view all button
+                function updateViewAllButton() {
+                    if (viewAllButton) {
+                        viewAllButton.textContent = limit && notificationFiles.length > limit ? 
+                            `View all notifications (${notificationFiles.length})` : 
+                            'Refresh notifications';
+                    }
+                    
+                    // If no notifications were loaded, show empty state
+                    if (notificationsList.children.length === 0) {
+                        notificationsList.innerHTML = `
+                            <li class="notification-item">
+                                <div class="empty-notifications">
+                                    <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
+                                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                    </svg>
+                                    <p>No notifications found</p>
+                                </div>
+                            </li>
+                        `;
+                    }
                 }
             }
-        }
-        
-        // Initialize notifications when popup is opened
-        const notificationsButtonFront = document.getElementById('notifications-button-front');
-        const notificationsButtonBack = document.getElementById('notifications-button-back');
-        const notificationsClose = document.getElementById('notifications-close');
-        
-        // Function to open notifications popup
-        function openNotificationsPopup() {
-            notificationsPopup.classList.add('active');
-            fetchNotifications(3); // Show limited notifications initially
-            playSound('ClickIn.wav');
-        }
-        
-        // Attach event listeners for notification buttons
-        if (notificationsButtonFront) {
-            notificationsButtonFront.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                openNotificationsPopup();
-            });
-        }
-        
-        if (notificationsButtonBack) {
-            notificationsButtonBack.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                openNotificationsPopup();
-            });
-        }
-        
-        // View all notifications button
-        if (viewAllButton) {
-            viewAllButton.addEventListener('click', function() {
-                // Expand the notifications popup
-                notificationsPopup.classList.add('expanded');
-                // Fetch all notifications
-                fetchNotifications(null); // null means no limit
-                playSound('ClickIn.wav');
-            });
-        }
-        
-        // Close notifications popup
-        if (notificationsClose) {
-            notificationsClose.addEventListener('click', function() {
-                notificationsPopup.classList.remove('active');
-                notificationsPopup.classList.remove('expanded');
-                playSound('ClickOut.wav');
-            });
-        }
-        
-        // Close notifications when clicking outside
-        document.addEventListener('click', function(e) {
-            if (notificationsPopup.classList.contains('active') && 
-                !notificationsPopup.contains(e.target) && 
-                e.target !== notificationsButtonFront && 
-                !notificationsButtonFront.contains(e.target) &&
-                e.target !== notificationsButtonBack && 
-                !notificationsButtonBack.contains(e.target)) {
-                notificationsPopup.classList.remove('active');
-                notificationsPopup.classList.remove('expanded');
-            }
         });
-    });
-</script>
+
+        // Firebase authentication functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const resetForm = document.getElementById('reset-form');
+            const loginError = document.getElementById('login-error');
+            const signupError = document.getElementById('signup-error');
+            const resetMessage = document.getElementById('reset-message');
+            const showSignupLink = document.getElementById('show-signup');
+            const showLoginLink = document.getElementById('show-login');
+            const forgotPasswordLink = document.getElementById('forgot-password');
+            const backToLoginLink = document.getElementById('back-to-login');
+            const loginModal = document.getElementById('login-modal');
+            const signupModal = document.getElementById('signup-modal');
+            const resetModal = document.getElementById('reset-modal');
+            const signupModalClose = document.getElementById('signup-modal-close');
+            const resetModalClose = document.getElementById('reset-modal-close');
+            
+            // Mock user state for demo purposes
+            let currentUser = null;
+            
+            // Function to update UI based on user state
+            function updateUIForUser() {
+                if (currentUser) {
+                    // User is signed in
+                    console.log('User is signed in:', currentUser.email);
+                    
+                    // Update login button to show logged in state
+                    const loginButtonFront = document.getElementById('login-button-front');
+                    const loginButtonBack = document.getElementById('login-button-back');
+                    
+                    if (loginButtonFront) {
+                        loginButtonFront.innerHTML = `
+                            <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>Account</span>
+                        `;
+                    }
+                    
+                    if (loginButtonBack) {
+                        loginButtonBack.innerHTML = `
+                            <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>Account</span>
+                        `;
+                    }
+                    
+                    // Update login modal to show logged in state
+                    if (loginForm) {
+                        loginForm.style.display = 'none';
+                        
+                        // Create logged in content if it doesn't exist
+                        let loggedInContent = document.getElementById('logged-in-content');
+                        if (!loggedInContent) {
+                            loggedInContent = document.createElement('div');
+                            loggedInContent.id = 'logged-in-content';
+                            loggedInContent.innerHTML = `
+                                <div style="text-align: center; margin-bottom: 20px;">
+                                    <p>You are logged in as:</p>
+                                    <p style="font-weight: bold; font-size: 1.1rem; margin: 10px 0;">${currentUser.email}</p>
+                                </div>
+                                <button type="button" id="logout-button" class="login-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Log out</button>
+                            `;
+                            loginForm.parentNode.insertBefore(loggedInContent, loginForm);
+                            
+                            // Add logout functionality
+                            document.getElementById('logout-button').addEventListener('click', function() {
+                                currentUser = null;
+                                updateUIForUser();
+                                console.log('User signed out');
+                                playSound('ClickOut.wav');
+                                loginModal.classList.remove('active');
+                            });
+                        }
+                    }
+                } else {
+                    // User is signed out
+                    console.log('User is signed out');
+                    
+                    // Update login button to show logged out state
+                    const loginButtonFront = document.getElementById('login-button-front');
+                    const loginButtonBack = document.getElementById('login-button-back');
+                    
+                    if (loginButtonFront) {
+                        loginButtonFront.innerHTML = `
+                            <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>Log in</span>
+                        `;
+                    }
+                    
+                    if (loginButtonBack) {
+                        loginButtonBack.innerHTML = `
+                            <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>Log in</span>
+                        `;
+                    }
+                    
+                    // Update login modal to show login form
+                    if (loginForm) {
+                        loginForm.style.display = 'flex';
+                        
+                        // Remove logged in content if it exists
+                        const loggedInContent = document.getElementById('logged-in-content');
+                        if (loggedInContent) {
+                            loggedInContent.remove();
+                        }
+                    }
+                }
+            }
+            
+            // Login form submission
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    
+                    // Show loading state
+                    const loginButton = document.getElementById('login-button');
+                    loginButton.textContent = 'Logging in...';
+                    loginButton.disabled = true;
+                    
+                    // Clear previous errors
+                    loginError.style.display = 'none';
+                    loginError.textContent = '';
+                    
+                    // Mock login (in a real app, this would be Firebase auth)
+                    setTimeout(() => {
+                        if (email && password) {
+                            // Successful login
+                            currentUser = { email: email };
+                            updateUIForUser();
+                            console.log('Login successful');
+                            playSound('ClickOut.wav');
+                            
+                            // Reset form
+                            loginForm.reset();
+                        } else {
+                            // Failed login
+                            loginError.textContent = 'Invalid email or password';
+                            loginError.style.display = 'block';
+                            playSound('ClickOut.wav');
+                        }
+                        
+                        // Reset button state
+                        loginButton.textContent = 'Log in';
+                        loginButton.disabled = false;
+                    }, 1000);
+                });
+            }
+            
+            // Signup form submission
+            if (signupForm) {
+                signupForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('signup-email').value;
+                    const password = document.getElementById('signup-password').value;
+                    const confirmPassword = document.getElementById('confirm-password').value;
+                    
+                    // Show loading state
+                    const signupButton = document.getElementById('signup-button');
+                    signupButton.textContent = 'Creating account...';
+                    signupButton.disabled = true;
+                    
+                    // Clear previous errors
+                    signupError.style.display = 'none';
+                    signupError.textContent = '';
+                    
+                    // Check if passwords match
+                    if (password !== confirmPassword) {
+                        signupError.textContent = 'Passwords do not match';
+                        signupError.style.display = 'block';
+                        signupButton.textContent = 'Sign up';
+                        signupButton.disabled = false;
+                        playSound('ClickOut.wav');
+                        return;
+                    }
+                    
+                    // Mock signup (in a real app, this would be Firebase auth)
+                    setTimeout(() => {
+                        if (email && password) {
+                            // Successful signup
+                            currentUser = { email: email };
+                            updateUIForUser();
+                            console.log('Signup successful');
+                            playSound('ClickOut.wav');
+                            
+                            // Reset form
+                            signupForm.reset();
+                            
+                            // Switch to login modal
+                            signupModal.classList.remove('active');
+                            loginModal.classList.add('active');
+                        } else {
+                            // Failed signup
+                            signupError.textContent = 'Invalid email or password';
+                            signupError.style.display = 'block';
+                            playSound('ClickOut.wav');
+                        }
+                        
+                        // Reset button state
+                        signupButton.textContent = 'Sign up';
+                        signupButton.disabled = false;
+                    }, 1000);
+                });
+            }
+            
+            // Password reset form submission
+            if (resetForm) {
+                resetForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('reset-email').value;
+                    
+                    // Show loading state
+                    const resetButton = document.getElementById('reset-button');
+                    resetButton.textContent = 'Sending...';
+                    resetButton.disabled = true;
+                    
+                    // Clear previous messages
+                    resetMessage.style.display = 'none';
+                    resetMessage.textContent = '';
+                    
+                    // Mock password reset (in a real app, this would be Firebase auth)
+                    setTimeout(() => {
+                        if (email) {
+                            // Email sent
+                            console.log('Password reset email sent');
+                            resetMessage.textContent = 'Password reset email sent. Check your inbox.';
+                            resetMessage.style.display = 'block';
+                            playSound('ClickOut.wav');
+                            
+                            // Reset form
+                            resetForm.reset();
+                        } else {
+                            // Failed to send email
+                            resetMessage.textContent = 'Please enter a valid email address';
+                            resetMessage.style.display = 'block';
+                            resetMessage.style.color = '#e53e3e';
+                            playSound('ClickOut.wav');
+                        }
+                        
+                        // Reset button state
+                        resetButton.textContent = 'Send Reset Link';
+                        resetButton.disabled = false;
+                    }, 1000);
+                });
+            }
+            
+            // Show signup modal
+            if (showSignupLink) {
+                showSignupLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loginModal.classList.remove('active');
+                    signupModal.classList.add('active');
+                    playSound('ClickIn.wav');
+                });
+            }
+            
+            // Show login modal
+            if (showLoginLink) {
+                showLoginLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    signupModal.classList.remove('active');
+                    loginModal.classList.add('active');
+                    playSound('ClickIn.wav');
+                });
+            }
+            
+            // Show password reset modal
+            if (forgotPasswordLink) {
+                forgotPasswordLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loginModal.classList.remove('active');
+                    resetModal.classList.add('active');
+                    playSound('ClickIn.wav');
+                });
+            }
+            
+            // Back to login from password reset
+            if (backToLoginLink) {
+                backToLoginLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    resetModal.classList.remove('active');
+                    loginModal.classList.add('active');
+                    playSound('ClickIn.wav');
+                });
+            }
+            
+            // Close signup modal
+            if (signupModalClose) {
+                signupModalClose.addEventListener('click', function() {
+                    signupModal.classList.remove('active');
+                    playSound('ClickOut.wav');
+                });
+            }
+            
+            // Close reset modal
+            if (resetModalClose) {
+                resetModalClose.addEventListener('click', function() {
+                    resetModal.classList.remove('active');
+                    playSound('ClickOut.wav');
+                });
+            }
+            
+            // Close modals when clicking outside
+            signupModal.addEventListener('click', function(e) {
+                if (e.target === signupModal) {
+                    signupModal.classList.remove('active');
+                }
+            });
+            
+            resetModal.addEventListener('click', function(e) {
+                if (e.target === resetModal) {
+                    resetModal.classList.remove('active');
+                }
+            });
+            
+            // Initialize UI
+            updateUIForUser();
+        });
+    </script>
 </body>
 </html>
 
