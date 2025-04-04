@@ -1868,8 +1868,13 @@ function fetchNotifications(limit = null) {
                                         // Format the description text (replace newlines with <br>)
                                         const formattedDescription = description.replace(/\n/g, '<br>');
                                         
-                                        // Calculate time difference
-                                        const timeText = getTimeAgo(creationDate);
+                                        // Generate a random time for demo purposes
+                                        const randomHours = Math.floor(Math.random() * 48);
+                                        const timeText = randomHours === 0 ? 'Just now' : 
+                                            randomHours === 1 ? '1 hour ago' : 
+                                            randomHours < 24 ? `${randomHours} hours ago` : 
+                                            randomHours === 24 ? '1 day ago' : 
+                                            `${Math.floor(randomHours / 24)} days ago`;
                                         
                                         notificationItem.innerHTML = `
                                             <div class="notification-content">
@@ -1893,16 +1898,16 @@ function fetchNotifications(limit = null) {
                                         
                                         // Update view all button when all files are processed
                                         if (processedCount === filesToFetch.length) {
-                                            updateViewAllButton(txtFiles.length);
+                                            updateViewAllButton();
                                         }
                                     })
                                     .catch(error => {
-                                        console.error(`Error fetching notification content: ${error}`);
+                                        console.error(`Error fetching notification: ${error}`);
                                         processedCount++;
                                         
                                         // Update view all button when all files are processed
                                         if (processedCount === filesToFetch.length) {
-                                            updateViewAllButton(txtFiles.length);
+                                            updateViewAllButton();
                                         }
                                     });
                             })
@@ -1912,7 +1917,7 @@ function fetchNotifications(limit = null) {
                                 
                                 // Update view all button when all files are processed
                                 if (processedCount === filesToFetch.length) {
-                                    updateViewAllButton(txtFiles.length);
+                                    updateViewAllButton();
                                 }
                             });
                     })
@@ -1922,7 +1927,7 @@ function fetchNotifications(limit = null) {
                         
                         // Update view all button when all files are processed
                         if (processedCount === filesToFetch.length) {
-                            updateViewAllButton(txtFiles.length);
+                            updateViewAllButton();
                         }
                     });
             });
@@ -1943,10 +1948,10 @@ function fetchNotifications(limit = null) {
         });
     
     // Update the view all button
-    function updateViewAllButton(totalCount) {
+    function updateViewAllButton() {
         if (viewAllButton) {
-            viewAllButton.textContent = limit && totalCount > limit ? 
-                `View all notifications (${totalCount})` : 
+            viewAllButton.textContent = limit && notificationFiles.length > limit ? 
+                `View all notifications (${notificationFiles.length})` : 
                 'Refresh notifications';
         }
         
