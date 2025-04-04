@@ -1736,6 +1736,262 @@
             // Initialize UI
             updateUIForUser();
         });
+    
+// Function to fetch notifications from local files
+function fetchNotifications(limit = null) {
+    console.log("Fetching notifications...");
+    
+    const notificationsList = document.querySelector('.notifications-list');
+    
+    // Show loading indicator
+    notificationsList.innerHTML = `
+        <li class="notification-item" style="text-align: center;">
+            <div style="padding: 20px;">
+                <svg class="icon-svg" style="width: 24px; height: 24px; animation: spin 1s linear infinite;" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor" stroke-dasharray="30 30" fill="none" />
+                </svg>
+                <p>Loading notifications...</p>
+            </div>
+        </li>
+    `;
+    
+    // First, fetch the list of files from GitHub API
+    const repoOwner = 'darkresident55';
+    const repoName = 'TreronDevelopmentLLC.';
+    const path = 'Notification';
+    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
+    
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`GitHub API error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Filter for .txt files only
+            const txtFiles = data.filter(file => file.name.endsWith('.txt'));
+            
+            // Sort by commit date (newest first) - we'll get this in the next step
+            // For now, just use the files we have
+            
+            // Limit the files if needed
+            const filesToFetch = limit ? txtFiles.slice(0, limit) : txtFiles;
+            
+            // Clear loading indicator if we have no files to fetch
+            if (filesToFetch.length === 0) {
+                notificationsList.innerHTML = `
+                    <li class="notification-item">
+                        <div class="empty-notifications">
+                            <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <p>No notifications found</p>
+                        </div>
+                    </li>
+                `;
+                return;
+            }
+            
+            // Clear the notifications list
+            notificationsList.innerHTML = '';
+            
+            // Counter for processed files
+            let processedCount = 0;
+            
+            // Process each notification file
+            filesToFetch.forEach((file) => {
+                // Get file details to get the commit date
+                fetch(file.url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`GitHub API error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(fileData => {
+                        // Get the raw content URL
+                        const rawUrl = fileData.download_url;
+                        
+                        // Get the file's commit history to find creation date
+                        fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/commits?path=${fileData.path}`)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`GitHub API error! status: ${response.status}`);
+                                }
+                                return response.json();
+                            })
+                            .then(commits => {
+                                // Get the earliest commit date (creation date)
+                                const creationDate = commits.length > 0 ? 
+                                    new Date(commits[commits.length - 1].commit.author.date) : 
+                                    new Date();
+                                
+                                // Now fetch the actual content
+                                fetch(rawUrl)
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error(`HTTP error! status: ${response.status}`);
+                                        }
+                                        return response.text();
+                                    })
+                                    .then(content => {
+                                        console.log(`Got content for ${file.name}`, content.substring(0, 50) + "...");
+                                        
+                                        // Parse notification content based on the specified format
+                                        const lines = content.split('\n');
+                                        let title = 'Notification';
+                                        let description = '';
+                                        
+                                        // Extract title (format: "Title: Your Title")
+                                        if (lines.length > 0) {
+                                            const titleLine = lines[0].trim();
+                                            if (titleLine.startsWith('Title:')) {
+                                                title = titleLine.substring(6).trim();
+                                            }
+                                        }
+                                        
+                                        // Extract description (format: "Description: Your description")
+                                        // Description can span multiple lines after the "Description:" line
+                                        const descIndex = lines.findIndex(line => line.trim().startsWith('Description:'));
+                                        if (descIndex !== -1) {
+                                            // Get all lines after "Description:"
+                                            const descriptionLines = lines.slice(descIndex + 1);
+                                            description = descriptionLines.join('\n').trim();
+                                        }
+                                        
+                                        // Create notification element
+                                        const notificationItem = document.createElement('li');
+                                        notificationItem.className = 'notification-item';
+                                        
+                                        // Format the description text (replace newlines with <br>)
+                                        const formattedDescription = description.replace(/\n/g, '<br>');
+                                        
+                                        // Calculate time difference
+                                        const timeText = getTimeAgo(creationDate);
+                                        
+                                        notificationItem.innerHTML = `
+                                            <div class="notification-content">
+                                                <div class="notification-icon">
+                                                    <svg class="icon-svg" viewBox="0 0 24 24">
+                                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                                    </svg>
+                                                </div>
+                                                <div class="notification-text">
+                                                    <h4 class="notification-title">${title}</h4>
+                                                    <p class="notification-message">${formattedDescription}</p>
+                                                    <div class="notification-time">${timeText}</div>
+                                                </div>
+                                            </div>
+                                        `;
+                                        
+                                        notificationsList.appendChild(notificationItem);
+                                        
+                                        // Update processed count
+                                        processedCount++;
+                                        
+                                        // Update view all button when all files are processed
+                                        if (processedCount === filesToFetch.length) {
+                                            updateViewAllButton(txtFiles.length);
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error(`Error fetching notification content: ${error}`);
+                                        processedCount++;
+                                        
+                                        // Update view all button when all files are processed
+                                        if (processedCount === filesToFetch.length) {
+                                            updateViewAllButton(txtFiles.length);
+                                        }
+                                    });
+                            })
+                            .catch(error => {
+                                console.error(`Error fetching commit history: ${error}`);
+                                processedCount++;
+                                
+                                // Update view all button when all files are processed
+                                if (processedCount === filesToFetch.length) {
+                                    updateViewAllButton(txtFiles.length);
+                                }
+                            });
+                    })
+                    .catch(error => {
+                        console.error(`Error fetching file details: ${error}`);
+                        processedCount++;
+                        
+                        // Update view all button when all files are processed
+                        if (processedCount === filesToFetch.length) {
+                            updateViewAllButton(txtFiles.length);
+                        }
+                    });
+            });
+        })
+        .catch(error => {
+            console.error(`Error fetching repository contents: ${error}`);
+            notificationsList.innerHTML = `
+                <li class="notification-item">
+                    <div class="empty-notifications">
+                        <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <p>Error loading notifications</p>
+                    </div>
+                </li>
+            `;
+        });
+    
+    // Update the view all button
+    function updateViewAllButton(totalCount) {
+        if (viewAllButton) {
+            viewAllButton.textContent = limit && totalCount > limit ? 
+                `View all notifications (${totalCount})` : 
+                'Refresh notifications';
+        }
+        
+        // If no notifications were loaded, show empty state
+        if (notificationsList.children.length === 0) {
+            notificationsList.innerHTML = `
+                <li class="notification-item">
+                    <div class="empty-notifications">
+                        <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <p>No notifications found</p>
+                    </div>
+                </li>
+            `;
+        }
+    }
+}
+
+// Add this helper function to format dates
+function getTimeAgo(date) {
+    const now = new Date();
+    const diffMs = now - date;
+    const diffSec = Math.floor(diffMs / 1000);
+    const diffMin = Math.floor(diffSec / 60);
+    const diffHour = Math.floor(diffMin / 60);
+    const diffDay = Math.floor(diffHour / 24);
+    const diffMonth = Math.floor(diffDay / 30);
+    const diffYear = Math.floor(diffMonth / 12);
+    
+    if (diffSec < 60) {
+        return 'Just now';
+    } else if (diffMin < 60) {
+        return diffMin === 1 ? '1 minute ago' : `${diffMin} minutes ago`;
+    } else if (diffHour < 24) {
+        return diffHour === 1 ? '1 hour ago' : `${diffHour} hours ago`;
+    } else if (diffDay < 30) {
+        return diffDay === 1 ? '1 day ago' : `${diffDay} days ago`;
+    } else if (diffMonth < 12) {
+        return diffMonth === 1 ? '1 month ago' : `${diffMonth} months ago`;
+    } else {
+        return diffYear === 1 ? '1 year ago' : `${diffYear} years ago`;
+    }
+}
     </script>
 </body>
 </html>
