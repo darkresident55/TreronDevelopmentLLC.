@@ -779,80 +779,621 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
+
+    .reset-modal-close {
+        background: none;
+        border: none;
+        color: hsl(var(--muted-foreground));
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .reset-modal-close:hover {
+        background-color: hsla(var(--foreground), 0.1);
+        color: hsl(var(--foreground));
+    }
+
+/* New Login Modal Styles */
+.login-modal {
+    background-color: #121212;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+}
+
+.login-modal-overlay.active .login-modal {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.login-modal-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.login-modal-logo {
+    width: 70px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.login-modal-company {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: hsl(var(--foreground));
+}
+
+.login-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    margin-bottom: 10px;
+}
+
+.login-modal-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+    color: white;
+}
+
+.login-subtitle {
+    color: hsl(var(--muted-foreground));
+    padding: 0 24px;
+    margin: 0 0 5px 0;
+}
+
+.login-create-account {
+    color: #6366f1;
+    padding: 0 24px;
+    margin: 0 0 20px 0;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.login-create-account:hover {
+    text-decoration: underline;
+}
+
+.login-form {
+    padding: 0 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.9rem;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: hsl(var(--muted-foreground));
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    background-color: #1c1c1c;
+    border: 1px solid #6366f1;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-with-icon input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: hsl(var(--muted-foreground));
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: white;
+}
+
+.login-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.use-phone-button {
+    flex: 1;
+    padding: 12px;
+    background-color: #2a2a2a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.use-phone-button:hover {
+    background-color: #3a3a3a;
+}
+
+.continue-button {
+    flex: 1;
+    padding: 12px;
+    background-color: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.continue-button:hover {
+    background-color: #4f46e5;
+}
+
+.button-text {
+    transition: opacity 0.3s;
+}
+
+.button-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.continue-button.loading .button-text {
+    opacity: 0;
+}
+
+.continue-button.loading .button-loader {
+    opacity: 1;
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+    width: 20px;
+    height: 20px;
+}
+
+.login-footer {
+    padding: 0 24px 24px;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.login-footer a {
+    color: #6366f1;
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Profile View Styles */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.profile-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: white;
+}
+
+.profile-content {
+    padding: 20px 24px;
+}
+
+.profile-user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #6366f1;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0 4px 0;
+    color: white;
+}
+
+.profile-email {
+    color: hsl(var(--muted-foreground));
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.profile-section {
+    margin-bottom: 24px;
+    background-color: #1c1c1c;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0 0 16px 0;
+    color: white;
+}
+
+.empty-maps {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.empty-maps p {
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 16px;
+}
+
+.upload-button {
+    background-color: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.upload-button svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+.upload-button:hover {
+    background-color: #4f46e5;
+}
+
+.contribution-graph {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 4px;
+    margin-top: 10px;
+}
+
+.contribution-day {
+    aspect-ratio: 1;
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.contribution-day:hover {
+    transform: scale(1.2);
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.logout-button {
+    flex: 1;
+    padding: 12px;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #dc2626;
+}
+
+.close-button {
+    flex: 1;
+    padding: 12px;
+    background-color: #2a2a2a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.close-button:hover {
+    background-color: #3a3a3a;
+}
+
+/* Animation for modal transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(20px); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+}
 </style>
 </head>
 <body class="dark">
 <!-- Login Modal -->
 <div class="login-modal-overlay" id="login-modal">
-    <div class="login-modal">
-        <div class="login-modal-logo-container">
-            <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="login-modal-logo">
-            <span class="login-modal-company">Treron Development LLC</span>
+  <div class="login-modal">
+    <div id="login-view">
+      <div class="login-modal-logo-container">
+        <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="login-modal-logo">
+        <span class="login-modal-company">Treron Development LLC</span>
+      </div>
+      <div class="login-modal-header">
+        <h2 class="login-modal-title">Log in</h2>
+        <button class="login-modal-close" id="login-modal-close">
+          <svg class="icon-svg" viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div id="login-error" class="login-error"></div>
+      <p class="login-subtitle">Enter your email and password to continue</p>
+      <p class="login-create-account" id="show-signup">Create account</p>
+      <form class="login-form" id="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <div class="input-with-icon">
+            <svg class="input-icon" viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <input type="email" id="email" placeholder="Your email address" required>
+          </div>
         </div>
-        <div class="login-modal-header">
-            <h2 class="login-modal-title">Log in to Treron</h2>
-            <button class="login-modal-close" id="login-modal-close">
-                <svg class="icon-svg" viewBox="0 0 24 24">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-with-icon">
+            <svg class="input-icon" viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input type="password" id="password" placeholder="Your password" required>
+            <button type="button" class="password-toggle" id="password-toggle">
+              <svg class="icon-svg" viewBox="0 0 24 24">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
             </button>
+          </div>
         </div>
-        <div id="login-error" class="login-error"></div>
-        <form class="login-form" id="login-form">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Enter your email" required>
+        <div class="login-buttons">
+          <button type="button" class="use-phone-button">Use phone</button>
+          <button type="submit" class="continue-button" id="login-button">
+            <span class="button-text">Continue</span>
+            <div class="button-loader">
+              <svg class="spinner" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" stroke-dasharray="30 30"></circle>
+              </svg>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password" required>
-            </div>
-            <button type="submit" class="login-button" id="login-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Log in</button>
-        </form>
-        <div class="login-footer">
-            <p>Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
-            <p><a href="#" id="forgot-password">Forgot password?</a></p>
+          </button>
         </div>
+      </form>
+      <div class="login-footer">
+        <p>By entering and clicking Continue, you agree to the <a href="#">Terms</a>, <a href="#">Privacy Policy</a>.</p>
+        <p><a href="#" id="forgot-password">Forgot password?</a></p>
+      </div>
     </div>
+    
+    <div id="profile-view" style="display: none;">
+      <div class="profile-header">
+        <h2 class="profile-title">Your Profile</h2>
+        <button class="login-modal-close" id="profile-close">
+          <svg class="icon-svg" viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="profile-content">
+        <div class="profile-user">
+          <div class="profile-avatar" id="profile-avatar">T</div>
+          <div class="profile-info">
+            <h3 class="profile-name" id="profile-name">Username</h3>
+            <p class="profile-email" id="profile-email">user@example.com</p>
+          </div>
+        </div>
+        
+        <div class="profile-section">
+          <h3 class="section-title">Custom Maps</h3>
+          <div class="empty-maps">
+            <p>You don't currently have any Maps or Mods Uploaded</p>
+            <button class="upload-button">
+              <svg class="icon-svg" viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              Upload Map or Mod
+            </button>
+          </div>
+        </div>
+        
+        <div class="profile-section">
+          <h3 class="section-title">Contribution activity</h3>
+          <div class="contribution-graph" id="contribution-graph"></div>
+        </div>
+        
+        <div class="profile-actions">
+          <button class="logout-button" id="logout-button">Log out</button>
+          <button class="close-button" id="close-profile-button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Add signup modal -->
 <div class="login-modal-overlay" id="signup-modal">
-    <div class="login-modal">
-        <div class="login-modal-logo-container">
-            <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="login-modal-logo">
-            <span class="login-modal-company">Treron Development LLC</span>
-        </div>
-        <div class="login-modal-header">
-            <h2 class="login-modal-title">Create an Account</h2>
-            <button class="login-modal-close" id="signup-modal-close">
-                <svg class="icon-svg" viewBox="0 0 24 24">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-        </div>
-        <div id="signup-error" class="login-error"></div>
-        <form class="login-form" id="signup-form">
-            <div class="form-group">
-                <label for="signup-email">Email</label>
-                <input type="email" id="signup-email" placeholder="Enter your email" required>
-            </div>
-            <div class="form-group">
-                <label for="signup-password">Password</label>
-                <input type="password" id="signup-password" placeholder="Enter your password (min 6 characters)" required minlength="6">
-            </div>
-            <div class="form-group">
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" placeholder="Confirm your password" required minlength="6">
-            </div>
-            <button type="submit" class="login-button" id="signup-button" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">Sign up</button>
-        </form>
-        <div class="login-footer">
-            <p>Already have an account? <a href="#" id="show-login">Log in</a></p>
-        </div>
+  <div class="login-modal">
+    <div class="login-modal-logo-container">
+      <img src="https://raw.githubusercontent.com/darkresident55/TreronDevelopmentLLC./main/TreronIcons/Treron%20Logo.png" alt="Treron Logo" class="login-modal-logo">
+      <span class="login-modal-company">Treron Development LLC</span>
     </div>
+    <div class="login-modal-header">
+      <h2 class="login-modal-title">Create an Account</h2>
+      <button class="login-modal-close" id="signup-modal-close">
+        <svg class="icon-svg" viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div id="signup-error" class="login-error"></div>
+    <p class="login-subtitle">Sign up to upload and manage custom maps</p>
+    <p class="login-create-account" id="show-login">Already have an account?</p>
+    <form class="login-form" id="signup-form">
+      <div class="form-group">
+        <label for="signup-email">Email</label>
+        <div class="input-with-icon">
+          <svg class="input-icon" viewBox="0 0 24 24">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <input type="email" id="signup-email" placeholder="Your email address" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="signup-password">Password</label>
+        <div class="input-with-icon">
+          <svg class="input-icon" viewBox="0 0 24 24">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <input type="password" id="signup-password" placeholder="Enter your password (min 6 characters)" required minlength="6">
+          <button type="button" class="password-toggle" id="signup-password-toggle">
+            <svg class="icon-svg" viewBox="0 0 24 24">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <div class="input-with-icon">
+          <svg class="input-icon" viewBox="0 0 24 24">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <input type="password" id="confirm-password" placeholder="Confirm your password" required minlength="6">
+        </div>
+      </div>
+      <div class="login-buttons">
+        <button type="button" class="use-phone-button">Use phone</button>
+        <button type="submit" class="continue-button" id="signup-button">
+          <span class="button-text">Sign up</span>
+          <div class="button-loader">
+            <svg class="spinner" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" stroke-dasharray="30 30"></circle>
+            </svg>
+          </div>
+        </button>
+      </div>
+    </form>
+    <div class="login-footer">
+      <p>By signing up, you agree to the <a href="#">Terms</a>, <a href="#">Privacy Policy</a>.</p>
+    </div>
+  </div>
 </div>
 
 <!-- Add password reset modal -->
@@ -1005,14 +1546,14 @@
                         <a href="#" class="menu-link-front" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
                             <svg class="menu-icon icon-svg" style="--icon-color: #22c55e;" viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="3"></circle>
-                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                             </svg>
                             <span>Settings</span>
                         </a>
                         <a href="#" class="menu-link-back" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
                             <svg class="menu-icon icon-svg" style="--icon-color: #22c55e;" viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="3"></circle>
-                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                             </svg>
                             <span>Settings</span>
                         </a>
@@ -1241,165 +1782,7 @@
                 });
             }
             
-            // Function to fetch notifications from local files
-            function fetchNotifications(limit = 3) {
-                console.log("Fetching notifications...");
-                
-                const notificationsList = document.querySelector('.notifications-list');
-                
-                // Show loading indicator
-                notificationsList.innerHTML = `
-                    <li class="notification-item" style="text-align: center;">
-                        <div style="padding: 20px;">
-                            <svg class="icon-svg" style="width: 24px; height: 24px; animation: spin 1s linear infinite;" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor" stroke-dasharray="30 30" fill="none" />
-                            </svg>
-                            <p>Loading notifications...</p>
-                        </div>
-                    </li>
-                `;
-                
-                // Define notification files to load
-                const notificationFiles = [
-                    'notifications/welcome.txt',
-                    'notifications/update.txt',
-                    'notifications/important.txt'
-                ];
-                
-                // Limit the files based on the limit parameter
-                const filesToFetch = limit ? notificationFiles.slice(0, limit) : notificationFiles;
-                
-                // Clear loading indicator if we have no files to fetch
-                if (filesToFetch.length === 0) {
-                    notificationsList.innerHTML = `
-                        <li class="notification-item">
-                            <div class="empty-notifications">
-                                <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
-                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                                </svg>
-                                <p>No notifications found</p>
-                            </div>
-                        </li>
-                    `;
-                    return;
-                }
-                
-                // Clear the notifications list
-                notificationsList.innerHTML = '';
-                
-                // Counter for processed files
-                let processedCount = 0;
-                
-                // Process each notification file
-                filesToFetch.forEach((filePath, index) => {
-                    fetch(filePath)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error(`HTTP error! status: ${response.status}`);
-                            }
-                            return response.text();
-                        })
-                        .then(content => {
-                            console.log(`Got content for ${filePath}`, content.substring(0, 50) + "...");
-                            
-                            // Parse notification content based on the specified format
-                            const lines = content.split('\n');
-                            let title = 'Notification';
-                            let description = '';
-                            
-                            // Extract title (format: "Title: Your Title")
-                            if (lines.length > 0) {
-                                const titleLine = lines[0].trim();
-                                if (titleLine.startsWith('Title:')) {
-                                    title = titleLine.substring(6).trim();
-                                }
-                            }
-                            
-                            // Extract description (format: "Description: Your description")
-                            // Description can span multiple lines after the "Description:" line
-                            const descIndex = lines.findIndex(line => line.trim().startsWith('Description:'));
-                            if (descIndex !== -1) {
-                                // Get all lines after "Description:"
-                                const descriptionLines = lines.slice(descIndex + 1);
-                                description = descriptionLines.join('\n').trim();
-                            }
-                            
-                            // Create notification element
-                            const notificationItem = document.createElement('li');
-                            notificationItem.className = 'notification-item';
-                            
-                            // Format the description text (replace newlines with <br>)
-                            const formattedDescription = description.replace(/\n/g, '<br>');
-                            
-                            // Generate a random time for demo purposes
-                            const randomHours = Math.floor(Math.random() * 48);
-                            const timeText = randomHours === 0 ? 'Just now' : 
-                                            randomHours === 1 ? '1 hour ago' : 
-                                            randomHours < 24 ? `${randomHours} hours ago` : 
-                                            randomHours === 24 ? '1 day ago' : 
-                                            `${Math.floor(randomHours / 24)} days ago`;
-                            
-                            notificationItem.innerHTML = `
-                                <div class="notification-content">
-                                    <div class="notification-icon">
-                                        <svg class="icon-svg" viewBox="0 0 24 24">
-                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="notification-text">
-                                        <h4 class="notification-title">${title}</h4>
-                                        <p class="notification-message">${formattedDescription}</p>
-                                        <div class="notification-time">${timeText}</div>
-                                    </div>
-                                </div>
-                            `;
-                            
-                            notificationsList.appendChild(notificationItem);
-                            
-                            // Update processed count
-                            processedCount++;
-                            
-                            // Update view all button when all files are processed
-                            if (processedCount === filesToFetch.length) {
-                                updateViewAllButton();
-                            }
-                        })
-                        .catch(error => {
-                            console.error(`Error fetching notification: ${error}`);
-                            processedCount++;
-                            
-                            // Update view all button when all files are processed
-                            if (processedCount === filesToFetch.length) {
-                                updateViewAllButton();
-                            }
-                        });
-                });
-                
-                // Update the view all button
-                function updateViewAllButton() {
-                    if (viewAllButton) {
-                        viewAllButton.textContent = limit && notificationFiles.length > limit ? 
-                            `View all notifications (${notificationFiles.length})` : 
-                            'Refresh notifications';
-                    }
-                    
-                    // If no notifications were loaded, show empty state
-                    if (notificationsList.children.length === 0) {
-                        notificationsList.innerHTML = `
-                            <li class="notification-item">
-                                <div class="empty-notifications">
-                                    <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
-                                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                                    </svg>
-                                    <p>No notifications found</p>
-                                </div>
-                            </li>
-                        `;
-                    }
-                }
-            }
+
         });
 
         // Firebase authentication functionality
@@ -1721,6 +2104,12 @@
             }
             
             // Close modals when clicking outside
+            loginModal.addEventListener('click', function(e) {
+                if (e.target === loginModal) {
+                    loginModal.classList.remove('active');
+                }
+            });
+            
             signupModal.addEventListener('click', function(e) {
                 if (e.target === signupModal) {
                     signupModal.classList.remove('active');
@@ -1736,6 +2125,412 @@
             // Initialize UI
             updateUIForUser();
         });
+    
+// Authentication and profile functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Get DOM elements
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const resetForm = document.getElementById('reset-form');
+    const loginError = document.getElementById('login-error');
+    const signupError = document.getElementById('signup-error');
+    const resetMessage = document.getElementById('reset-message');
+    const showSignupLink = document.getElementById('show-signup');
+    const showLoginLink = document.getElementById('show-login');
+    const forgotPasswordLink = document.getElementById('forgot-password');
+    const backToLoginLink = document.getElementById('back-to-login');
+    const loginModal = document.getElementById('login-modal');
+    const signupModal = document.getElementById('signup-modal');
+    const resetModal = document.getElementById('reset-modal');
+    const signupModalClose = document.getElementById('signup-modal-close');
+    const resetModalClose = document.getElementById('reset-modal-close');
+    const loginView = document.getElementById('login-view');
+    const profileView = document.getElementById('profile-view');
+    const profileClose = document.getElementById('profile-close');
+    const closeProfileButton = document.getElementById('close-profile-button');
+    const logoutButton = document.getElementById('logout-button');
+    const passwordToggle = document.getElementById('password-toggle');
+    const signupPasswordToggle = document.getElementById('signup-password-toggle');
+    const loginButtonFront = document.getElementById('login-button-front');
+    const loginButtonBack = document.getElementById('login-button-back');
+    
+    // Password toggle functionality
+    if (passwordToggle) {
+        passwordToggle.addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.innerHTML = `
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                `;
+            } else {
+                passwordInput.type = 'password';
+                this.innerHTML = `
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                `;
+            }
+        });
+    }
+    
+    if (signupPasswordToggle) {
+        signupPasswordToggle.addEventListener('click', function() {
+            const passwordInput = document.getElementById('signup-password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.innerHTML = `
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                `;
+            } else {
+                passwordInput.type = 'password';
+                this.innerHTML = `
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                `;
+            }
+        });
+    }
+    
+    // Mock user state for demo purposes
+    let currentUser = null;
+    
+    // Check if user is already logged in from localStorage
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        updateUIForUser();
+    }
+    
+    // Function to update UI based on user state
+    function updateUIForUser() {
+        if (currentUser) {
+            // User is signed in
+            console.log('User is signed in:', currentUser.email);
+            
+            // Update login button to show logged in state
+            if (loginButtonFront) {
+                loginButtonFront.innerHTML = `
+                    <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Profile</span>
+                `;
+            }
+            
+            if (loginButtonBack) {
+                loginButtonBack.innerHTML = `
+                    <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Profile</span>
+                `;
+            }
+            
+            // Update profile view with user info
+            if (profileView) {
+                const profileName = document.getElementById('profile-name');
+                const profileEmail = document.getElementById('profile-email');
+                const profileAvatar = document.getElementById('profile-avatar');
+                
+                if (profileName) profileName.textContent = currentUser.email.split('@')[0];
+                if (profileEmail) profileEmail.textContent = currentUser.email;
+                if (profileAvatar) profileAvatar.textContent = currentUser.email.charAt(0).toUpperCase();
+                
+                // Generate contribution graph
+                generateContributionGraph();
+            }
+            
+            // Show profile view instead of login view
+            if (loginView && profileView) {
+                loginView.style.display = 'none';
+                profileView.style.display = 'block';
+            }
+        } else {
+            // User is signed out
+            console.log('User is signed out');
+            
+            // Update login button to show logged out state
+            if (loginButtonFront) {
+                loginButtonFront.innerHTML = `
+                    <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Log in</span>
+                `;
+            }
+            
+            if (loginButtonBack) {
+                loginButtonBack.innerHTML = `
+                    <svg class="menu-icon icon-svg" style="--icon-color: #ef4444;" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Log in</span>
+                `;
+            }
+            
+            // Show login view instead of profile view
+            if (loginView && profileView) {
+                loginView.style.display = 'block';
+                profileView.style.display = 'none';
+            }
+        }
+    }
+    
+    // Generate contribution graph with random activity
+    function generateContributionGraph() {
+        const graphContainer = document.getElementById('contribution-graph');
+        if (!graphContainer) return;
+        
+        graphContainer.innerHTML = '';
+        
+        // Generate 60 days of random contributions
+        for (let i = 0; i < 60; i++) {
+            const day = document.createElement('div');
+            day.className = 'contribution-day';
+            
+            // Random contribution level (0-4)
+            const level = Math.floor(Math.random() * 5);
+            
+            // Set color based on level
+            if (level === 0) {
+                day.style.backgroundColor = '#1c1c1c';
+            } else if (level === 1) {
+                day.style.backgroundColor = 'rgba(99, 102, 241, 0.2)';
+            } else if (level === 2) {
+                day.style.backgroundColor = 'rgba(99, 102, 241, 0.4)';
+            } else if (level === 3) {
+                day.style.backgroundColor = 'rgba(99, 102, 241, 0.7)';
+            } else {
+                day.style.backgroundColor = '#6366f1';
+            }
+            
+            graphContainer.appendChild(day);
+        }
+    }
+    
+    // Login form submission
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Show loading state
+            const loginButton = document.getElementById('login-button');
+            loginButton.classList.add('loading');
+            
+            // Clear previous errors
+            if (loginError) {
+                loginError.style.display = 'none';
+                loginError.textContent = '';
+            }
+            
+            // Mock login (in a real app, this would be Firebase auth)
+            setTimeout(() => {
+                if (email && password) {
+                    // Successful login
+                    currentUser = { email: email };
+                    localStorage.setItem("user", JSON.stringify(currentUser));
+                    updateUIForUser();
+                    console.log('Login successful');
+                    playSound('ClickOut.wav');
+                    
+                    // Reset form
+                    loginForm.reset();
+                } else {
+                    // Failed login
+                    if (loginError) {
+                        loginError.textContent = 'Invalid email or password';
+                        loginError.style.display = 'block';
+                    }
+                    playSound('ClickOut.wav');
+                }
+                
+                // Reset button state
+                loginButton.classList.remove('loading');
+            }, 1500);
+        });
+    }
+    
+    // Signup form submission
+    if (signupForm) {
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            // Show loading state
+            const signupButton = document.getElementById('signup-button');
+            signupButton.classList.add('loading');
+            
+            // Clear previous errors
+            if (signupError) {
+                signupError.style.display = 'none';
+                signupError.textContent = '';
+            }
+            
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                if (signupError) {
+                    signupError.textContent = 'Passwords do not match';
+                    signupError.style.display = 'block';
+                }
+                signupButton.classList.remove('loading');
+                playSound('ClickOut.wav');
+                return;
+            }
+            
+            // Mock signup (in a real app, this would be Firebase auth)
+            setTimeout(() => {
+                if (email && password) {
+                    // Successful signup
+                    currentUser = { email: email };
+                    localStorage.setItem("user", JSON.stringify(currentUser));
+                    updateUIForUser();
+                    console.log('Signup successful');
+                    playSound('ClickOut.wav');
+                    
+                    // Reset form
+                    signupForm.reset();
+                    
+                    // Switch to login modal
+                    signupModal.classList.remove('active');
+                    loginModal.classList.add('active');
+                } else {
+                    // Failed signup
+                    if (signupError) {
+                        signupError.textContent = 'Invalid email or password';
+                        signupError.style.display = 'block';
+                    }
+                    playSound('ClickOut.wav');
+                }
+                
+                // Reset button state
+                signupButton.classList.remove('loading');
+            }, 1500);
+        });
+    }
+    
+    // Logout functionality
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function() {
+            currentUser = null;
+            localStorage.removeItem("user");
+            updateUIForUser();
+            playSound('ClickOut.wav');
+        });
+    }
+    
+    // Close profile view
+    if (profileClose) {
+        profileClose.addEventListener('click', function() {
+            loginModal.classList.remove('active');
+            playSound('ClickOut.wav');
+        });
+    }
+    
+    if (closeProfileButton) {
+        closeProfileButton.addEventListener('click', function() {
+            loginModal.classList.remove('active');
+            playSound('ClickOut.wav');
+        });
+    }
+    
+    // Show signup modal
+    if (showSignupLink) {
+        showSignupLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginModal.classList.remove('active');
+            signupModal.classList.add('active');
+            playSound('ClickIn.wav');
+        });
+    }
+    
+    // Show login modal
+    if (showLoginLink) {
+        showLoginLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            signupModal.classList.remove('active');
+            loginModal.classList.add('active');
+            playSound('ClickIn.wav');
+        });
+    }
+    
+    // Show password reset modal
+    if (forgotPasswordLink) {
+        forgotPasswordLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginModal.classList.remove('active');
+            resetModal.classList.add('active');
+            playSound('ClickIn.wav');
+        });
+    }
+    
+    // Back to login from password reset
+    if (backToLoginLink) {
+        backToLoginLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            resetModal.classList.remove('active');
+            loginModal.classList.add('active');
+            playSound('ClickIn.wav');
+        });
+    }
+    
+    // Close signup modal
+    if (signupModalClose) {
+        signupModalClose.addEventListener('click', function() {
+            signupModal.classList.remove('active');
+            playSound('ClickOut.wav');
+        });
+    }
+    
+    // Close reset modal
+    if (resetModalClose) {
+        resetModalClose.addEventListener('click', function() {
+            resetModal.classList.remove('active');
+            playSound('ClickOut.wav');
+        });
+    }
+    
+    // Close modals when clicking outside
+    loginModal.addEventListener('click', function(e) {
+        if (e.target === loginModal) {
+            loginModal.classList.remove('active');
+        }
+    });
+    
+    signupModal.addEventListener('click', function(e) {
+        if (e.target === signupModal) {
+            signupModal.classList.remove('active');
+        }
+    });
+    
+    resetModal.addEventListener('click', function(e) {
+        if (e.target === resetModal) {
+            resetModal.classList.remove('active');
+        }
+    });
+    
+    // Initialize UI
+    updateUIForUser();
+});
     
 // Function to fetch notifications from local files
 function fetchNotifications(limit = null) {
