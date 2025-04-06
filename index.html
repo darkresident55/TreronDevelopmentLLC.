@@ -414,14 +414,16 @@
     }
 
     .login-modal {
-        background-color: #121212;
+        background-color: hsl(var(--card));
+        color: hsl(var(--card-foreground));
         border-radius: 16px;
-        overflow: hidden;
+        padding: 24px;
         width: 90%;
-        max-width: 380px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        transform: translateY(20px) scale(0.95);
+        max-width: 400px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        transform: translateY(50px) scale(0.95);
         opacity: 0;
+        transform-origin: bottom center;
         transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
     }
 
@@ -430,213 +432,108 @@
         opacity: 1;
     }
 
-    .login-modal-logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 20px 0;
-    }
-
-    .login-modal-logo {
-        width: 70px;
-        height: 70px;
-        margin-bottom: 10px;
-        position: relative;
-    }
-
-    .login-modal-logo img {
-        width: 100%;
-        height: 100%;
-    }
-
-    .login-modal-company {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: white;
-        margin-top: 5px;
-    }
-
     .login-modal-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 24px;
-        margin-bottom: 10px;
-    }
-
-    .login-modal-title {
-        font-size: 2rem;
-        font-weight: bold;
-        margin: 0;
-        color: white;
-    }
-
-    .login-subtitle {
-        color: #a0a0a0;
-        padding: 0 24px;
-        margin: 0 0 5px 0;
-        font-size: 0.9rem;
-    }
-
-    .login-create-account {
-        color: #6366f1;
-        padding: 0 24px;
-        margin: 0 0 20px 0;
-        cursor: pointer;
-        font-weight: 500;
-    }
-
-    .login-create-account:hover {
-        text-decoration: underline;
-    }
-
-    .login-form {
-        padding: 0 24px;
-    }
-
-    .form-group {
         margin-bottom: 20px;
     }
 
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        color: #a0a0a0;
-        font-size: 0.9rem;
+    .login-modal-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0;
     }
 
-    .input-with-icon {
-        position: relative;
-    }
-
-    .input-with-icon input {
-        width: 100%;
-        padding: 12px 12px 12px 40px;
-        background-color: #1c1c1c;
-        border: 1px solid #6366f1;
-        border-radius: 8px;
-        color: white;
-        font-size: 1rem;
-        transition: border-color 0.3s, box-shadow 0.3s;
-        box-sizing: border-box;
-    }
-
-    .input-with-icon input:focus {
-        outline: none;
-        border-color: #4f46e5;
-        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
-    }
-
-    .login-buttons {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 24px;
-    }
-
-    .use-phone-button {
-        flex: 1;
-        padding: 12px;
-        background-color: #2a2a2a;
-        color: white;
+    .login-modal-close {
+        background: none;
         border: none;
-        border-radius: 8px;
-        font-size: 1rem;
+        color: hsl(var(--muted-foreground));
         cursor: pointer;
-        transition: background-color 0.3s;
+        padding: 5px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    .use-phone-button:hover {
-        background-color: #3a3a3a;
+    .login-modal-close:hover {
+        background-color: hsla(var(--foreground), 0.1);
+        color: hsl(var(--foreground));
     }
 
-    .continue-button {
-        flex: 1;
-        padding: 12px;
-        background-color: #6366f1;
-        color: white;
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        gap: 6px;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .form-group input {
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid hsla(var(--border), 0.5);
+        background-color: hsl(var(--input));
+        color: hsl(var(--foreground));
+        font-size: 1rem;
+        transition: border-color 0.2s ease;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: hsl(var(--primary));
+        box-shadow: 0 0 0 2px hsla(var(--primary), 0.2);
+    }
+
+    .login-button {
+        background-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
         border: none;
         border-radius: 8px;
+        padding: 12px;
         font-size: 1rem;
         font-weight: 500;
         cursor: pointer;
-        transition: background-color 0.3s;
-        position: relative;
-        overflow: hidden;
+        transition: background-color 0.2s ease, transform 0.2s ease;
     }
 
-    .continue-button:hover {
-        background-color: #4f46e5;
+    .login-button:hover {
+        background-color: hsl(var(--primary), 0.9);
+        transform: translateY(-2px);
+    }
+
+    .login-button:active {
+        transform: translateY(0);
     }
 
     .login-footer {
-        padding: 0 24px 24px;
-        color: #666;
-        font-size: 0.8rem;
+        margin-top: 16px;
+        font-size: 0.9rem;
+        color: hsl(var(--muted-foreground));
     }
 
     .login-footer a {
-        color: #6366f1;
+        color: hsl(var(--primary));
         text-decoration: none;
+        transition: color 0.2s ease;
     }
 
     .login-footer a:hover {
         text-decoration: underline;
     }
 
-/* Logged in view styles */
-#logged-in-content {
-    padding: 20px 24px;
-    text-align: center;
-}
-
-#logged-in-content p {
-    margin: 0 0 10px 0;
-    color: #a0a0a0;
-}
-
-#logged-in-content p:last-of-type {
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-#logout-button {
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;
-}
-
-#logout-button:hover {
-    background-color: #dc2626;
-}
-
-/* Logo animation styles */
-@keyframes drawLine {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-.logo-animation-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
     /* Notifications Popup Styles */
     .notifications-popup {
         position: fixed;
@@ -907,7 +804,7 @@
     border-radius: 16px;
     overflow: hidden;
     width: 90%;
-    max-width: 380px;
+    max-width: 420px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     transform: translateY(20px) scale(0.95);
     opacity: 0;
@@ -928,21 +825,14 @@
 
 .login-modal-logo {
     width: 70px;
-    height: 70px;
+    height: auto;
     margin-bottom: 10px;
-    position: relative;
-}
-
-.login-modal-logo img {
-    width: 100%;
-    height: 100%;
 }
 
 .login-modal-company {
     font-size: 1.2rem;
     font-weight: bold;
-    color: white;
-    margin-top: 5px;
+    color: hsl(var(--foreground));
 }
 
 .login-modal-header {
@@ -954,17 +844,16 @@
 }
 
 .login-modal-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
     margin: 0;
     color: white;
 }
 
 .login-subtitle {
-    color: #a0a0a0;
+    color: hsl(var(--muted-foreground));
     padding: 0 24px;
     margin: 0 0 5px 0;
-    font-size: 0.9rem;
 }
 
 .login-create-account {
@@ -990,12 +879,27 @@
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    color: #a0a0a0;
+    color: hsl(var(--muted-foreground));
     font-size: 0.9rem;
 }
 
 .input-with-icon {
     position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: hsl(var(--muted-foreground));
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .input-with-icon input {
@@ -1007,13 +911,31 @@
     color: white;
     font-size: 1rem;
     transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box;
 }
 
 .input-with-icon input:focus {
     outline: none;
     border-color: #4f46e5;
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: hsl(var(--muted-foreground));
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: white;
 }
 
 .login-buttons {
@@ -1057,6 +979,38 @@
     background-color: #4f46e5;
 }
 
+.button-text {
+    transition: opacity 0.3s;
+}
+
+.button-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.continue-button.loading .button-text {
+    opacity: 0;
+}
+
+.continue-button.loading .button-loader {
+    opacity: 1;
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+    width: 20px;
+    height: 20px;
+}
+
 .login-footer {
     padding: 0 24px 24px;
     color: #666;
@@ -1072,446 +1026,152 @@
     text-decoration: underline;
 }
 
-/* Logged in view styles */
-#logged-in-content {
-    padding: 20px 24px;
-    text-align: center;
-}
-
-#logged-in-content p {
-    margin: 0 0 10px 0;
-    color: #a0a0a0;
-}
-
-#logged-in-content p:last-of-type {
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-#logout-button {
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;
-}
-
-#logout-button:hover {
-    background-color: #dc2626;
-}
-
-/* Logo animation styles */
-@keyframes drawLine {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-.logo-animation-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
-    /* Notifications Popup Styles */
-    .notifications-popup {
-        position: fixed;
-        bottom: 90px;
-        left: 50%;
-        transform: translateX(-50%) translateY(20px) scale(0.95);
-        width: 90%;
-        max-width: 350px;
-        background-color: hsl(var(--card));
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        z-index: 200;
-        opacity: 0;
-        visibility: hidden;
-        transform-origin: bottom center;
-        transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.3s ease, max-width 0.5s ease, max-height 0.5s ease;
-        max-height: 400px;
-    }
-
-    .notifications-popup.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0) scale(1);
-    }
-
-    .notifications-popup.expanded {
-        max-width: 600px;
-        max-height: 80vh;
-    }
-
-    .notifications-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 16px;
-        border-bottom: 1px solid hsla(var(--border), 0.5);
-    }
-
-    .notifications-title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .notifications-close {
-        background: none;
-        border: none;
-        color: hsl(var(--muted-foreground));
-        cursor: pointer;
-        padding: 5px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .notifications-close:hover {
-        background-color: hsla(var(--foreground), 0.1);
-        color: hsl(var(--foreground));
-    }
-
-    .notifications-list {
-        max-height: 300px;
-        overflow-y: auto;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        transition: max-height 0.5s ease;
-    }
-
-    .notifications-popup.expanded .notifications-list {
-        max-height: calc(80vh - 120px);
-    }
-
-    .notification-item {
-        padding: 12px 16px;
-        border-bottom: 1px solid hsla(var(--border), 0.2);
-        text-align: left;
-        transition: background-color 0.2s ease;
-    }
-
-    .notification-item:last-child {
-        border-bottom: none;
-    }
-
-    .notification-item:hover {
-        background-color: hsla(var(--foreground), 0.05);
-    }
-
-    .notification-content {
-        display: flex;
-        gap: 12px;
-    }
-
-    .notification-icon {
-        flex-shrink: 0;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background-color: hsla(var(--primary), 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: hsl(var(--primary));
-    }
-
-    .notification-text {
-        flex-grow: 1;
-    }
-
-    .notification-title {
-        font-weight: 500;
-        margin: 0 0 4px 0;
-    }
-
-    .notification-message {
-        color: hsl(var(--muted-foreground));
-        font-size: 0.9rem;
-        margin: 0;
-        white-space: pre-line;
-    }
-
-    .notification-time {
-        font-size: 0.8rem;
-        color: hsl(var(--muted-foreground));
-        margin-top: 4px;
-    }
-
-    .notifications-footer {
-        padding: 12px 16px;
-        text-align: center;
-        border-top: 1px solid hsla(var(--border), 0.5);
-    }
-
-    .view-all-button {
-        background: none;
-        border: none;
-        color: hsl(var(--primary));
-        cursor: pointer;
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: color 0.2s ease;
-    }
-
-    .view-all-button:hover {
-        text-decoration: underline;
-    }
-
-    .empty-notifications {
-        padding: 24px 16px;
-        text-align: center;
-        color: hsl(var(--muted-foreground));
-    }
-
-    .empty-notifications-icon {
-        margin-bottom: 12px;
-        opacity: 0.5;
-    }
-
-    /* Additional Styles for Login Modal */
-    .login-modal-logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .login-modal-logo {
-        width: 60px;
-        height: auto;
-        margin-bottom: 10px;
-    }
-
-    .login-modal-company {
-        font-size: 1.1rem;
-        font-weight: bold;
-        color: hsl(var(--muted-foreground));
-    }
-
-    .login-error {
-        color: #ef4444;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    .login-message {
-        color: hsl(var(--primary));
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    /* Updated Login Modal Styles */
-    .login-modal-logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .login-modal-logo {
-        width: 80px;
-        height: auto;
-        margin-bottom: 10px;
-    }
-
-    .login-modal-company {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: hsl(var(--foreground));
-    }
-
-    .login-error {
-        color: #e53e3e;
-        background-color: rgba(229, 62, 62, 0.1);
-        border-radius: 6px;
-        padding: 10px;
-        margin-bottom: 15px;
-        text-align: center;
-        display: none;
-    }
-
-    .login-message {
-        color: #38a169;
-        background-color: rgba(56, 161, 105, 0.1);
-        border-radius: 6px;
-        padding: 10px;
-        margin-bottom: 15px;
-        text-align: center;
-        display: none;
-    }
-
-    .login-modal {
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    /* Keyframes for loading animation */
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    .reset-modal-close {
-        background: none;
-        border: none;
-        color: hsl(var(--muted-foreground));
-        cursor: pointer;
-        padding: 5px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .reset-modal-close:hover {
-        background-color: hsla(var(--foreground), 0.1);
-        color: hsl(var(--foreground));
-    }
-
-/* New Login Modal Styles */
-.login-modal {
-    background-color: #121212;
-    border-radius: 16px;
-    overflow: hidden;
-    width: 90%;
-    max-width: 380px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    transform: translateY(20px) scale(0.95);
-    opacity: 0;
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
-}
-
-.login-modal-overlay.active .login-modal {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-}
-
-.login-modal-logo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
-}
-
-.login-modal-logo {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 10px;
-    position: relative;
-}
-
-.login-modal-logo img {
-    width: 100%;
-    height: 100%;
-}
-
-.login-modal-company {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
-    margin-top: 5px;
-}
-
-.login-modal-header {
+/* Profile View Styles */
+.profile-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 24px;
-    margin-bottom: 10px;
+    padding: 20px 24px;
+    border-bottom: 1px solid #2a2a2a;
 }
 
-.login-modal-title {
-    font-size: 2rem;
+.profile-title {
+    font-size: 1.5rem;
     font-weight: bold;
     margin: 0;
     color: white;
 }
 
-.login-subtitle {
-    color: #a0a0a0;
-    padding: 0 24px;
-    margin: 0 0 5px 0;
-    font-size: 0.9rem;
+.profile-content {
+    padding: 20px 24px;
 }
 
-.login-create-account {
-    color: #6366f1;
-    padding: 0 24px;
-    margin: 0 0 20px 0;
-    cursor: pointer;
-    font-weight: 500;
-}
-
-.login-create-account:hover {
-    text-decoration: underline;
-}
-
-.login-form {
-    padding: 0 24px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #a0a0a0;
-    font-size: 0.9rem;
-}
-
-.input-with-icon {
-    position: relative;
-}
-
-.input-with-icon input {
-    width: 100%;
-    padding: 12px 12px 12px 40px;
-    background-color: #1c1c1c;
-    border: 1px solid #6366f1;
-    border-radius: 8px;
-    color: white;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box;
-}
-
-.input-with-icon input:focus {
-    outline: none;
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
-}
-
-.login-buttons {
+.profile-user {
     display: flex;
-    gap: 12px;
+    align-items: center;
     margin-bottom: 24px;
 }
 
-.use-phone-button {
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #6366f1;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0 4px 0;
+    color: white;
+}
+
+.profile-email {
+    color: hsl(var(--muted-foreground));
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.profile-section {
+    margin-bottom: 24px;
+    background-color: #1c1c1c;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0 0 16px 0;
+    color: white;
+}
+
+.empty-maps {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.empty-maps p {
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 16px;
+}
+
+.upload-button {
+    background-color: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.upload-button svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+.upload-button:hover {
+    background-color: #4f46e5;
+}
+
+.contribution-graph {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 4px;
+    margin-top: 10px;
+}
+
+.contribution-day {
+    aspect-ratio: 1;
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.contribution-day:hover {
+    transform: scale(1.2);
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.logout-button {
+    flex: 1;
+    padding: 12px;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #dc2626;
+}
+
+.close-button {
     flex: 1;
     padding: 12px;
     background-color: #2a2a2a;
@@ -1523,1074 +1183,27 @@
     transition: background-color 0.3s;
 }
 
-.use-phone-button:hover {
+.close-button:hover {
     background-color: #3a3a3a;
 }
 
-.continue-button {
-    flex: 1;
-    padding: 12px;
-    background-color: #6366f1;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    position: relative;
-    overflow: hidden;
+/* Animation for modal transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.continue-button:hover {
-    background-color: #4f46e5;
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(20px); }
 }
 
-.login-footer {
-    padding: 0 24px 24px;
-    color: #666;
-    font-size: 0.8rem;
+.fade-in {
+    animation: fadeIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-.login-footer a {
-    color: #6366f1;
-    text-decoration: none;
-}
-
-.login-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Logged in view styles */
-#logged-in-content {
-    padding: 20px 24px;
-    text-align: center;
-}
-
-#logged-in-content p {
-    margin: 0 0 10px 0;
-    color: #a0a0a0;
-}
-
-#logged-in-content p:last-of-type {
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-#logout-button {
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;
-}
-
-#logout-button:hover {
-    background-color: #dc2626;
-}
-
-/* Logo animation styles */
-@keyframes drawLine {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-.logo-animation-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
-    /* Notifications Popup Styles */
-    .notifications-popup {
-        position: fixed;
-        bottom: 90px;
-        left: 50%;
-        transform: translateX(-50%) translateY(20px) scale(0.95);
-        width: 90%;
-        max-width: 350px;
-        background-color: hsl(var(--card));
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        z-index: 200;
-        opacity: 0;
-        visibility: hidden;
-        transform-origin: bottom center;
-        transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.3s ease, max-width 0.5s ease, max-height 0.5s ease;
-        max-height: 400px;
-    }
-
-    .notifications-popup.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0) scale(1);
-    }
-
-    .notifications-popup.expanded {
-        max-width: 600px;
-        max-height: 80vh;
-    }
-
-    .notifications-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 16px;
-        border-bottom: 1px solid hsla(var(--border), 0.5);
-    }
-
-    .notifications-title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .notifications-close {
-        background: none;
-        border: none;
-        color: hsl(var(--muted-foreground));
-        cursor: pointer;
-        padding: 5px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .notifications-close:hover {
-        background-color: hsla(var(--foreground), 0.1);
-        color: hsl(var(--foreground));
-    }
-
-    .notifications-list {
-        max-height: 300px;
-        overflow-y: auto;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        transition: max-height 0.5s ease;
-    }
-
-    .notifications-popup.expanded .notifications-list {
-        max-height: calc(80vh - 120px);
-    }
-
-    .notification-item {
-        padding: 12px 16px;
-        border-bottom: 1px solid hsla(var(--border), 0.2);
-        text-align: left;
-        transition: background-color 0.2s ease;
-    }
-
-    .notification-item:last-child {
-        border-bottom: none;
-    }
-
-    .notification-item:hover {
-        background-color: hsla(var(--foreground), 0.05);
-    }
-
-    .notification-content {
-        display: flex;
-        gap: 12px;
-    }
-
-    .notification-icon {
-        flex-shrink: 0;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background-color: hsla(var(--primary), 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: hsl(var(--primary));
-    }
-
-    .notification-text {
-        flex-grow: 1;
-    }
-
-    .notification-title {
-        font-weight: 500;
-        margin: 0 0 4px 0;
-    }
-
-    .notification-message {
-        color: hsl(var(--muted-foreground));
-        font-size: 0.9rem;
-        margin: 0;
-        white-space: pre-line;
-    }
-
-    .notification-time {
-        font-size: 0.8rem;
-        color: hsl(var(--muted-foreground));
-        margin-top: 4px;
-    }
-
-    .notifications-footer {
-        padding: 12px 16px;
-        text-align: center;
-        border-top: 1px solid hsla(var(--border), 0.5);
-    }
-
-    .view-all-button {
-        background: none;
-        border: none;
-        color: hsl(var(--primary));
-        cursor: pointer;
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: color 0.2s ease;
-    }
-
-    .view-all-button:hover {
-        text-decoration: underline;
-    }
-
-    .empty-notifications {
-        padding: 24px 16px;
-        text-align: center;
-        color: hsl(var(--muted-foreground));
-    }
-
-    .empty-notifications-icon {
-        margin-bottom: 12px;
-        opacity: 0.5;
-    }
-
-    /* Additional Styles for Login Modal */
-    .login-modal-logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .login-modal-logo {
-        width: 60px;
-        height: auto;
-        margin-bottom: 10px;
-    }
-
-    .login-modal-company {
-        font-size: 1.1rem;
-        font-weight: bold;
-        color: hsl(var(--muted-foreground));
-    }
-
-    .login-error {
-        color: #ef4444;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    .login-message {
-        color: hsl(var(--primary));
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    /* Updated Login Modal Styles */
-    .login-modal-logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .login-modal-logo {
-        width: 80px;
-        height: auto;
-        margin-bottom: 10px;
-    }
-
-    .login-modal-company {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: hsl(var(--foreground));
-    }
-
-    .login-error {
-        color: #e53e3e;
-        background-color: rgba(229, 62, 62, 0.1);
-        border-radius: 6px;
-        padding: 10px;
-        margin-bottom: 15px;
-        text-align: center;
-        display: none;
-    }
-
-    .login-message {
-        color: #38a169;
-        background-color: rgba(56, 161, 105, 0.1);
-        border-radius: 6px;
-        padding: 10px;
-        margin-bottom: 15px;
-        text-align: center;
-        display: none;
-    }
-
-    .login-modal {
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    /* Keyframes for loading animation */
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    .reset-modal-close {
-        background: none;
-        border: none;
-        color: hsl(var(--muted-foreground));
-        cursor: pointer;
-        padding: 5px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .reset-modal-close:hover {
-        background-color: hsla(var(--foreground), 0.1);
-        color: hsl(var(--foreground));
-    }
-
-/* New Login Modal Styles */
-.login-modal {
-    background-color: #121212;
-    border-radius: 16px;
-    overflow: hidden;
-    width: 90%;
-    max-width: 380px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    transform: translateY(20px) scale(0.95);
-    opacity: 0;
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
-}
-
-.login-modal-overlay.active .login-modal {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-}
-
-.login-modal-logo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
-}
-
-.login-modal-logo {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 10px;
-    position: relative;
-}
-
-.login-modal-logo img {
-    width: 100%;
-    height: 100%;
-}
-
-.login-modal-company {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
-    margin-top: 5px;
-}
-
-.login-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 24px;
-    margin-bottom: 10px;
-}
-
-.login-modal-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0;
-    color: white;
-}
-
-.login-subtitle {
-    color: #a0a0a0;
-    padding: 0 24px;
-    margin: 0 0 5px 0;
-    font-size: 0.9rem;
-}
-
-.login-create-account {
-    color: #6366f1;
-    padding: 0 24px;
-    margin: 0 0 20px 0;
-    cursor: pointer;
-    font-weight: 500;
-}
-
-.login-create-account:hover {
-    text-decoration: underline;
-}
-
-.login-form {
-    padding: 0 24px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #a0a0a0;
-    font-size: 0.9rem;
-}
-
-.input-with-icon {
-    position: relative;
-}
-
-.input-with-icon input {
-    width: 100%;
-    padding: 12px 12px 12px 40px;
-    background-color: #1c1c1c;
-    border: 1px solid #6366f1;
-    border-radius: 8px;
-    color: white;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box;
-}
-
-.input-with-icon input:focus {
-    outline: none;
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
-}
-
-.login-buttons {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.use-phone-button {
-    flex: 1;
-    padding: 12px;
-    background-color: #2a2a2a;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.use-phone-button:hover {
-    background-color: #3a3a3a;
-}
-
-.continue-button {
-    flex: 1;
-    padding: 12px;
-    background-color: #6366f1;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    position: relative;
-    overflow: hidden;
-}
-
-.continue-button:hover {
-    background-color: #4f46e5;
-}
-
-.login-footer {
-    padding: 0 24px 24px;
-    color: #666;
-    font-size: 0.8rem;
-}
-
-.login-footer a {
-    color: #6366f1;
-    text-decoration: none;
-}
-
-.login-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Logged in view styles */
-#logged-in-content {
-    padding: 20px 24px;
-    text-align: center;
-}
-
-#logged-in-content p {
-    margin: 0 0 10px 0;
-    color: #a0a0a0;
-}
-
-#logged-in-content p:last-of-type {
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-#logout-button {
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;
-}
-
-#logout-button:hover {
-    background-color: #dc2626;
-}
-
-/* Logo animation styles */
-@keyframes drawLine {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-.logo-animation-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
-    /* Notifications Popup Styles */
-    .notifications-popup {
-        position: fixed;
-        bottom: 90px;
-        left: 50%;
-        transform: translateX(-50%) translateY(20px) scale(0.95);
-        width: 90%;
-        max-width: 350px;
-        background-color: hsl(var(--card));
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        z-index: 200;
-        opacity: 0;
-        visibility: hidden;
-        transform-origin: bottom center;
-        transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.3s ease, max-width 0.5s ease, max-height 0.5s ease;
-        max-height: 400px;
-    }
-
-    .notifications-popup.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0) scale(1);
-    }
-
-    .notifications-popup.expanded {
-        max-width: 600px;
-        max-height: 80vh;
-    }
-
-    .notifications-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 16px;
-        border-bottom: 1px solid hsla(var(--border), 0.5);
-    }
-
-    .notifications-title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .notifications-close {
-        background: none;
-        border: none;
-        color: hsl(var(--muted-foreground));
-        cursor: pointer;
-        padding: 5px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .notifications-close:hover {
-        background-color: hsla(var(--foreground), 0.1);
-        color: hsl(var(--foreground));
-    }
-
-    .notifications-list {
-        max-height: 300px;
-        overflow-y: auto;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        transition: max-height 0.5s ease;
-    }
-
-    .notifications-popup.expanded .notifications-list {
-        max-height: calc(80vh - 120px);
-    }
-
-    .notification-item {
-        padding: 12px 16px;
-        border-bottom: 1px solid hsla(var(--border), 0.2);
-        text-align: left;
-        transition: background-color 0.2s ease;
-    }
-
-    .notification-item:last-child {
-        border-bottom: none;
-    }
-
-    .notification-item:hover {
-        background-color: hsla(var(--foreground), 0.05);
-    }
-
-    .notification-content {
-        display: flex;
-        gap: 12px;
-    }
-
-    .notification-icon {
-        flex-shrink: 0;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background-color: hsla(var(--primary), 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: hsl(var(--primary));
-    }
-
-    .notification-text {
-        flex-grow: 1;
-    }
-
-    .notification-title {
-        font-weight: 500;
-        margin: 0 0 4px 0;
-    }
-
-    .notification-message {
-        color: hsl(var(--muted-foreground));
-        font-size: 0.9rem;
-        margin: 0;
-        white-space: pre-line;
-    }
-
-    .notification-time {
-        font-size: 0.8rem;
-        color: hsl(var(--muted-foreground));
-        margin-top: 4px;
-    }
-
-    .notifications-footer {
-        padding: 12px 16px;
-        text-align: center;
-        border-top: 1px solid hsla(var(--border), 0.5);
-    }
-
-    .view-all-button {
-        background: none;
-        border: none;
-        color: hsl(var(--primary));
-        cursor: pointer;
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: color 0.2s ease;
-    }
-
-    .view-all-button:hover {
-        text-decoration: underline;
-    }
-
-    .empty-notifications {
-        padding: 24px 16px;
-        text-align: center;
-        color: hsl(var(--muted-foreground));
-    }
-
-    .empty-notifications-icon {
-        margin-bottom: 12px;
-        opacity: 0.5;
-    }
-
-    /* Additional Styles for Login Modal */
-    .login-modal-logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .login-modal-logo {
-        width: 60px;
-        height: auto;
-        margin-bottom: 10px;
-    }
-
-    .login-modal-company {
-        font-size: 1.1rem;
-        font-weight: bold;
-        color: hsl(var(--muted-foreground));
-    }
-
-    .login-error {
-        color: #ef4444;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    .login-message {
-        color: hsl(var(--primary));
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    /* Updated Login Modal Styles */
-    .login-modal-logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .login-modal-logo {
-        width: 80px;
-        height: auto;
-        margin-bottom: 10px;
-    }
-
-    .login-modal-company {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: hsl(var(--foreground));
-    }
-
-    .login-error {
-        color: #e53e3e;
-        background-color: rgba(229, 62, 62, 0.1);
-        border-radius: 6px;
-        padding: 10px;
-        margin-bottom: 15px;
-        text-align: center;
-        display: none;
-    }
-
-    .login-message {
-        color: #38a169;
-        background-color: rgba(56, 161, 105, 0.1);
-        border-radius: 6px;
-        padding: 10px;
-        margin-bottom: 15px;
-        text-align: center;
-        display: none;
-    }
-
-    .login-modal {
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    /* Keyframes for loading animation */
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    .reset-modal-close {
-        background: none;
-        border: none;
-        color: hsl(var(--muted-foreground));
-        cursor: pointer;
-        padding: 5px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .reset-modal-close:hover {
-        background-color: hsla(var(--foreground), 0.1);
-        color: hsl(var(--foreground));
-    }
-
-/* New Login Modal Styles */
-.login-modal {
-    background-color: #121212;
-    border-radius: 16px;
-    overflow: hidden;
-    width: 90%;
-    max-width: 380px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    transform: translateY(20px) scale(0.95);
-    opacity: 0;
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
-}
-
-.login-modal-overlay.active .login-modal {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-}
-
-.login-modal-logo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
-}
-
-.login-modal-logo {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 10px;
-    position: relative;
-}
-
-.login-modal-logo img {
-    width: 100%;
-    height: 100%;
-}
-
-.login-modal-company {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
-    margin-top: 5px;
-}
-
-.login-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 24px;
-    margin-bottom: 10px;
-}
-
-.login-modal-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0;
-    color: white;
-}
-
-.login-subtitle {
-    color: #a0a0a0;
-    padding: 0 24px;
-    margin: 0 0 5px 0;
-    font-size: 0.9rem;
-}
-
-.login-create-account {
-    color: #6366f1;
-    padding: 0 24px;
-    margin: 0 0 20px 0;
-    cursor: pointer;
-    font-weight: 500;
-}
-
-.login-create-account:hover {
-    text-decoration: underline;
-}
-
-.login-form {
-    padding: 0 24px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #a0a0a0;
-    font-size: 0.9rem;
-}
-
-.input-with-icon {
-    position: relative;
-}
-
-.input-with-icon input {
-    width: 100%;
-    padding: 12px 12px 12px 40px;
-    background-color: #1c1c1c;
-    border: 1px solid #6366f1;
-    border-radius: 8px;
-    color: white;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box;
-}
-
-.input-with-icon input:focus {
-    outline: none;
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
-}
-
-.login-buttons {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.use-phone-button {
-    flex: 1;
-    padding: 12px;
-    background-color: #2a2a2a;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.use-phone-button:hover {
-    background-color: #3a3a3a;
-}
-
-.continue-button {
-    flex: 1;
-    padding: 12px;
-    background-color: #6366f1;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    position: relative;
-    overflow: hidden;
-}
-
-.continue-button:hover {
-    background-color: #4f46e5;
-}
-
-.login-footer {
-    padding: 0 24px 24px;
-    color: #666;
-    font-size: 0.8rem;
-}
-
-.login-footer a {
-    color: #6366f1;
-    text-decoration: none;
-}
-
-.login-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Logged in view styles */
-#logged-in-content {
-    padding: 20px 24px;
-    text-align: center;
-}
-
-#logged-in-content p {
-    margin: 0 0 10px 0;
-    color: #a0a0a0;
-}
-
-#logged-in-content p:last-of-type {
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-#logout-button {
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;
-}
-
-#logout-button:hover {
-    background-color: #dc2626;
-}
-
-/* Logo animation styles */
-@keyframes drawLine {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-.logo-animation-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
+.fade-out {
+    animation: fadeOut 0.3s ease forwards;
 }
 </style>
 </head>
@@ -2934,13 +1547,6 @@
                             <svg class="menu-icon icon-svg" style="--icon-color: #22c55e;" viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="3"></circle>
                                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                            </svg>
-                            <span>Settings</span>
-                        </a>
-                        <a href="#" class="menu-link-back" onmousedown="playSound('ClickIn.wav')" onmouseup="playSound('ClickOut.wav')">
-                            <svg class="menu-icon icon-svg" style="--icon-color: #22c55e;" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0  1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                             </svg>
                             <span>Settings</span>
                         </a>
@@ -3365,7 +1971,6 @@
                         signupError.textContent = 'Passwords do not match';
                         signupError.style.display = 'block';
                         signupButton.textContent = 'Sign up';
-                        
                         signupButton.disabled = false;
                         playSound('ClickOut.wav');
                         return;
@@ -3717,13 +2322,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Login form submission with animation
+    // Login form submission
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const email = document.getElementById('email').value || "TreronSupport@trerondevelopment.xyz";
-            const password = document.getElementById('password').value || "password";
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
             
             // Show loading state
             const loginButton = document.getElementById('login-button');
@@ -3735,150 +2340,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 loginError.textContent = '';
             }
             
-            // Start logo animation
-            startLogoAnimation().then(() => {
-                // After animation completes, update user state
-                currentUser = { email: email };
-                localStorage.setItem("user", JSON.stringify(currentUser));
-                updateUIForUser();
-                console.log('Login successful');
-                playSound('ClickOut.wav');
-                
-                // Reset form
-                loginForm.reset();
+            // Mock login (in a real app, this would be Firebase auth)
+            setTimeout(() => {
+                if (email && password) {
+                    // Successful login
+                    currentUser = { email: email };
+                    localStorage.setItem("user", JSON.stringify(currentUser));
+                    updateUIForUser();
+                    console.log('Login successful');
+                    playSound('ClickOut.wav');
+                    
+                    // Reset form
+                    loginForm.reset();
+                } else {
+                    // Failed login
+                    if (loginError) {
+                        loginError.textContent = 'Invalid email or password';
+                        loginError.style.display = 'block';
+                    }
+                    playSound('ClickOut.wav');
+                }
                 
                 // Reset button state
                 loginButton.classList.remove('loading');
-            });
-        });
-    }
-    
-    // Logo animation function
-    function startLogoAnimation() {
-        return new Promise((resolve) => {
-            // Create animation container
-            const animContainer = document.createElement('div');
-            animContainer.className = 'logo-animation-container';
-            animContainer.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.9);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 2000;
-                opacity: 0;
-                transition: opacity 0.5s ease;
-            `;
-            document.body.appendChild(animContainer);
-            
-            // Force reflow
-            void animContainer.offsetWidth;
-            
-            // Fade in
-            animContainer.style.opacity = '1';
-            
-            // Create SVG for logo
-            const logoSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            logoSvg.setAttribute('width', '150');
-            logoSvg.setAttribute('height', '150');
-            logoSvg.setAttribute('viewBox', '0 0 100 100');
-            logoSvg.style.cssText = `
-                transform: scale(0.5);
-                opacity: 0;
-                transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 1s ease;
-            `;
-            
-            // Red lines (top)
-            const redLine1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            redLine1.setAttribute('d', 'M30 30 L70 30');
-            redLine1.setAttribute('stroke', 'red');
-            redLine1.setAttribute('stroke-width', '4');
-            redLine1.setAttribute('stroke-linecap', 'round');
-            redLine1.style.cssText = `
-                stroke-dasharray: 40;
-                stroke-dashoffset: 40;
-                animation: drawLine 0.5s ease forwards;
-            `;
-            
-            // Red lines (bottom)
-            const redLine2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            redLine2.setAttribute('d', 'M30 40 L70 40');
-            redLine2.setAttribute('stroke', 'red');
-            redLine2.setAttribute('stroke-width', '4');
-            redLine2.setAttribute('stroke-linecap', 'round');
-            redLine2.style.cssText = `
-                stroke-dasharray: 40;
-                stroke-dashoffset: 40;
-                animation: drawLine 0.5s ease forwards 0.2s;
-            `;
-            
-            // Blue lines (left)
-            const blueLine1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            blueLine1.setAttribute('d', 'M40 45 L40 70');
-            blueLine1.setAttribute('stroke', 'blue');
-            blueLine1.setAttribute('stroke-width', '4');
-            blueLine1.setAttribute('stroke-linecap', 'round');
-            blueLine1.style.cssText = `
-                stroke-dasharray: 25;
-                stroke-dashoffset: 25;
-                animation: drawLine 0.5s ease forwards 0.4s;
-            `;
-            
-            // Blue lines (right)
-            const blueLine2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            blueLine2.setAttribute('d', 'M60 45 L60 70');
-            blueLine2.setAttribute('stroke', 'blue');
-            blueLine2.setAttribute('stroke-width', '4');
-            blueLine2.setAttribute('stroke-linecap', 'round');
-            blueLine2.style.cssText = `
-                stroke-dasharray: 25;
-                stroke-dashoffset: 25;
-                animation: drawLine 0.5s ease forwards 0.6s;
-            `;
-            
-            // Add lines to SVG
-            logoSvg.appendChild(redLine1);
-            logoSvg.appendChild(redLine2);
-            logoSvg.appendChild(blueLine1);
-            logoSvg.appendChild(blueLine2);
-            
-            // Add SVG to container
-            animContainer.appendChild(logoSvg);
-            
-            // Add animation style
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes drawLine {
-                    to {
-                        stroke-dashoffset: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Animate logo after a short delay
-            setTimeout(() => {
-                logoSvg.style.transform = 'scale(1)';
-                logoSvg.style.opacity = '1';
-                
-                // Complete animation and resolve promise
-                setTimeout(() => {
-                    // Scale up and fade out
-                    logoSvg.style.transform = 'scale(2)';
-                    logoSvg.style.opacity = '0';
-                    animContainer.style.opacity = '0';
-                    
-                    // Remove animation elements
-                    setTimeout(() => {
-                        document.body.removeChild(animContainer);
-                        resolve();
-                    }, 1000);
-                }, 1500);
-            }, 200);
+            }, 1500);
         });
     }
     
@@ -3887,9 +2372,9 @@ document.addEventListener('DOMContentLoaded', function() {
         signupForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const email = document.getElementById('signup-email').value || "TreronSupport@trerondevelopment.xyz";
-            const password = document.getElementById('signup-password').value || "password";
-            const confirmPassword = document.getElementById('confirm-password').value || "password";
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
             
             // Show loading state
             const signupButton = document.getElementById('signup-button');
@@ -3912,43 +2397,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Start logo animation
-            startLogoAnimation().then(() => {
-                // After animation completes, update user state
-                currentUser = { email: email };
-                localStorage.setItem("user", JSON.stringify(currentUser));
-                updateUIForUser();
-                console.log('Signup successful');
-                playSound('ClickOut.wav');
-                
-                // Reset form
-                signupForm.reset();
+            // Mock signup (in a real app, this would be Firebase auth)
+            setTimeout(() => {
+                if (email && password) {
+                    // Successful signup
+                    currentUser = { email: email };
+                    localStorage.setItem("user", JSON.stringify(currentUser));
+                    updateUIForUser();
+                    console.log('Signup successful');
+                    playSound('ClickOut.wav');
+                    
+                    // Reset form
+                    signupForm.reset();
+                    
+                    // Switch to login modal
+                    signupModal.classList.remove('active');
+                    loginModal.classList.add('active');
+                } else {
+                    // Failed signup
+                    if (signupError) {
+                        signupError.textContent = 'Invalid email or password';
+                        signupError.style.display = 'block';
+                    }
+                    playSound('ClickOut.wav');
+                }
                 
                 // Reset button state
                 signupButton.classList.remove('loading');
-                
-                // Switch to login modal
-                signupModal.classList.remove('active');
-                loginModal.classList.add('active');
-            });
+            }, 1500);
         });
     }
     
     // Logout functionality
     if (logoutButton) {
         logoutButton.addEventListener('click', function() {
-            // Clear user data
             currentUser = null;
             localStorage.removeItem("user");
-            
-            // Update UI
             updateUIForUser();
             playSound('ClickOut.wav');
-            
-            // Close the modal after a short delay
-            setTimeout(() => {
-                loginModal.classList.remove('active');
-            }, 300);
         });
     }
     
@@ -4190,4 +2676,123 @@ function fetchNotifications(limit = null) {
                                                 <div class="notification-icon">
                                                     <svg class="icon-svg" viewBox="0 0 24 24">
                                                         <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                                    </svg>
+                                                </div>
+                                                <div class="notification-text">
+                                                    <h4 class="notification-title">${title}</h4>
+                                                    <p class="notification-message">${formattedDescription}</p>
+                                                    <div class="notification-time">${timeText}</div>
+                                                </div>
+                                            </div>
+                                        `;
+                                        
+                                        notificationsList.appendChild(notificationItem);
+                                        
+                                        // Update processed count
+                                        processedCount++;
+                                        
+                                        // Update view all button when all files are processed
+                                        if (processedCount === filesToFetch.length) {
+                                            updateViewAllButton();
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error(`Error fetching notification: ${error}`);
+                                        processedCount++;
+                                        
+                                        // Update view all button when all files are processed
+                                        if (processedCount === filesToFetch.length) {
+                                            updateViewAllButton();
+                                        }
+                                    });
+                            })
+                            .catch(error => {
+                                console.error(`Error fetching commit history: ${error}`);
+                                processedCount++;
+                                
+                                // Update view all button when all files are processed
+                                if (processedCount === filesToFetch.length) {
+                                    updateViewAllButton();
+                                }
+                            });
+                    })
+                    .catch(error => {
+                        console.error(`Error fetching file details: ${error}`);
+                        processedCount++;
+                        
+                        // Update view all button when all files are processed
+                        if (processedCount === filesToFetch.length) {
+                            updateViewAllButton();
+                        }
+                    });
+            });
+        })
+        .catch(error => {
+            console.error(`Error fetching repository contents: ${error}`);
+            notificationsList.innerHTML = `
+                <li class="notification-item">
+                    <div class="empty-notifications">
+                        <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <p>Error loading notifications</p>
+                    </div>
+                </li>
+            `;
+        });
+    
+    // Update the view all button
+    function updateViewAllButton() {
+        if (viewAllButton) {
+            viewAllButton.textContent = limit && notificationFiles.length > limit ? 
+                `View all notifications (${notificationFiles.length})` : 
+                'Refresh notifications';
+        }
+        
+        // If no notifications were loaded, show empty state
+        if (notificationsList.children.length === 0) {
+            notificationsList.innerHTML = `
+                <li class="notification-item">
+                    <div class="empty-notifications">
+                        <svg class="icon-svg empty-notifications-icon" style="width: 48px; height: 48px;" viewBox="0 0 24 24">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <p>No notifications found</p>
+                    </div>
+                </li>
+            `;
+        }
+    }
+}
+
+// Add this helper function to format dates
+function getTimeAgo(date) {
+    const now = new Date();
+    const diffMs = now - date;
+    const diffSec = Math.floor(diffMs / 1000);
+    const diffMin = Math.floor(diffSec / 60);
+    const diffHour = Math.floor(diffMin / 60);
+    const diffDay = Math.floor(diffHour / 24);
+    const diffMonth = Math.floor(diffDay / 30);
+    const diffYear = Math.floor(diffMonth / 12);
+    
+    if (diffSec < 60) {
+        return 'Just now';
+    } else if (diffMin < 60) {
+        return diffMin === 1 ? '1 minute ago' : `${diffMin} minutes ago`;
+    } else if (diffHour < 24) {
+        return diffHour === 1 ? '1 hour ago' : `${diffHour} hours ago`;
+    } else if (diffDay < 30) {
+        return diffDay === 1 ? '1 day ago' : `${diffDay} days ago`;
+    } else if (diffMonth < 12) {
+        return diffMonth === 1 ? '1 month ago' : `${diffMonth} months ago`;
+    } else {
+        return diffYear === 1 ? '1 year ago' : `${diffYear} years ago`;
+    }
+}
+    </script>
+</body>
+</html>
 
